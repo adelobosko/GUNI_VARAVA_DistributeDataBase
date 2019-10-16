@@ -20,7 +20,8 @@ namespace Factory_And_store
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var dataBase = DistributedDataBaseContainer.GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+            var dataBase = DistributedDataBaseContainer.GenerateConnection(DataBaseType.Store, ConnectionType.Local);
+
 
             var res = dataBase.Positions.Select(i => i).ToList();
             MessageBox.Show(res.Count.ToString());
