@@ -31,7 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -43,17 +51,105 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CashRegister.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CashRegisterAccess.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CashRegisterOperation.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Component.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Departament.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DistributedDataBase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DistributedDataBase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DistributedDataBase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="DistributedDataBase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DistributedDataBase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeWorkLog.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HeadOrder.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LackLog.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeasurementUnit.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Merchandise.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MerchandiseAcceptanceLog.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\All.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>All.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PerformedHeadOrder.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PerformedStoreOrder.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Position.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RawMaterial.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RawMaterialProviderContract.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RealEstate.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RealEstateContact.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RealEstateType.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StatusOrder.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockRawMaterial.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreOrder.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -64,6 +160,7 @@
     <None Include="DistributedDataBase.edmx.diagram">
       <DependentUpon>DistributedDataBase.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\All.edmx">
@@ -71,5 +168,23 @@
       <LastGenOutput>All.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DistributedDataBase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DistributedDataBase.Context.cs</LastGenOutput>
+      <DependentUpon>DistributedDataBase.edmx</DependentUpon>
+    </Content>
+    <Content Include="Scripts\DistributedDataBase.edmx.sql" />
+    <Content Include="DistributedDataBase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DistributedDataBase.cs</LastGenOutput>
+      <DependentUpon>DistributedDataBase.edmx</DependentUpon>
+    </Content>
+    <Content Include="Scripts\LinkedServers.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
