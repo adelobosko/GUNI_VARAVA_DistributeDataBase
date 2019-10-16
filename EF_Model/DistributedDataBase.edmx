@@ -490,7 +490,7 @@
           <Key>
             <PropertyRef Name="ID_StatusOrder" />
           </Key>
-          <Property Name="ID_StatusOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_StatusOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="NameStatusOrder" Type="String" Nullable="false" />
           <NavigationProperty Name="RawMaterialProviderContract" Relationship="DistributedDataBase.StatusOrderRawMaterialProviderContract" FromRole="StatusOrder" ToRole="RawMaterialProviderContract" />
           <NavigationProperty Name="HeadOrder" Relationship="DistributedDataBase.HeadOrderStatusOrder" FromRole="StatusOrder" ToRole="HeadOrder" />
@@ -859,10 +859,10 @@
           <End Type="DistributedDataBase.HeadOrder" Role="HeadOrder" Multiplicity="*" />
           <End Type="DistributedDataBase.StatusOrder" Role="StatusOrder" Multiplicity="1" />
           <ReferentialConstraint>
-            <Principal Role="HeadOrder">
+            <Principal Role="StatusOrder">
               <PropertyRef Name="ID_StatusOrder" />
             </Principal>
-            <Dependent Role="StatusOrder">
+            <Dependent Role="HeadOrder">
               <PropertyRef Name="ID_StatusOrder" />
             </Dependent>
           </ReferentialConstraint>
