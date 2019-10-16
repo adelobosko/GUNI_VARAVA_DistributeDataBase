@@ -1,0 +1,2216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MainOffice.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MainOfficeStoreContainer">
+    <EntitySet Name="RealEstateTypes" EntityType="MainOffice.Store.RealEstateTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RealEstates" EntityType="MainOffice.Store.RealEstates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RealEstateContacts" EntityType="MainOffice.Store.RealEstateContacts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Departaments" EntityType="MainOffice.Store.Departaments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RawMaterialProviderContracts" EntityType="MainOffice.Store.RawMaterialProviderContracts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StockRawMaterials" EntityType="MainOffice.Store.StockRawMaterials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RawMaterials" EntityType="MainOffice.Store.RawMaterials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MeasurementUnits" EntityType="MainOffice.Store.MeasurementUnits" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Components" EntityType="MainOffice.Store.Components" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Merchandises" EntityType="MainOffice.Store.Merchandises" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="MainOffice.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees" EntityType="MainOffice.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeWorkLogs" EntityType="MainOffice.Store.EmployeeWorkLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="MainOffice.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Positions" EntityType="MainOffice.Store.Positions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CashRegisters" EntityType="MainOffice.Store.CashRegisters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CashRegisterOperations" EntityType="MainOffice.Store.CashRegisterOperations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HeadOrders" EntityType="MainOffice.Store.HeadOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Purchases" EntityType="MainOffice.Store.Purchases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CashRegisterAccesses" EntityType="MainOffice.Store.CashRegisterAccesses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StoreOrders" EntityType="MainOffice.Store.StoreOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MerchandiseAcceptanceLogs" EntityType="MainOffice.Store.MerchandiseAcceptanceLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LackLogs" EntityType="MainOffice.Store.LackLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusOrders" EntityType="MainOffice.Store.StatusOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PerformedHeadOrders" EntityType="MainOffice.Store.PerformedHeadOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PerformedStoreOrders" EntityType="MainOffice.Store.PerformedStoreOrders" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="RealEstateTypeRealEstate" Association="MainOffice.Store.RealEstateTypeRealEstate">
+      <End Role="RealEstateType" EntitySet="RealEstateTypes" />
+      <End Role="RealEstate" EntitySet="RealEstates" />
+    </AssociationSet>
+    <AssociationSet Name="HeadOrderStatusOrder" Association="MainOffice.Store.HeadOrderStatusOrder">
+      <End Role="HeadOrder" EntitySet="HeadOrders" />
+      <End Role="StatusOrder" EntitySet="StatusOrders" />
+    </AssociationSet>
+    <AssociationSet Name="PositionHeadOrder" Association="MainOffice.Store.PositionHeadOrder">
+      <End Role="Position" EntitySet="Positions" />
+      <End Role="HeadOrder" EntitySet="HeadOrders" />
+    </AssociationSet>
+    <AssociationSet Name="CashRegisterOperationCashRegisterAccess" Association="MainOffice.Store.CashRegisterOperationCashRegisterAccess">
+      <End Role="CashRegisterOperation" EntitySet="CashRegisterOperations" />
+      <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="CashRegisterCashRegisterAccess" Association="MainOffice.Store.CashRegisterCashRegisterAccess">
+      <End Role="CashRegister" EntitySet="CashRegisters" />
+      <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="RealEstateCashRegister" Association="MainOffice.Store.RealEstateCashRegister">
+      <End Role="RealEstate" EntitySet="RealEstates" />
+      <End Role="CashRegister" EntitySet="CashRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="CashRegisterAccessEmployee" Association="MainOffice.Store.CashRegisterAccessEmployee">
+      <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="CashRegisterAccessPurchase" Association="MainOffice.Store.CashRegisterAccessPurchase">
+      <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="MerchandisePurchase" Association="MainOffice.Store.MerchandisePurchase">
+      <End Role="Merchandise" EntitySet="Merchandises" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="PositionEmployee" Association="MainOffice.Store.PositionEmployee">
+      <End Role="Position" EntitySet="Positions" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="UserEmployee" Association="MainOffice.Store.UserEmployee">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeEmployeeWorkLog" Association="MainOffice.Store.EmployeeEmployeeWorkLog">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeWorkLog" EntitySet="EmployeeWorkLogs" />
+    </AssociationSet>
+    <AssociationSet Name="DepartamentRealEstateContact" Association="MainOffice.Store.DepartamentRealEstateContact">
+      <End Role="Departament" EntitySet="Departaments" />
+      <End Role="RealEstateContact" EntitySet="RealEstateContacts" />
+    </AssociationSet>
+    <AssociationSet Name="RealEstateRealEstateContact" Association="MainOffice.Store.RealEstateRealEstateContact">
+      <End Role="RealEstate" EntitySet="RealEstates" />
+      <End Role="RealEstateContact" EntitySet="RealEstateContacts" />
+    </AssociationSet>
+    <AssociationSet Name="RealEstateMerchandise" Association="MainOffice.Store.RealEstateMerchandise">
+      <End Role="RealEstate" EntitySet="RealEstates" />
+      <End Role="Merchandise" EntitySet="Merchandises" />
+    </AssociationSet>
+    <AssociationSet Name="RealEstateStoreOrder" Association="MainOffice.Store.RealEstateStoreOrder">
+      <End Role="RealEstate" EntitySet="RealEstates" />
+      <End Role="StoreOrder" EntitySet="StoreOrders" />
+    </AssociationSet>
+    <AssociationSet Name="RealEstateEmployee" Association="MainOffice.Store.RealEstateEmployee">
+      <End Role="RealEstate" EntitySet="RealEstates" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeStoreOrder" Association="MainOffice.Store.EmployeeStoreOrder">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="StoreOrder" EntitySet="StoreOrders" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeMerchandiseAcceptanceLog" Association="MainOffice.Store.EmployeeMerchandiseAcceptanceLog">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+    </AssociationSet>
+    <AssociationSet Name="ProductMerchandise" Association="MainOffice.Store.ProductMerchandise">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Merchandise" EntitySet="Merchandises" />
+    </AssociationSet>
+    <AssociationSet Name="ProductComponent" Association="MainOffice.Store.ProductComponent">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Component" EntitySet="Components" />
+    </AssociationSet>
+    <AssociationSet Name="ProductStoreOrder" Association="MainOffice.Store.ProductStoreOrder">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="StoreOrder" EntitySet="StoreOrders" />
+    </AssociationSet>
+    <AssociationSet Name="RawMaterialComponent" Association="MainOffice.Store.RawMaterialComponent">
+      <End Role="RawMaterial" EntitySet="RawMaterials" />
+      <End Role="Component" EntitySet="Components" />
+    </AssociationSet>
+    <AssociationSet Name="MeasurementUnitComponent" Association="MainOffice.Store.MeasurementUnitComponent">
+      <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+      <End Role="Component" EntitySet="Components" />
+    </AssociationSet>
+    <AssociationSet Name="RawMaterialRawMaterialProviderContract" Association="MainOffice.Store.RawMaterialRawMaterialProviderContract">
+      <End Role="RawMaterial" EntitySet="RawMaterials" />
+      <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+    </AssociationSet>
+    <AssociationSet Name="MeasurementUnitRawMaterialProviderContract" Association="MainOffice.Store.MeasurementUnitRawMaterialProviderContract">
+      <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+      <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+    </AssociationSet>
+    <AssociationSet Name="RawMaterialStockRawMaterial" Association="MainOffice.Store.RawMaterialStockRawMaterial">
+      <End Role="RawMaterial" EntitySet="RawMaterials" />
+      <End Role="StockRawMaterial" EntitySet="StockRawMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="MeasurementUnitStockRawMaterial" Association="MainOffice.Store.MeasurementUnitStockRawMaterial">
+      <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+      <End Role="StockRawMaterial" EntitySet="StockRawMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="StatusOrderStoreOrder" Association="MainOffice.Store.StatusOrderStoreOrder">
+      <End Role="StatusOrder" EntitySet="StatusOrders" />
+      <End Role="StoreOrder" EntitySet="StoreOrders" />
+    </AssociationSet>
+    <AssociationSet Name="StoreOrderMerchandiseAcceptanceLog" Association="MainOffice.Store.StoreOrderMerchandiseAcceptanceLog">
+      <End Role="StoreOrder" EntitySet="StoreOrders" />
+      <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+    </AssociationSet>
+    <AssociationSet Name="MerchandiseAcceptanceLogLackLog" Association="MainOffice.Store.MerchandiseAcceptanceLogLackLog">
+      <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+      <End Role="LackLog" EntitySet="LackLogs" />
+    </AssociationSet>
+    <AssociationSet Name="HeadOrderPerformedHeadOrder" Association="MainOffice.Store.HeadOrderPerformedHeadOrder">
+      <End Role="HeadOrder" EntitySet="HeadOrders" />
+      <End Role="PerformedHeadOrder" EntitySet="PerformedHeadOrders" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeePerformedHeadOrder" Association="MainOffice.Store.EmployeePerformedHeadOrder">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="PerformedHeadOrder" EntitySet="PerformedHeadOrders" />
+    </AssociationSet>
+    <AssociationSet Name="StoreOrderPerformedStoreOrder" Association="MainOffice.Store.StoreOrderPerformedStoreOrder">
+      <End Role="StoreOrder" EntitySet="StoreOrders" />
+      <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeePerformedStoreOrder" Association="MainOffice.Store.EmployeePerformedStoreOrder">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeePerformedStoreOrder1" Association="MainOffice.Store.EmployeePerformedStoreOrder1">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+    </AssociationSet>
+    <AssociationSet Name="StatusOrderRawMaterialProviderContract" Association="MainOffice.Store.StatusOrderRawMaterialProviderContract">
+      <End Role="StatusOrder" EntitySet="StatusOrders" />
+      <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="RealEstateTypes">
+    <Key>
+      <PropertyRef Name="ID_RealEstateType" />
+    </Key>
+    <Property Name="ID_RealEstateType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RealEstates">
+    <Key>
+      <PropertyRef Name="ID_RealEstate" />
+    </Key>
+    <Property Name="ID_RealEstate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RealEstateType" Type="int" Nullable="false" />
+    <Property Name="NameRealEstate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Region" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BuildingNumber" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RealEstateContacts">
+    <Key>
+      <PropertyRef Name="ID_RealEstateContact" />
+    </Key>
+    <Property Name="ID_RealEstateContact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RealEstate" Type="int" Nullable="false" />
+    <Property Name="ID_Departament" Type="int" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Departaments">
+    <Key>
+      <PropertyRef Name="ID_Departament" />
+    </Key>
+    <Property Name="ID_Departament" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameDepartament" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RawMaterialProviderContracts">
+    <Key>
+      <PropertyRef Name="ID_Contract" />
+    </Key>
+    <Property Name="ID_Contract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RawMaterial" Type="int" Nullable="false" />
+    <Property Name="ID_MeasurementUnit" Type="int" Nullable="false" />
+    <Property Name="ManufactureDate" Type="datetime" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="PricePerCount" Type="int" Nullable="false" />
+    <Property Name="ID_StatusContract" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StockRawMaterials">
+    <Key>
+      <PropertyRef Name="ID_StockRawMaterial" />
+    </Key>
+    <Property Name="ID_StockRawMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RawMaterial" Type="int" Nullable="false" />
+    <Property Name="ID_MeasurementUnit" Type="int" Nullable="false" />
+    <Property Name="ManufactureDate" Type="datetime" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="PricePerGramm" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RawMaterials">
+    <Key>
+      <PropertyRef Name="ID_RawMaterial" />
+    </Key>
+    <Property Name="ID_RawMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RawMaterialName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="MinTemperature" Type="int" Nullable="true" />
+    <Property Name="MaxTemperature" Type="int" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MeasurementUnits">
+    <Key>
+      <PropertyRef Name="ID_MeasurementUnit" />
+    </Key>
+    <Property Name="ID_MeasurementUnit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameMeasurementUnit" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Components">
+    <Key>
+      <PropertyRef Name="ID_Product" />
+      <PropertyRef Name="ID_RawMaterial" />
+    </Key>
+    <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RawMaterial" Type="int" Nullable="false" />
+    <Property Name="ID_MeasurementUnit" Type="int" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Merchandises">
+    <Key>
+      <PropertyRef Name="ID_Merchandise" />
+    </Key>
+    <Property Name="ID_Merchandise" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Product" Type="int" Nullable="false" />
+    <Property Name="ID_RealEstateMerchandiseCreater" Type="int" Nullable="false" />
+    <Property Name="Weight" Type="int" Nullable="false" />
+    <Property Name="ManufactureDate" Type="datetime" Nullable="false" />
+    <Property Name="PricePerGramm" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ID_Product" />
+    </Key>
+    <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Recipe" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CalorieContent" Type="int" Nullable="true" />
+    <Property Name="Proteins" Type="int" Nullable="true" />
+    <Property Name="Fats" Type="int" Nullable="true" />
+    <Property Name="Carbohydrates" Type="int" Nullable="true" />
+    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="MinTemperature" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MaxTemperature" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Photo" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="ID_Employee" />
+    </Key>
+    <Property Name="ID_Employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Position" Type="int" Nullable="false" />
+    <Property Name="ID_RealEstate" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Passport" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IDK" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeWorkLogs">
+    <Key>
+      <PropertyRef Name="ID_EmployeeWorkLog" />
+    </Key>
+    <Property Name="ID_EmployeeWorkLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Employee" Type="int" Nullable="false" />
+    <Property Name="DateTimeStart" Type="datetime" Nullable="false" />
+    <Property Name="DateTimeEnd" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID_Employee" />
+    </Key>
+    <Property Name="UserLogin" Type="nvarchar(max)" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Employee" Type="int" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Positions">
+    <Key>
+      <PropertyRef Name="ID_Position" />
+    </Key>
+    <Property Name="ID_Position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NamePosition" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PaymentPerHour" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CashRegisters">
+    <Key>
+      <PropertyRef Name="ID_CashRegister" />
+    </Key>
+    <Property Name="ID_CashRegister" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RealEstate" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashRegisterOperations">
+    <Key>
+      <PropertyRef Name="ID_Operation" />
+    </Key>
+    <Property Name="ID_Operation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameOperation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="HeadOrders">
+    <Key>
+      <PropertyRef Name="ID_HeadOrder" />
+    </Key>
+    <Property Name="ID_HeadOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ID_Position" Type="int" Nullable="false" />
+    <Property Name="ID_StatusOrder" Type="int" Nullable="false" />
+    <Property Name="AssignFor" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="ID_Purchase" />
+    </Key>
+    <Property Name="ID_Purchase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Merchandise" Type="int" Nullable="false" />
+    <Property Name="ID_CashRegisterAccess" Type="int" Nullable="false" />
+    <Property Name="Weight" Type="int" Nullable="false" />
+    <Property Name="PurchaseDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashRegisterAccesses">
+    <Key>
+      <PropertyRef Name="ID_CashRegisterAccess" />
+    </Key>
+    <Property Name="ID_CashRegisterAccess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CashRegister" Type="int" Nullable="false" />
+    <Property Name="ID_EmployeeSeller" Type="int" Nullable="false" />
+    <Property Name="ID_Operation" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StoreOrders">
+    <Key>
+      <PropertyRef Name="ID_StoreOrder" />
+    </Key>
+    <Property Name="ID_StoreOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Product" Type="int" Nullable="false" />
+    <Property Name="ID_RealEstateStore" Type="int" Nullable="false" />
+    <Property Name="ID_StoreManager" Type="int" Nullable="false" />
+    <Property Name="ID_StatusOrder" Type="int" Nullable="false" />
+    <Property Name="InitialDate" Type="datetime" Nullable="false" />
+    <Property Name="Weight" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MerchandiseAcceptanceLogs">
+    <Key>
+      <PropertyRef Name="ID_StoreOrder" />
+    </Key>
+    <Property Name="ID_StoreOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_AcceptManager" Type="int" Nullable="false" />
+    <Property Name="AcceptDate" Type="datetime" Nullable="false" />
+    <Property Name="Weight" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LackLogs">
+    <Key>
+      <PropertyRef Name="ID_StoreOrder" />
+    </Key>
+    <Property Name="ID_StoreOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WeightOfLack" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusOrders">
+    <Key>
+      <PropertyRef Name="ID_StatusOrder" />
+    </Key>
+    <Property Name="ID_StatusOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameStatusOrder" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PerformedHeadOrders">
+    <Key>
+      <PropertyRef Name="ID_PerformedOrder" />
+    </Key>
+    <Property Name="ID_HeadOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Employee" Type="int" Nullable="false" />
+    <Property Name="ID_PerformedOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PerformedStoreOrders">
+    <Key>
+      <PropertyRef Name="ID_StoreOrder" />
+    </Key>
+    <Property Name="ID_StoreOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_FactoryManager" Type="int" Nullable="false" />
+    <Property Name="ID_Carrier" Type="int" Nullable="false" />
+    <Property Name="ShippingDate" Type="datetime" Nullable="false" />
+    <Property Name="Weight" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="RealEstateTypeRealEstate">
+    <End Role="RealEstateType" Type="MainOffice.Store.RealEstateTypes" Multiplicity="1" />
+    <End Role="RealEstate" Type="MainOffice.Store.RealEstates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstateType">
+        <PropertyRef Name="ID_RealEstateType" />
+      </Principal>
+      <Dependent Role="RealEstate">
+        <PropertyRef Name="ID_RealEstateType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HeadOrderStatusOrder">
+    <End Role="HeadOrder" Type="MainOffice.Store.HeadOrders" Multiplicity="*" />
+    <End Role="StatusOrder" Type="MainOffice.Store.StatusOrders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="ID_StatusOrder" />
+      </Principal>
+      <Dependent Role="HeadOrder">
+        <PropertyRef Name="ID_StatusOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PositionHeadOrder">
+    <End Role="Position" Type="MainOffice.Store.Positions" Multiplicity="1" />
+    <End Role="HeadOrder" Type="MainOffice.Store.HeadOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="ID_Position" />
+      </Principal>
+      <Dependent Role="HeadOrder">
+        <PropertyRef Name="ID_Position" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CashRegisterOperationCashRegisterAccess">
+    <End Role="CashRegisterOperation" Type="MainOffice.Store.CashRegisterOperations" Multiplicity="1" />
+    <End Role="CashRegisterAccess" Type="MainOffice.Store.CashRegisterAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashRegisterOperation">
+        <PropertyRef Name="ID_Operation" />
+      </Principal>
+      <Dependent Role="CashRegisterAccess">
+        <PropertyRef Name="ID_Operation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CashRegisterCashRegisterAccess">
+    <End Role="CashRegister" Type="MainOffice.Store.CashRegisters" Multiplicity="1" />
+    <End Role="CashRegisterAccess" Type="MainOffice.Store.CashRegisterAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashRegister">
+        <PropertyRef Name="ID_CashRegister" />
+      </Principal>
+      <Dependent Role="CashRegisterAccess">
+        <PropertyRef Name="ID_CashRegister" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RealEstateCashRegister">
+    <End Role="RealEstate" Type="MainOffice.Store.RealEstates" Multiplicity="1" />
+    <End Role="CashRegister" Type="MainOffice.Store.CashRegisters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstate">
+        <PropertyRef Name="ID_RealEstate" />
+      </Principal>
+      <Dependent Role="CashRegister">
+        <PropertyRef Name="ID_RealEstate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CashRegisterAccessEmployee">
+    <End Role="CashRegisterAccess" Type="MainOffice.Store.CashRegisterAccesses" Multiplicity="*" />
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="CashRegisterAccess">
+        <PropertyRef Name="ID_EmployeeSeller" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CashRegisterAccessPurchase">
+    <End Role="CashRegisterAccess" Type="MainOffice.Store.CashRegisterAccesses" Multiplicity="1" />
+    <End Role="Purchase" Type="MainOffice.Store.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashRegisterAccess">
+        <PropertyRef Name="ID_CashRegisterAccess" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="ID_CashRegisterAccess" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MerchandisePurchase">
+    <End Role="Merchandise" Type="MainOffice.Store.Merchandises" Multiplicity="1" />
+    <End Role="Purchase" Type="MainOffice.Store.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="ID_Merchandise" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="ID_Merchandise" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PositionEmployee">
+    <End Role="Position" Type="MainOffice.Store.Positions" Multiplicity="1" />
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="ID_Position" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="ID_Position" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserEmployee">
+    <End Role="User" Type="MainOffice.Store.Users" Multiplicity="0..1" />
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ID_Employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeEmployeeWorkLog">
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <End Role="EmployeeWorkLog" Type="MainOffice.Store.EmployeeWorkLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="EmployeeWorkLog">
+        <PropertyRef Name="ID_Employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DepartamentRealEstateContact">
+    <End Role="Departament" Type="MainOffice.Store.Departaments" Multiplicity="1" />
+    <End Role="RealEstateContact" Type="MainOffice.Store.RealEstateContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departament">
+        <PropertyRef Name="ID_Departament" />
+      </Principal>
+      <Dependent Role="RealEstateContact">
+        <PropertyRef Name="ID_Departament" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RealEstateRealEstateContact">
+    <End Role="RealEstate" Type="MainOffice.Store.RealEstates" Multiplicity="1" />
+    <End Role="RealEstateContact" Type="MainOffice.Store.RealEstateContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstate">
+        <PropertyRef Name="ID_RealEstate" />
+      </Principal>
+      <Dependent Role="RealEstateContact">
+        <PropertyRef Name="ID_RealEstate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RealEstateMerchandise">
+    <End Role="RealEstate" Type="MainOffice.Store.RealEstates" Multiplicity="1" />
+    <End Role="Merchandise" Type="MainOffice.Store.Merchandises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstate">
+        <PropertyRef Name="ID_RealEstate" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="ID_RealEstateMerchandiseCreater" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RealEstateStoreOrder">
+    <End Role="RealEstate" Type="MainOffice.Store.RealEstates" Multiplicity="1" />
+    <End Role="StoreOrder" Type="MainOffice.Store.StoreOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstate">
+        <PropertyRef Name="ID_RealEstate" />
+      </Principal>
+      <Dependent Role="StoreOrder">
+        <PropertyRef Name="ID_RealEstateStore" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RealEstateEmployee">
+    <End Role="RealEstate" Type="MainOffice.Store.RealEstates" Multiplicity="1" />
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RealEstate">
+        <PropertyRef Name="ID_RealEstate" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="ID_RealEstate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeStoreOrder">
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <End Role="StoreOrder" Type="MainOffice.Store.StoreOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="StoreOrder">
+        <PropertyRef Name="ID_StoreManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeMerchandiseAcceptanceLog">
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <End Role="MerchandiseAcceptanceLog" Type="MainOffice.Store.MerchandiseAcceptanceLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="MerchandiseAcceptanceLog">
+        <PropertyRef Name="ID_AcceptManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductMerchandise">
+    <End Role="Product" Type="MainOffice.Store.Products" Multiplicity="1" />
+    <End Role="Merchandise" Type="MainOffice.Store.Merchandises" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID_Product" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="ID_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductComponent">
+    <End Role="Product" Type="MainOffice.Store.Products" Multiplicity="1" />
+    <End Role="Component" Type="MainOffice.Store.Components" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID_Product" />
+      </Principal>
+      <Dependent Role="Component">
+        <PropertyRef Name="ID_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductStoreOrder">
+    <End Role="Product" Type="MainOffice.Store.Products" Multiplicity="1" />
+    <End Role="StoreOrder" Type="MainOffice.Store.StoreOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID_Product" />
+      </Principal>
+      <Dependent Role="StoreOrder">
+        <PropertyRef Name="ID_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RawMaterialComponent">
+    <End Role="RawMaterial" Type="MainOffice.Store.RawMaterials" Multiplicity="1" />
+    <End Role="Component" Type="MainOffice.Store.Components" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RawMaterial">
+        <PropertyRef Name="ID_RawMaterial" />
+      </Principal>
+      <Dependent Role="Component">
+        <PropertyRef Name="ID_RawMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MeasurementUnitComponent">
+    <End Role="MeasurementUnit" Type="MainOffice.Store.MeasurementUnits" Multiplicity="1" />
+    <End Role="Component" Type="MainOffice.Store.Components" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MeasurementUnit">
+        <PropertyRef Name="ID_MeasurementUnit" />
+      </Principal>
+      <Dependent Role="Component">
+        <PropertyRef Name="ID_MeasurementUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RawMaterialRawMaterialProviderContract">
+    <End Role="RawMaterial" Type="MainOffice.Store.RawMaterials" Multiplicity="1" />
+    <End Role="RawMaterialProviderContract" Type="MainOffice.Store.RawMaterialProviderContracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RawMaterial">
+        <PropertyRef Name="ID_RawMaterial" />
+      </Principal>
+      <Dependent Role="RawMaterialProviderContract">
+        <PropertyRef Name="ID_RawMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MeasurementUnitRawMaterialProviderContract">
+    <End Role="MeasurementUnit" Type="MainOffice.Store.MeasurementUnits" Multiplicity="1" />
+    <End Role="RawMaterialProviderContract" Type="MainOffice.Store.RawMaterialProviderContracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MeasurementUnit">
+        <PropertyRef Name="ID_MeasurementUnit" />
+      </Principal>
+      <Dependent Role="RawMaterialProviderContract">
+        <PropertyRef Name="ID_MeasurementUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RawMaterialStockRawMaterial">
+    <End Role="RawMaterial" Type="MainOffice.Store.RawMaterials" Multiplicity="1" />
+    <End Role="StockRawMaterial" Type="MainOffice.Store.StockRawMaterials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RawMaterial">
+        <PropertyRef Name="ID_RawMaterial" />
+      </Principal>
+      <Dependent Role="StockRawMaterial">
+        <PropertyRef Name="ID_RawMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MeasurementUnitStockRawMaterial">
+    <End Role="MeasurementUnit" Type="MainOffice.Store.MeasurementUnits" Multiplicity="1" />
+    <End Role="StockRawMaterial" Type="MainOffice.Store.StockRawMaterials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MeasurementUnit">
+        <PropertyRef Name="ID_MeasurementUnit" />
+      </Principal>
+      <Dependent Role="StockRawMaterial">
+        <PropertyRef Name="ID_MeasurementUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StatusOrderStoreOrder">
+    <End Role="StatusOrder" Type="MainOffice.Store.StatusOrders" Multiplicity="1" />
+    <End Role="StoreOrder" Type="MainOffice.Store.StoreOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="ID_StatusOrder" />
+      </Principal>
+      <Dependent Role="StoreOrder">
+        <PropertyRef Name="ID_StatusOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StoreOrderMerchandiseAcceptanceLog">
+    <End Role="StoreOrder" Type="MainOffice.Store.StoreOrders" Multiplicity="1" />
+    <End Role="MerchandiseAcceptanceLog" Type="MainOffice.Store.MerchandiseAcceptanceLogs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="StoreOrder">
+        <PropertyRef Name="ID_StoreOrder" />
+      </Principal>
+      <Dependent Role="MerchandiseAcceptanceLog">
+        <PropertyRef Name="ID_StoreOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MerchandiseAcceptanceLogLackLog">
+    <End Role="MerchandiseAcceptanceLog" Type="MainOffice.Store.MerchandiseAcceptanceLogs" Multiplicity="1" />
+    <End Role="LackLog" Type="MainOffice.Store.LackLogs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MerchandiseAcceptanceLog">
+        <PropertyRef Name="ID_StoreOrder" />
+      </Principal>
+      <Dependent Role="LackLog">
+        <PropertyRef Name="ID_StoreOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HeadOrderPerformedHeadOrder">
+    <End Role="HeadOrder" Type="MainOffice.Store.HeadOrders" Multiplicity="1" />
+    <End Role="PerformedHeadOrder" Type="MainOffice.Store.PerformedHeadOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HeadOrder">
+        <PropertyRef Name="ID_HeadOrder" />
+      </Principal>
+      <Dependent Role="PerformedHeadOrder">
+        <PropertyRef Name="ID_HeadOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeePerformedHeadOrder">
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <End Role="PerformedHeadOrder" Type="MainOffice.Store.PerformedHeadOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="PerformedHeadOrder">
+        <PropertyRef Name="ID_Employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StoreOrderPerformedStoreOrder">
+    <End Role="StoreOrder" Type="MainOffice.Store.StoreOrders" Multiplicity="1" />
+    <End Role="PerformedStoreOrder" Type="MainOffice.Store.PerformedStoreOrders" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="StoreOrder">
+        <PropertyRef Name="ID_StoreOrder" />
+      </Principal>
+      <Dependent Role="PerformedStoreOrder">
+        <PropertyRef Name="ID_StoreOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeePerformedStoreOrder">
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <End Role="PerformedStoreOrder" Type="MainOffice.Store.PerformedStoreOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="PerformedStoreOrder">
+        <PropertyRef Name="ID_FactoryManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeePerformedStoreOrder1">
+    <End Role="Employee" Type="MainOffice.Store.Employees" Multiplicity="1" />
+    <End Role="PerformedStoreOrder" Type="MainOffice.Store.PerformedStoreOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="PerformedStoreOrder">
+        <PropertyRef Name="ID_Carrier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StatusOrderRawMaterialProviderContract">
+    <End Role="StatusOrder" Type="MainOffice.Store.StatusOrders" Multiplicity="1" />
+    <End Role="RawMaterialProviderContract" Type="MainOffice.Store.RawMaterialProviderContracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="ID_StatusOrder" />
+      </Principal>
+      <Dependent Role="RawMaterialProviderContract">
+        <PropertyRef Name="ID_StatusContract" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MainOffice" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="MainOfficeContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RealEstateTypes" EntityType="MainOffice.RealEstateType" />
+          <EntitySet Name="RealEstates" EntityType="MainOffice.RealEstate" />
+          <EntitySet Name="RealEstateContacts" EntityType="MainOffice.RealEstateContact" />
+          <EntitySet Name="Departaments" EntityType="MainOffice.Departament" />
+          <EntitySet Name="RawMaterialProviderContracts" EntityType="MainOffice.RawMaterialProviderContract" />
+          <EntitySet Name="StockRawMaterials" EntityType="MainOffice.StockRawMaterial" />
+          <EntitySet Name="RawMaterials" EntityType="MainOffice.RawMaterial" />
+          <EntitySet Name="MeasurementUnits" EntityType="MainOffice.MeasurementUnit" />
+          <EntitySet Name="Components" EntityType="MainOffice.Component" />
+          <EntitySet Name="Merchandises" EntityType="MainOffice.Merchandise" />
+          <EntitySet Name="Products" EntityType="MainOffice.Product" />
+          <EntitySet Name="Employees" EntityType="MainOffice.Employee" />
+          <EntitySet Name="EmployeeWorkLogs" EntityType="MainOffice.EmployeeWorkLog" />
+          <EntitySet Name="Users" EntityType="MainOffice.User" />
+          <EntitySet Name="Positions" EntityType="MainOffice.Position" />
+          <EntitySet Name="CashRegisters" EntityType="MainOffice.CashRegister" />
+          <EntitySet Name="CashRegisterOperations" EntityType="MainOffice.CashRegisterOperation" />
+          <EntitySet Name="HeadOrders" EntityType="MainOffice.HeadOrder" />
+          <EntitySet Name="Purchases" EntityType="MainOffice.Purchase" />
+          <EntitySet Name="CashRegisterAccesses" EntityType="MainOffice.CashRegisterAccess" />
+          <EntitySet Name="StoreOrders" EntityType="MainOffice.StoreOrder" />
+          <EntitySet Name="MerchandiseAcceptanceLogs" EntityType="MainOffice.MerchandiseAcceptanceLog" />
+          <EntitySet Name="LackLogs" EntityType="MainOffice.LackLog" />
+          <EntitySet Name="StatusOrders" EntityType="MainOffice.StatusOrder" />
+          <AssociationSet Name="RealEstateTypeRealEstate" Association="MainOffice.RealEstateTypeRealEstate">
+            <End Role="RealEstateType" EntitySet="RealEstateTypes" />
+            <End Role="RealEstate" EntitySet="RealEstates" />
+          </AssociationSet>
+          <AssociationSet Name="HeadOrderStatusOrder" Association="MainOffice.HeadOrderStatusOrder">
+            <End Role="HeadOrder" EntitySet="HeadOrders" />
+            <End Role="StatusOrder" EntitySet="StatusOrders" />
+          </AssociationSet>
+          <AssociationSet Name="PositionHeadOrder" Association="MainOffice.PositionHeadOrder">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="HeadOrder" EntitySet="HeadOrders" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterOperationCashRegisterAccess" Association="MainOffice.CashRegisterOperationCashRegisterAccess">
+            <End Role="CashRegisterOperation" EntitySet="CashRegisterOperations" />
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterCashRegisterAccess" Association="MainOffice.CashRegisterCashRegisterAccess">
+            <End Role="CashRegister" EntitySet="CashRegisters" />
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateCashRegister" Association="MainOffice.RealEstateCashRegister">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="CashRegister" EntitySet="CashRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterAccessEmployee" Association="MainOffice.CashRegisterAccessEmployee">
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterAccessPurchase" Association="MainOffice.CashRegisterAccessPurchase">
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="MerchandisePurchase" Association="MainOffice.MerchandisePurchase">
+            <End Role="Merchandise" EntitySet="Merchandises" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="PositionEmployee" Association="MainOffice.PositionEmployee">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="UserEmployee" Association="MainOffice.UserEmployee">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeEmployeeWorkLog" Association="MainOffice.EmployeeEmployeeWorkLog">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeWorkLog" EntitySet="EmployeeWorkLogs" />
+          </AssociationSet>
+          <AssociationSet Name="DepartamentRealEstateContact" Association="MainOffice.DepartamentRealEstateContact">
+            <End Role="Departament" EntitySet="Departaments" />
+            <End Role="RealEstateContact" EntitySet="RealEstateContacts" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateRealEstateContact" Association="MainOffice.RealEstateRealEstateContact">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="RealEstateContact" EntitySet="RealEstateContacts" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateMerchandise" Association="MainOffice.RealEstateMerchandise">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="Merchandise" EntitySet="Merchandises" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateStoreOrder" Association="MainOffice.RealEstateStoreOrder">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateEmployee" Association="MainOffice.RealEstateEmployee">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeStoreOrder" Association="MainOffice.EmployeeStoreOrder">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeMerchandiseAcceptanceLog" Association="MainOffice.EmployeeMerchandiseAcceptanceLog">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="ProductMerchandise" Association="MainOffice.ProductMerchandise">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Merchandise" EntitySet="Merchandises" />
+          </AssociationSet>
+          <AssociationSet Name="ProductComponent" Association="MainOffice.ProductComponent">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="ProductStoreOrder" Association="MainOffice.ProductStoreOrder">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="RawMaterialComponent" Association="MainOffice.RawMaterialComponent">
+            <End Role="RawMaterial" EntitySet="RawMaterials" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="MeasurementUnitComponent" Association="MainOffice.MeasurementUnitComponent">
+            <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="RawMaterialRawMaterialProviderContract" Association="MainOffice.RawMaterialRawMaterialProviderContract">
+            <End Role="RawMaterial" EntitySet="RawMaterials" />
+            <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+          </AssociationSet>
+          <AssociationSet Name="MeasurementUnitRawMaterialProviderContract" Association="MainOffice.MeasurementUnitRawMaterialProviderContract">
+            <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+            <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+          </AssociationSet>
+          <AssociationSet Name="RawMaterialStockRawMaterial" Association="MainOffice.RawMaterialStockRawMaterial">
+            <End Role="RawMaterial" EntitySet="RawMaterials" />
+            <End Role="StockRawMaterial" EntitySet="StockRawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="MeasurementUnitStockRawMaterial" Association="MainOffice.MeasurementUnitStockRawMaterial">
+            <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+            <End Role="StockRawMaterial" EntitySet="StockRawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="StatusOrderStoreOrder" Association="MainOffice.StatusOrderStoreOrder">
+            <End Role="StatusOrder" EntitySet="StatusOrders" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="StoreOrderMerchandiseAcceptanceLog" Association="MainOffice.StoreOrderMerchandiseAcceptanceLog">
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+            <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="MerchandiseAcceptanceLogLackLog" Association="MainOffice.MerchandiseAcceptanceLogLackLog">
+            <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+            <End Role="LackLog" EntitySet="LackLogs" />
+          </AssociationSet>
+          <EntitySet Name="PerformedHeadOrders" EntityType="MainOffice.PerformedHeadOrder" />
+          <AssociationSet Name="HeadOrderPerformedHeadOrder" Association="MainOffice.HeadOrderPerformedHeadOrder">
+            <End Role="HeadOrder" EntitySet="HeadOrders" />
+            <End Role="PerformedHeadOrder" EntitySet="PerformedHeadOrders" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeePerformedHeadOrder" Association="MainOffice.EmployeePerformedHeadOrder">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PerformedHeadOrder" EntitySet="PerformedHeadOrders" />
+          </AssociationSet>
+          <EntitySet Name="PerformedStoreOrders" EntityType="MainOffice.PerformedStoreOrder" />
+          <AssociationSet Name="StoreOrderPerformedStoreOrder" Association="MainOffice.StoreOrderPerformedStoreOrder">
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+            <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeePerformedStoreOrder" Association="MainOffice.EmployeePerformedStoreOrder">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeePerformedStoreOrder1" Association="MainOffice.EmployeePerformedStoreOrder1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="StatusOrderRawMaterialProviderContract" Association="MainOffice.StatusOrderRawMaterialProviderContract">
+            <End Role="StatusOrder" EntitySet="StatusOrders" />
+            <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RealEstateType">
+          <Key>
+            <PropertyRef Name="ID_RealEstateType" />
+          </Key>
+          <Property Name="ID_RealEstateType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="RealEstate" Relationship="MainOffice.RealEstateTypeRealEstate" FromRole="RealEstateType" ToRole="RealEstate" />
+        </EntityType>
+        <EntityType Name="RealEstate">
+          <Key>
+            <PropertyRef Name="ID_RealEstate" />
+          </Key>
+          <Property Name="ID_RealEstate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RealEstateType" Type="Int32" Nullable="false" />
+          <Property Name="NameRealEstate" Type="String" Nullable="false" />
+          <Property Name="Country" Type="String" Nullable="false" />
+          <Property Name="Region" Type="String" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" />
+          <Property Name="Street" Type="String" Nullable="false" />
+          <Property Name="BuildingNumber" Type="String" Nullable="false" />
+          <NavigationProperty Name="RealEstateType" Relationship="MainOffice.RealEstateTypeRealEstate" FromRole="RealEstate" ToRole="RealEstateType" />
+          <NavigationProperty Name="CashRegister" Relationship="MainOffice.RealEstateCashRegister" FromRole="RealEstate" ToRole="CashRegister" />
+          <NavigationProperty Name="RealEstateContact" Relationship="MainOffice.RealEstateRealEstateContact" FromRole="RealEstate" ToRole="RealEstateContact" />
+          <NavigationProperty Name="Merchandise" Relationship="MainOffice.RealEstateMerchandise" FromRole="RealEstate" ToRole="Merchandise" />
+          <NavigationProperty Name="StoreOrder" Relationship="MainOffice.RealEstateStoreOrder" FromRole="RealEstate" ToRole="StoreOrder" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.RealEstateEmployee" FromRole="RealEstate" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="RealEstateContact">
+          <Key>
+            <PropertyRef Name="ID_RealEstateContact" />
+          </Key>
+          <Property Name="ID_RealEstateContact" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RealEstate" Type="Int32" Nullable="false" />
+          <Property Name="ID_Departament" Type="Int32" Nullable="false" />
+          <Property Name="Telephone" Type="String" Nullable="true" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <NavigationProperty Name="Departament" Relationship="MainOffice.DepartamentRealEstateContact" FromRole="RealEstateContact" ToRole="Departament" />
+          <NavigationProperty Name="RealEstate" Relationship="MainOffice.RealEstateRealEstateContact" FromRole="RealEstateContact" ToRole="RealEstate" />
+        </EntityType>
+        <EntityType Name="Departament">
+          <Key>
+            <PropertyRef Name="ID_Departament" />
+          </Key>
+          <Property Name="ID_Departament" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameDepartament" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="RealEstateContact" Relationship="MainOffice.DepartamentRealEstateContact" FromRole="Departament" ToRole="RealEstateContact" />
+        </EntityType>
+        <EntityType Name="RawMaterialProviderContract">
+          <Key>
+            <PropertyRef Name="ID_Contract" />
+          </Key>
+          <Property Name="ID_Contract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RawMaterial" Type="Int32" Nullable="false" />
+          <Property Name="ID_MeasurementUnit" Type="Int32" Nullable="false" />
+          <Property Name="ManufactureDate" Type="DateTime" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="PricePerCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RawMaterial" Relationship="MainOffice.RawMaterialRawMaterialProviderContract" FromRole="RawMaterialProviderContract" ToRole="RawMaterial" />
+          <NavigationProperty Name="MeasurementUnit" Relationship="MainOffice.MeasurementUnitRawMaterialProviderContract" FromRole="RawMaterialProviderContract" ToRole="MeasurementUnit" />
+          <Property Name="ID_StatusContract" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StatusOrder" Relationship="MainOffice.StatusOrderRawMaterialProviderContract" FromRole="RawMaterialProviderContract" ToRole="StatusOrder" />
+        </EntityType>
+        <EntityType Name="StockRawMaterial">
+          <Key>
+            <PropertyRef Name="ID_StockRawMaterial" />
+          </Key>
+          <Property Name="ID_StockRawMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RawMaterial" Type="Int32" Nullable="false" />
+          <Property Name="ID_MeasurementUnit" Type="Int32" Nullable="false" />
+          <Property Name="ManufactureDate" Type="DateTime" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="PricePerGramm" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RawMaterial" Relationship="MainOffice.RawMaterialStockRawMaterial" FromRole="StockRawMaterial" ToRole="RawMaterial" />
+          <NavigationProperty Name="MeasurementUnit" Relationship="MainOffice.MeasurementUnitStockRawMaterial" FromRole="StockRawMaterial" ToRole="MeasurementUnit" />
+        </EntityType>
+        <EntityType Name="RawMaterial">
+          <Key>
+            <PropertyRef Name="ID_RawMaterial" />
+          </Key>
+          <Property Name="ID_RawMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RawMaterialName" Type="String" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" />
+          <Property Name="MinTemperature" Type="Int32" Nullable="true" />
+          <Property Name="MaxTemperature" Type="Int32" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="Component" Relationship="MainOffice.RawMaterialComponent" FromRole="RawMaterial" ToRole="Component" />
+          <NavigationProperty Name="RawMaterialProviderContract" Relationship="MainOffice.RawMaterialRawMaterialProviderContract" FromRole="RawMaterial" ToRole="RawMaterialProviderContract" />
+          <NavigationProperty Name="StockRawMaterial" Relationship="MainOffice.RawMaterialStockRawMaterial" FromRole="RawMaterial" ToRole="StockRawMaterial" />
+        </EntityType>
+        <EntityType Name="MeasurementUnit">
+          <Key>
+            <PropertyRef Name="ID_MeasurementUnit" />
+          </Key>
+          <Property Name="ID_MeasurementUnit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameMeasurementUnit" Type="String" Nullable="false" />
+          <NavigationProperty Name="Component" Relationship="MainOffice.MeasurementUnitComponent" FromRole="MeasurementUnit" ToRole="Component" />
+          <NavigationProperty Name="RawMaterialProviderContract" Relationship="MainOffice.MeasurementUnitRawMaterialProviderContract" FromRole="MeasurementUnit" ToRole="RawMaterialProviderContract" />
+          <NavigationProperty Name="StockRawMaterial" Relationship="MainOffice.MeasurementUnitStockRawMaterial" FromRole="MeasurementUnit" ToRole="StockRawMaterial" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+            <PropertyRef Name="ID_RawMaterial" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RawMaterial" Type="Int32" Nullable="false" />
+          <Property Name="ID_MeasurementUnit" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="MainOffice.ProductComponent" FromRole="Component" ToRole="Product" />
+          <NavigationProperty Name="RawMaterial" Relationship="MainOffice.RawMaterialComponent" FromRole="Component" ToRole="RawMaterial" />
+          <NavigationProperty Name="MeasurementUnit" Relationship="MainOffice.MeasurementUnitComponent" FromRole="Component" ToRole="MeasurementUnit" />
+        </EntityType>
+        <EntityType Name="Merchandise">
+          <Key>
+            <PropertyRef Name="ID_Merchandise" />
+          </Key>
+          <Property Name="ID_Merchandise" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Product" Type="Int32" Nullable="false" />
+          <Property Name="ID_RealEstateMerchandiseCreater" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="ManufactureDate" Type="DateTime" Nullable="false" />
+          <Property Name="PricePerGramm" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Purchase" Relationship="MainOffice.MerchandisePurchase" FromRole="Merchandise" ToRole="Purchase" />
+          <NavigationProperty Name="RealEstate" Relationship="MainOffice.RealEstateMerchandise" FromRole="Merchandise" ToRole="RealEstate" />
+          <NavigationProperty Name="Product" Relationship="MainOffice.ProductMerchandise" FromRole="Merchandise" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="Recipe" Type="String" Nullable="true" />
+          <Property Name="CalorieContent" Type="Int32" Nullable="true" />
+          <Property Name="Proteins" Type="Int32" Nullable="true" />
+          <Property Name="Fats" Type="Int32" Nullable="true" />
+          <Property Name="Carbohydrates" Type="Int32" Nullable="true" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" />
+          <Property Name="MinTemperature" Type="String" Nullable="true" />
+          <Property Name="MaxTemperature" Type="String" Nullable="true" />
+          <Property Name="Photo" Type="String" Nullable="true" />
+          <NavigationProperty Name="Merchandise" Relationship="MainOffice.ProductMerchandise" FromRole="Product" ToRole="Merchandise" />
+          <NavigationProperty Name="Component" Relationship="MainOffice.ProductComponent" FromRole="Product" ToRole="Component" />
+          <NavigationProperty Name="StoreOrder" Relationship="MainOffice.ProductStoreOrder" FromRole="Product" ToRole="StoreOrder" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Position" Type="Int32" Nullable="false" />
+          <Property Name="ID_RealEstate" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="SecondName" Type="String" Nullable="false" />
+          <Property Name="MiddleName" Type="String" Nullable="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" />
+          <Property Name="Passport" Type="String" Nullable="false" />
+          <Property Name="IDK" Type="String" Nullable="false" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="MainOffice.CashRegisterAccessEmployee" FromRole="Employee" ToRole="CashRegisterAccess" />
+          <NavigationProperty Name="Position" Relationship="MainOffice.PositionEmployee" FromRole="Employee" ToRole="Position" />
+          <NavigationProperty Name="User" Relationship="MainOffice.UserEmployee" FromRole="Employee" ToRole="User" />
+          <NavigationProperty Name="EmployeeWorkLog" Relationship="MainOffice.EmployeeEmployeeWorkLog" FromRole="Employee" ToRole="EmployeeWorkLog" />
+          <NavigationProperty Name="RealEstate" Relationship="MainOffice.RealEstateEmployee" FromRole="Employee" ToRole="RealEstate" />
+          <NavigationProperty Name="StoreOrder" Relationship="MainOffice.EmployeeStoreOrder" FromRole="Employee" ToRole="StoreOrder" />
+          <NavigationProperty Name="MerchandiseAcceptanceLog" Relationship="MainOffice.EmployeeMerchandiseAcceptanceLog" FromRole="Employee" ToRole="MerchandiseAcceptanceLog" />
+          <NavigationProperty Name="PerformedHeadOrder" Relationship="MainOffice.EmployeePerformedHeadOrder" FromRole="Employee" ToRole="PerformedHeadOrder" />
+          <NavigationProperty Name="PerformedStoreOrder" Relationship="MainOffice.EmployeePerformedStoreOrder" FromRole="Employee" ToRole="PerformedStoreOrder" />
+          <NavigationProperty Name="PerformedStoreOrder1" Relationship="MainOffice.EmployeePerformedStoreOrder1" FromRole="Employee" ToRole="PerformedStoreOrder" />
+        </EntityType>
+        <EntityType Name="EmployeeWorkLog">
+          <Key>
+            <PropertyRef Name="ID_EmployeeWorkLog" />
+          </Key>
+          <Property Name="ID_EmployeeWorkLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" />
+          <Property Name="DateTimeStart" Type="DateTime" Nullable="false" />
+          <Property Name="DateTimeEnd" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.EmployeeEmployeeWorkLog" FromRole="EmployeeWorkLog" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="UserLogin" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" />
+          <Property Name="UserPassword" Type="String" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.UserEmployee" FromRole="User" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID_Position" />
+          </Key>
+          <Property Name="ID_Position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamePosition" Type="String" Nullable="false" />
+          <Property Name="PaymentPerHour" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="HeadOrder" Relationship="MainOffice.PositionHeadOrder" FromRole="Position" ToRole="HeadOrder" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.PositionEmployee" FromRole="Position" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="CashRegister">
+          <Key>
+            <PropertyRef Name="ID_CashRegister" />
+          </Key>
+          <Property Name="ID_CashRegister" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RealEstate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="MainOffice.CashRegisterCashRegisterAccess" FromRole="CashRegister" ToRole="CashRegisterAccess" />
+          <NavigationProperty Name="RealEstate" Relationship="MainOffice.RealEstateCashRegister" FromRole="CashRegister" ToRole="RealEstate" />
+        </EntityType>
+        <EntityType Name="CashRegisterOperation">
+          <Key>
+            <PropertyRef Name="ID_Operation" />
+          </Key>
+          <Property Name="ID_Operation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameOperation" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="MainOffice.CashRegisterOperationCashRegisterAccess" FromRole="CashRegisterOperation" ToRole="CashRegisterAccess" />
+        </EntityType>
+        <EntityType Name="HeadOrder">
+          <Key>
+            <PropertyRef Name="ID_HeadOrder" />
+          </Key>
+          <Property Name="ID_HeadOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="ID_Position" Type="Int32" Nullable="false" />
+          <Property Name="ID_StatusOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StatusOrder" Relationship="MainOffice.HeadOrderStatusOrder" FromRole="HeadOrder" ToRole="StatusOrder" />
+          <NavigationProperty Name="Position" Relationship="MainOffice.PositionHeadOrder" FromRole="HeadOrder" ToRole="Position" />
+          <NavigationProperty Name="PerformedHeadOrder" Relationship="MainOffice.HeadOrderPerformedHeadOrder" FromRole="HeadOrder" ToRole="PerformedHeadOrder" />
+          <Property Name="AssignFor" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="ID_Purchase" />
+          </Key>
+          <Property Name="ID_Purchase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Merchandise" Type="Int32" Nullable="false" />
+          <Property Name="ID_CashRegisterAccess" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="MainOffice.CashRegisterAccessPurchase" FromRole="Purchase" ToRole="CashRegisterAccess" />
+          <NavigationProperty Name="Merchandise" Relationship="MainOffice.MerchandisePurchase" FromRole="Purchase" ToRole="Merchandise" />
+        </EntityType>
+        <EntityType Name="CashRegisterAccess">
+          <Key>
+            <PropertyRef Name="ID_CashRegisterAccess" />
+          </Key>
+          <Property Name="ID_CashRegisterAccess" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CashRegister" Type="Int32" Nullable="false" />
+          <Property Name="ID_EmployeeSeller" Type="Int32" Nullable="false" />
+          <Property Name="ID_Operation" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CashRegisterOperation" Relationship="MainOffice.CashRegisterOperationCashRegisterAccess" FromRole="CashRegisterAccess" ToRole="CashRegisterOperation" />
+          <NavigationProperty Name="CashRegister" Relationship="MainOffice.CashRegisterCashRegisterAccess" FromRole="CashRegisterAccess" ToRole="CashRegister" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.CashRegisterAccessEmployee" FromRole="CashRegisterAccess" ToRole="Employee" />
+          <NavigationProperty Name="Purchase" Relationship="MainOffice.CashRegisterAccessPurchase" FromRole="CashRegisterAccess" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="StoreOrder">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Product" Type="Int32" Nullable="false" />
+          <Property Name="ID_RealEstateStore" Type="Int32" Nullable="false" />
+          <Property Name="ID_StoreManager" Type="Int32" Nullable="false" />
+          <Property Name="ID_StatusOrder" Type="Int32" Nullable="false" />
+          <Property Name="InitialDate" Type="DateTime" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RealEstate" Relationship="MainOffice.RealEstateStoreOrder" FromRole="StoreOrder" ToRole="RealEstate" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.EmployeeStoreOrder" FromRole="StoreOrder" ToRole="Employee" />
+          <NavigationProperty Name="Product" Relationship="MainOffice.ProductStoreOrder" FromRole="StoreOrder" ToRole="Product" />
+          <NavigationProperty Name="StatusOrder" Relationship="MainOffice.StatusOrderStoreOrder" FromRole="StoreOrder" ToRole="StatusOrder" />
+          <NavigationProperty Name="MerchandiseAcceptanceLog" Relationship="MainOffice.StoreOrderMerchandiseAcceptanceLog" FromRole="StoreOrder" ToRole="MerchandiseAcceptanceLog" />
+          <NavigationProperty Name="PerformedStoreOrder" Relationship="MainOffice.StoreOrderPerformedStoreOrder" FromRole="StoreOrder" ToRole="PerformedStoreOrder" />
+        </EntityType>
+        <EntityType Name="MerchandiseAcceptanceLog">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_AcceptManager" Type="Int32" Nullable="false" />
+          <Property Name="AcceptDate" Type="DateTime" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.EmployeeMerchandiseAcceptanceLog" FromRole="MerchandiseAcceptanceLog" ToRole="Employee" />
+          <NavigationProperty Name="StoreOrder" Relationship="MainOffice.StoreOrderMerchandiseAcceptanceLog" FromRole="MerchandiseAcceptanceLog" ToRole="StoreOrder" />
+          <NavigationProperty Name="LackLog" Relationship="MainOffice.MerchandiseAcceptanceLogLackLog" FromRole="MerchandiseAcceptanceLog" ToRole="LackLog" />
+        </EntityType>
+        <EntityType Name="LackLog">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WeightOfLack" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MerchandiseAcceptanceLog" Relationship="MainOffice.MerchandiseAcceptanceLogLackLog" FromRole="LackLog" ToRole="MerchandiseAcceptanceLog" />
+        </EntityType>
+        <EntityType Name="StatusOrder">
+          <Key>
+            <PropertyRef Name="ID_StatusOrder" />
+          </Key>
+          <Property Name="ID_StatusOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameStatusOrder" Type="String" Nullable="false" />
+          <NavigationProperty Name="HeadOrder" Relationship="MainOffice.HeadOrderStatusOrder" FromRole="StatusOrder" ToRole="HeadOrder" />
+          <NavigationProperty Name="StoreOrder" Relationship="MainOffice.StatusOrderStoreOrder" FromRole="StatusOrder" ToRole="StoreOrder" />
+          <NavigationProperty Name="RawMaterialProviderContract" Relationship="MainOffice.StatusOrderRawMaterialProviderContract" FromRole="StatusOrder" ToRole="RawMaterialProviderContract" />
+        </EntityType>
+        <Association Name="RealEstateTypeRealEstate">
+          <End Type="MainOffice.RealEstateType" Role="RealEstateType" Multiplicity="1" />
+          <End Type="MainOffice.RealEstate" Role="RealEstate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstateType">
+              <PropertyRef Name="ID_RealEstateType" />
+            </Principal>
+            <Dependent Role="RealEstate">
+              <PropertyRef Name="ID_RealEstateType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HeadOrderStatusOrder">
+          <End Type="MainOffice.HeadOrder" Role="HeadOrder" Multiplicity="*" />
+          <End Type="MainOffice.StatusOrder" Role="StatusOrder" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Principal>
+            <Dependent Role="HeadOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PositionHeadOrder">
+          <End Type="MainOffice.Position" Role="Position" Multiplicity="1" />
+          <End Type="MainOffice.HeadOrder" Role="HeadOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_Position" />
+            </Principal>
+            <Dependent Role="HeadOrder">
+              <PropertyRef Name="ID_Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterOperationCashRegisterAccess">
+          <End Type="MainOffice.CashRegisterOperation" Role="CashRegisterOperation" Multiplicity="1" />
+          <End Type="MainOffice.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashRegisterOperation">
+              <PropertyRef Name="ID_Operation" />
+            </Principal>
+            <Dependent Role="CashRegisterAccess">
+              <PropertyRef Name="ID_Operation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterCashRegisterAccess">
+          <End Type="MainOffice.CashRegister" Role="CashRegister" Multiplicity="1" />
+          <End Type="MainOffice.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashRegister">
+              <PropertyRef Name="ID_CashRegister" />
+            </Principal>
+            <Dependent Role="CashRegisterAccess">
+              <PropertyRef Name="ID_CashRegister" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateCashRegister">
+          <End Type="MainOffice.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="MainOffice.CashRegister" Role="CashRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="CashRegister">
+              <PropertyRef Name="ID_RealEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterAccessEmployee">
+          <End Type="MainOffice.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="*" />
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="CashRegisterAccess">
+              <PropertyRef Name="ID_EmployeeSeller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterAccessPurchase">
+          <End Type="MainOffice.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="1" />
+          <End Type="MainOffice.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashRegisterAccess">
+              <PropertyRef Name="ID_CashRegisterAccess" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="ID_CashRegisterAccess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MerchandisePurchase">
+          <End Type="MainOffice.Merchandise" Role="Merchandise" Multiplicity="1" />
+          <End Type="MainOffice.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchandise">
+              <PropertyRef Name="ID_Merchandise" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="ID_Merchandise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PositionEmployee">
+          <End Type="MainOffice.Position" Role="Position" Multiplicity="1" />
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_Position" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="ID_Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserEmployee">
+          <End Type="MainOffice.User" Role="User" Multiplicity="0..1" />
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeEmployeeWorkLog">
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MainOffice.EmployeeWorkLog" Role="EmployeeWorkLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="EmployeeWorkLog">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DepartamentRealEstateContact">
+          <End Type="MainOffice.Departament" Role="Departament" Multiplicity="1" />
+          <End Type="MainOffice.RealEstateContact" Role="RealEstateContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departament">
+              <PropertyRef Name="ID_Departament" />
+            </Principal>
+            <Dependent Role="RealEstateContact">
+              <PropertyRef Name="ID_Departament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateRealEstateContact">
+          <End Type="MainOffice.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="MainOffice.RealEstateContact" Role="RealEstateContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="RealEstateContact">
+              <PropertyRef Name="ID_RealEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateMerchandise">
+          <End Type="MainOffice.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="MainOffice.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="Merchandise">
+              <PropertyRef Name="ID_RealEstateMerchandiseCreater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateStoreOrder">
+          <End Type="MainOffice.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="MainOffice.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_RealEstateStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateEmployee">
+          <End Type="MainOffice.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="ID_RealEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeStoreOrder">
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MainOffice.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_StoreManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeMerchandiseAcceptanceLog">
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MainOffice.MerchandiseAcceptanceLog" Role="MerchandiseAcceptanceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="MerchandiseAcceptanceLog">
+              <PropertyRef Name="ID_AcceptManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductMerchandise">
+          <End Type="MainOffice.Product" Role="Product" Multiplicity="1" />
+          <End Type="MainOffice.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Merchandise">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductComponent">
+          <End Type="MainOffice.Product" Role="Product" Multiplicity="1" />
+          <End Type="MainOffice.Component" Role="Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductStoreOrder">
+          <End Type="MainOffice.Product" Role="Product" Multiplicity="1" />
+          <End Type="MainOffice.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RawMaterialComponent">
+          <End Type="MainOffice.RawMaterial" Role="RawMaterial" Multiplicity="1" />
+          <End Type="MainOffice.Component" Role="Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MeasurementUnitComponent">
+          <End Type="MainOffice.MeasurementUnit" Role="MeasurementUnit" Multiplicity="1" />
+          <End Type="MainOffice.Component" Role="Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementUnit">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RawMaterialRawMaterialProviderContract">
+          <End Type="MainOffice.RawMaterial" Role="RawMaterial" Multiplicity="1" />
+          <End Type="MainOffice.RawMaterialProviderContract" Role="RawMaterialProviderContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Principal>
+            <Dependent Role="RawMaterialProviderContract">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MeasurementUnitRawMaterialProviderContract">
+          <End Type="MainOffice.MeasurementUnit" Role="MeasurementUnit" Multiplicity="1" />
+          <End Type="MainOffice.RawMaterialProviderContract" Role="RawMaterialProviderContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementUnit">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Principal>
+            <Dependent Role="RawMaterialProviderContract">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RawMaterialStockRawMaterial">
+          <End Type="MainOffice.RawMaterial" Role="RawMaterial" Multiplicity="1" />
+          <End Type="MainOffice.StockRawMaterial" Role="StockRawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Principal>
+            <Dependent Role="StockRawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MeasurementUnitStockRawMaterial">
+          <End Type="MainOffice.MeasurementUnit" Role="MeasurementUnit" Multiplicity="1" />
+          <End Type="MainOffice.StockRawMaterial" Role="StockRawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementUnit">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Principal>
+            <Dependent Role="StockRawMaterial">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatusOrderStoreOrder">
+          <End Type="MainOffice.StatusOrder" Role="StatusOrder" Multiplicity="1" />
+          <End Type="MainOffice.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StoreOrderMerchandiseAcceptanceLog">
+          <End Type="MainOffice.StoreOrder" Role="StoreOrder" Multiplicity="1" />
+          <End Type="MainOffice.MerchandiseAcceptanceLog" Role="MerchandiseAcceptanceLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StoreOrder">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Principal>
+            <Dependent Role="MerchandiseAcceptanceLog">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MerchandiseAcceptanceLogLackLog">
+          <End Type="MainOffice.MerchandiseAcceptanceLog" Role="MerchandiseAcceptanceLog" Multiplicity="1" />
+          <End Type="MainOffice.LackLog" Role="LackLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MerchandiseAcceptanceLog">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Principal>
+            <Dependent Role="LackLog">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PerformedHeadOrder">
+          <Key>
+            <PropertyRef Name="ID_PerformedOrder" />
+          </Key>
+          <Property Name="ID_HeadOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HeadOrder" Relationship="MainOffice.HeadOrderPerformedHeadOrder" FromRole="PerformedHeadOrder" ToRole="HeadOrder" />
+          <Property Name="ID_PerformedOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.EmployeePerformedHeadOrder" FromRole="PerformedHeadOrder" ToRole="Employee" />
+        </EntityType>
+        <Association Name="HeadOrderPerformedHeadOrder">
+          <End Type="MainOffice.HeadOrder" Role="HeadOrder" Multiplicity="1" />
+          <End Type="MainOffice.PerformedHeadOrder" Role="PerformedHeadOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeadOrder">
+              <PropertyRef Name="ID_HeadOrder" />
+            </Principal>
+            <Dependent Role="PerformedHeadOrder">
+              <PropertyRef Name="ID_HeadOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeePerformedHeadOrder">
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MainOffice.PerformedHeadOrder" Role="PerformedHeadOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="PerformedHeadOrder">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PerformedStoreOrder">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_FactoryManager" Type="Int32" Nullable="false" />
+          <Property Name="ID_Carrier" Type="Int32" Nullable="false" />
+          <Property Name="ShippingDate" Type="DateTime" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StoreOrder" Relationship="MainOffice.StoreOrderPerformedStoreOrder" FromRole="PerformedStoreOrder" ToRole="StoreOrder" />
+          <NavigationProperty Name="Employee" Relationship="MainOffice.EmployeePerformedStoreOrder" FromRole="PerformedStoreOrder" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="MainOffice.EmployeePerformedStoreOrder1" FromRole="PerformedStoreOrder" ToRole="Employee" />
+        </EntityType>
+        <Association Name="StoreOrderPerformedStoreOrder">
+          <End Type="MainOffice.StoreOrder" Role="StoreOrder" Multiplicity="1" />
+          <End Type="MainOffice.PerformedStoreOrder" Role="PerformedStoreOrder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StoreOrder">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Principal>
+            <Dependent Role="PerformedStoreOrder">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeePerformedStoreOrder">
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MainOffice.PerformedStoreOrder" Role="PerformedStoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="PerformedStoreOrder">
+              <PropertyRef Name="ID_FactoryManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeePerformedStoreOrder1">
+          <End Type="MainOffice.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MainOffice.PerformedStoreOrder" Role="PerformedStoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="PerformedStoreOrder">
+              <PropertyRef Name="ID_Carrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatusOrderRawMaterialProviderContract">
+          <End Type="MainOffice.StatusOrder" Role="StatusOrder" Multiplicity="1" />
+          <End Type="MainOffice.RawMaterialProviderContract" Role="RawMaterialProviderContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Principal>
+            <Dependent Role="RawMaterialProviderContract">
+              <PropertyRef Name="ID_StatusContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MainOfficeStoreContainer" CdmEntityContainer="MainOfficeContainer">
+    <EntitySetMapping Name="RealEstateTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.RealEstateType)">
+        <MappingFragment StoreEntitySet="RealEstateTypes">
+          <ScalarProperty Name="ID_RealEstateType" ColumnName="ID_RealEstateType" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RealEstates">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.RealEstate)">
+        <MappingFragment StoreEntitySet="RealEstates">
+          <ScalarProperty Name="ID_RealEstate" ColumnName="ID_RealEstate" />
+          <ScalarProperty Name="ID_RealEstateType" ColumnName="ID_RealEstateType" />
+          <ScalarProperty Name="NameRealEstate" ColumnName="NameRealEstate" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="BuildingNumber" ColumnName="BuildingNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RealEstateContacts">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.RealEstateContact)">
+        <MappingFragment StoreEntitySet="RealEstateContacts">
+          <ScalarProperty Name="ID_RealEstateContact" ColumnName="ID_RealEstateContact" />
+          <ScalarProperty Name="ID_RealEstate" ColumnName="ID_RealEstate" />
+          <ScalarProperty Name="ID_Departament" ColumnName="ID_Departament" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departaments">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.Departament)">
+        <MappingFragment StoreEntitySet="Departaments">
+          <ScalarProperty Name="ID_Departament" ColumnName="ID_Departament" />
+          <ScalarProperty Name="NameDepartament" ColumnName="NameDepartament" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RawMaterialProviderContracts">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.RawMaterialProviderContract)">
+        <MappingFragment StoreEntitySet="RawMaterialProviderContracts">
+          <ScalarProperty Name="ID_Contract" ColumnName="ID_Contract" />
+          <ScalarProperty Name="ID_RawMaterial" ColumnName="ID_RawMaterial" />
+          <ScalarProperty Name="ID_MeasurementUnit" ColumnName="ID_MeasurementUnit" />
+          <ScalarProperty Name="ManufactureDate" ColumnName="ManufactureDate" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="PricePerCount" ColumnName="PricePerCount" />
+          <ScalarProperty Name="ID_StatusContract" ColumnName="ID_StatusContract" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StockRawMaterials">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.StockRawMaterial)">
+        <MappingFragment StoreEntitySet="StockRawMaterials">
+          <ScalarProperty Name="ID_StockRawMaterial" ColumnName="ID_StockRawMaterial" />
+          <ScalarProperty Name="ID_RawMaterial" ColumnName="ID_RawMaterial" />
+          <ScalarProperty Name="ID_MeasurementUnit" ColumnName="ID_MeasurementUnit" />
+          <ScalarProperty Name="ManufactureDate" ColumnName="ManufactureDate" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="PricePerGramm" ColumnName="PricePerGramm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RawMaterials">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.RawMaterial)">
+        <MappingFragment StoreEntitySet="RawMaterials">
+          <ScalarProperty Name="ID_RawMaterial" ColumnName="ID_RawMaterial" />
+          <ScalarProperty Name="RawMaterialName" ColumnName="RawMaterialName" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="MinTemperature" ColumnName="MinTemperature" />
+          <ScalarProperty Name="MaxTemperature" ColumnName="MaxTemperature" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeasurementUnits">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.MeasurementUnit)">
+        <MappingFragment StoreEntitySet="MeasurementUnits">
+          <ScalarProperty Name="ID_MeasurementUnit" ColumnName="ID_MeasurementUnit" />
+          <ScalarProperty Name="NameMeasurementUnit" ColumnName="NameMeasurementUnit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Components">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.Component)">
+        <MappingFragment StoreEntitySet="Components">
+          <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+          <ScalarProperty Name="ID_RawMaterial" ColumnName="ID_RawMaterial" />
+          <ScalarProperty Name="ID_MeasurementUnit" ColumnName="ID_MeasurementUnit" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Merchandises">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.Merchandise)">
+        <MappingFragment StoreEntitySet="Merchandises">
+          <ScalarProperty Name="ID_Merchandise" ColumnName="ID_Merchandise" />
+          <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+          <ScalarProperty Name="ID_RealEstateMerchandiseCreater" ColumnName="ID_RealEstateMerchandiseCreater" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="ManufactureDate" ColumnName="ManufactureDate" />
+          <ScalarProperty Name="PricePerGramm" ColumnName="PricePerGramm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Recipe" ColumnName="Recipe" />
+          <ScalarProperty Name="CalorieContent" ColumnName="CalorieContent" />
+          <ScalarProperty Name="Proteins" ColumnName="Proteins" />
+          <ScalarProperty Name="Fats" ColumnName="Fats" />
+          <ScalarProperty Name="Carbohydrates" ColumnName="Carbohydrates" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="MinTemperature" ColumnName="MinTemperature" />
+          <ScalarProperty Name="MaxTemperature" ColumnName="MaxTemperature" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+          <ScalarProperty Name="ID_Position" ColumnName="ID_Position" />
+          <ScalarProperty Name="ID_RealEstate" ColumnName="ID_RealEstate" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="IDK" ColumnName="IDK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeWorkLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.EmployeeWorkLog)">
+        <MappingFragment StoreEntitySet="EmployeeWorkLogs">
+          <ScalarProperty Name="ID_EmployeeWorkLog" ColumnName="ID_EmployeeWorkLog" />
+          <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+          <ScalarProperty Name="DateTimeStart" ColumnName="DateTimeStart" />
+          <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Positions">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.Position)">
+        <MappingFragment StoreEntitySet="Positions">
+          <ScalarProperty Name="ID_Position" ColumnName="ID_Position" />
+          <ScalarProperty Name="NamePosition" ColumnName="NamePosition" />
+          <ScalarProperty Name="PaymentPerHour" ColumnName="PaymentPerHour" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashRegisters">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.CashRegister)">
+        <MappingFragment StoreEntitySet="CashRegisters">
+          <ScalarProperty Name="ID_CashRegister" ColumnName="ID_CashRegister" />
+          <ScalarProperty Name="ID_RealEstate" ColumnName="ID_RealEstate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashRegisterOperations">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.CashRegisterOperation)">
+        <MappingFragment StoreEntitySet="CashRegisterOperations">
+          <ScalarProperty Name="ID_Operation" ColumnName="ID_Operation" />
+          <ScalarProperty Name="NameOperation" ColumnName="NameOperation" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HeadOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.HeadOrder)">
+        <MappingFragment StoreEntitySet="HeadOrders">
+          <ScalarProperty Name="ID_HeadOrder" ColumnName="ID_HeadOrder" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID_Position" ColumnName="ID_Position" />
+          <ScalarProperty Name="ID_StatusOrder" ColumnName="ID_StatusOrder" />
+          <ScalarProperty Name="AssignFor" ColumnName="AssignFor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.Purchase)">
+        <MappingFragment StoreEntitySet="Purchases">
+          <ScalarProperty Name="ID_Purchase" ColumnName="ID_Purchase" />
+          <ScalarProperty Name="ID_Merchandise" ColumnName="ID_Merchandise" />
+          <ScalarProperty Name="ID_CashRegisterAccess" ColumnName="ID_CashRegisterAccess" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CashRegisterAccesses">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.CashRegisterAccess)">
+        <MappingFragment StoreEntitySet="CashRegisterAccesses">
+          <ScalarProperty Name="ID_CashRegisterAccess" ColumnName="ID_CashRegisterAccess" />
+          <ScalarProperty Name="ID_CashRegister" ColumnName="ID_CashRegister" />
+          <ScalarProperty Name="ID_EmployeeSeller" ColumnName="ID_EmployeeSeller" />
+          <ScalarProperty Name="ID_Operation" ColumnName="ID_Operation" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.StoreOrder)">
+        <MappingFragment StoreEntitySet="StoreOrders">
+          <ScalarProperty Name="ID_StoreOrder" ColumnName="ID_StoreOrder" />
+          <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+          <ScalarProperty Name="ID_RealEstateStore" ColumnName="ID_RealEstateStore" />
+          <ScalarProperty Name="ID_StoreManager" ColumnName="ID_StoreManager" />
+          <ScalarProperty Name="ID_StatusOrder" ColumnName="ID_StatusOrder" />
+          <ScalarProperty Name="InitialDate" ColumnName="InitialDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MerchandiseAcceptanceLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.MerchandiseAcceptanceLog)">
+        <MappingFragment StoreEntitySet="MerchandiseAcceptanceLogs">
+          <ScalarProperty Name="ID_StoreOrder" ColumnName="ID_StoreOrder" />
+          <ScalarProperty Name="ID_AcceptManager" ColumnName="ID_AcceptManager" />
+          <ScalarProperty Name="AcceptDate" ColumnName="AcceptDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LackLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.LackLog)">
+        <MappingFragment StoreEntitySet="LackLogs">
+          <ScalarProperty Name="ID_StoreOrder" ColumnName="ID_StoreOrder" />
+          <ScalarProperty Name="WeightOfLack" ColumnName="WeightOfLack" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.StatusOrder)">
+        <MappingFragment StoreEntitySet="StatusOrders">
+          <ScalarProperty Name="ID_StatusOrder" ColumnName="ID_StatusOrder" />
+          <ScalarProperty Name="NameStatusOrder" ColumnName="NameStatusOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerformedHeadOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.PerformedHeadOrder)">
+        <MappingFragment StoreEntitySet="PerformedHeadOrders">
+          <ScalarProperty Name="ID_PerformedOrder" ColumnName="ID_PerformedOrder" />
+          <ScalarProperty Name="ID_HeadOrder" ColumnName="ID_HeadOrder" />
+          <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerformedStoreOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(MainOffice.PerformedStoreOrder)">
+        <MappingFragment StoreEntitySet="PerformedStoreOrders">
+          <ScalarProperty Name="ID_StoreOrder" ColumnName="ID_StoreOrder" />
+          <ScalarProperty Name="ID_FactoryManager" ColumnName="ID_FactoryManager" />
+          <ScalarProperty Name="ID_Carrier" ColumnName="ID_Carrier" />
+          <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="adb492a03f924f5c9c9fbeaa1aae0636" Name="Diagram1">
+        <EntityTypeShape EntityType="MainOffice.RealEstateType" Width="1.5" PointX="1.5" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.RealEstate" Width="1.5" PointX="1.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.RealEstateContact" Width="1.5" PointX="3.75" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.Departament" Width="1.5" PointX="1.5" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.RawMaterialProviderContract" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.StockRawMaterial" Width="1.5" PointX="7.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.RawMaterial" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.MeasurementUnit" Width="1.5" PointX="5.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.Component" Width="1.5" PointX="10.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.Merchandise" Width="1.5" PointX="7.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.Product" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.Employee" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.EmployeeWorkLog" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.User" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.Position" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.CashRegister" Width="1.5" PointX="1.5" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.CashRegisterOperation" Width="2" PointX="1.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.HeadOrder" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.Purchase" Width="1.5" PointX="9.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.CashRegisterAccess" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.StoreOrder" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.MerchandiseAcceptanceLog" Width="1.5" PointX="9.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.LackLog" Width="1.5" PointX="12" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.StatusOrder" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.PerformedHeadOrder" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainOffice.PerformedStoreOrder" Width="1.5" PointX="12.75" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="MainOffice.RealEstateTypeRealEstate" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.HeadOrderStatusOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.PositionHeadOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.CashRegisterOperationCashRegisterAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.CashRegisterCashRegisterAccess" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RealEstateCashRegister" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.CashRegisterAccessEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.CashRegisterAccessPurchase" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.MerchandisePurchase" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.PositionEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.UserEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.EmployeeEmployeeWorkLog" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.DepartamentRealEstateContact" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RealEstateRealEstateContact" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RealEstateMerchandise" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RealEstateStoreOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RealEstateEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.EmployeeStoreOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.EmployeeMerchandiseAcceptanceLog" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.ProductMerchandise" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.ProductComponent" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.ProductStoreOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RawMaterialComponent" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.MeasurementUnitComponent" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RawMaterialRawMaterialProviderContract" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.MeasurementUnitRawMaterialProviderContract" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.RawMaterialStockRawMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.MeasurementUnitStockRawMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.StatusOrderStoreOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.StoreOrderMerchandiseAcceptanceLog" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.MerchandiseAcceptanceLogLackLog" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.HeadOrderPerformedHeadOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.EmployeePerformedHeadOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.StoreOrderPerformedStoreOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.EmployeePerformedStoreOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.EmployeePerformedStoreOrder1" ManuallyRouted="false" />
+        <AssociationConnector Association="MainOffice.StatusOrderRawMaterialProviderContract" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
