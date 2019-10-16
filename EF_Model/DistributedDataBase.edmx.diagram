@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1d0589812ee04ac28f126c971f120735" Name="Diagram1" ZoomLevel="97" >
+        <EntityTypeShape EntityType="DistributedDataBase.RealEstateType" Width="2" PointX="0.5" PointY="5" />
+        <EntityTypeShape EntityType="DistributedDataBase.RealEstate" Width="2" PointX="1.125" PointY="7.375" />
+        <EntityTypeShape EntityType="DistributedDataBase.RealEstateContact" Width="2" PointX="0.5" PointY="11.75" />
+        <EntityTypeShape EntityType="DistributedDataBase.Departament" Width="2" PointX="0.5" PointY="15" />
+        <EntityTypeShape EntityType="DistributedDataBase.RawMaterialProviderContract" Width="2.5" PointX="11.5" PointY="7.625" />
+        <EntityTypeShape EntityType="DistributedDataBase.StockRawMaterial" Width="2" PointX="10.875" PointY="18.625" />
+        <EntityTypeShape EntityType="DistributedDataBase.RawMaterial" Width="2" PointX="12.75" PointY="13.625" />
+        <EntityTypeShape EntityType="DistributedDataBase.MeasurementUnit" Width="2" PointX="8.625" PointY="14.625" />
+        <EntityTypeShape EntityType="DistributedDataBase.Component" Width="2" PointX="8.5" PointY="25" />
+        <EntityTypeShape EntityType="DistributedDataBase.Merchandise" Width="2.375" PointX="0.5" PointY="19.125" />
+        <EntityTypeShape EntityType="DistributedDataBase.Product" Width="2" PointX="2" PointY="23.375" />
+        <EntityTypeShape EntityType="DistributedDataBase.Employee" Width="2" PointX="3.625" PointY="0.5" />
+        <EntityTypeShape EntityType="DistributedDataBase.EmployeeWorkLog" Width="2" PointX="0.5" PointY="2.625" />
+        <EntityTypeShape EntityType="DistributedDataBase.User" Width="2" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DistributedDataBase.Position" Width="2" PointX="6.125" PointY="0.5" />
+        <EntityTypeShape EntityType="DistributedDataBase.CashRegister" Width="2" PointX="3.625" PointY="18.125" />
+        <EntityTypeShape EntityType="DistributedDataBase.CashRegisterOperation" Width="2" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="DistributedDataBase.HeadOrder" Width="2" PointX="11.625" PointY="0.5" />
+        <EntityTypeShape EntityType="DistributedDataBase.Purchase" Width="2" PointX="5.875" PointY="20.625" />
+        <EntityTypeShape EntityType="DistributedDataBase.CashRegisterAccess" Width="2" PointX="3.75" PointY="12.5" />
+        <EntityTypeShape EntityType="DistributedDataBase.StoreOrder" Width="2" PointX="8.125" PointY="5.375" />
+        <EntityTypeShape EntityType="DistributedDataBase.MerchandiseAcceptanceLog" Width="2.125" PointX="7.875" PointY="9.5" />
+        <EntityTypeShape EntityType="DistributedDataBase.LackLog" Width="2" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DistributedDataBase.StatusOrder" Width="2" PointX="11.375" PointY="4.375" />
+        <EntityTypeShape EntityType="DistributedDataBase.PerformedHeadOrder" Width="2" PointX="8.5" PointY="2.625" />
+        <EntityTypeShape EntityType="DistributedDataBase.PerformedStoreOrder" Width="2" PointX="4.75" PointY="5.875" />
+        <AssociationConnector Association="DistributedDataBase.RealEstateTypeRealEstate" />
+        <AssociationConnector Association="DistributedDataBase.DepartamentRealEstateContact" />
+        <AssociationConnector Association="DistributedDataBase.RealEstateRealEstateContact" />
+        <AssociationConnector Association="DistributedDataBase.RawMaterialRawMaterialProviderContract" />
+        <AssociationConnector Association="DistributedDataBase.MeasurementUnitRawMaterialProviderContract" />
+        <AssociationConnector Association="DistributedDataBase.StatusOrderRawMaterialProviderContract" />
+        <AssociationConnector Association="DistributedDataBase.RawMaterialStockRawMaterial" />
+        <AssociationConnector Association="DistributedDataBase.MeasurementUnitStockRawMaterial" />
+        <AssociationConnector Association="DistributedDataBase.RawMaterialComponent" />
+        <AssociationConnector Association="DistributedDataBase.MeasurementUnitComponent" />
+        <AssociationConnector Association="DistributedDataBase.ProductComponent" />
+        <AssociationConnector Association="DistributedDataBase.MerchandisePurchase" />
+        <AssociationConnector Association="DistributedDataBase.RealEstateMerchandise" />
+        <AssociationConnector Association="DistributedDataBase.ProductMerchandise" />
+        <AssociationConnector Association="DistributedDataBase.CashRegisterAccessEmployee" />
+        <AssociationConnector Association="DistributedDataBase.PositionEmployee" />
+        <AssociationConnector Association="DistributedDataBase.UserEmployee" />
+        <AssociationConnector Association="DistributedDataBase.EmployeeEmployeeWorkLog" />
+        <AssociationConnector Association="DistributedDataBase.RealEstateEmployee" />
+        <AssociationConnector Association="DistributedDataBase.EmployeeStoreOrder" />
+        <AssociationConnector Association="DistributedDataBase.EmployeeMerchandiseAcceptanceLog" />
+        <AssociationConnector Association="DistributedDataBase.EmployeePerformedHeadOrder" />
+        <AssociationConnector Association="DistributedDataBase.EmployeePerformedStoreOrder" />
+        <AssociationConnector Association="DistributedDataBase.EmployeePerformedStoreOrder1" />
+        <AssociationConnector Association="DistributedDataBase.PositionHeadOrder" />
+        <AssociationConnector Association="DistributedDataBase.CashRegisterCashRegisterAccess" />
+        <AssociationConnector Association="DistributedDataBase.RealEstateCashRegister" />
+        <AssociationConnector Association="DistributedDataBase.CashRegisterOperationCashRegisterAccess" />
+        <AssociationConnector Association="DistributedDataBase.HeadOrderStatusOrder" />
+        <AssociationConnector Association="DistributedDataBase.CashRegisterAccessPurchase" />
+        <AssociationConnector Association="DistributedDataBase.RealEstateStoreOrder" />
+        <AssociationConnector Association="DistributedDataBase.MerchandiseAcceptanceLogLackLog" />
+        <AssociationConnector Association="DistributedDataBase.HeadOrderPerformedHeadOrder" />
+        <AssociationConnector Association="DistributedDataBase.StoreOrderPerformedStoreOrder" />
+        <AssociationConnector Association="DistributedDataBase.StatusOrderStoreOrder" />
+        <AssociationConnector Association="DistributedDataBase.StoreOrderMerchandiseAcceptanceLog" />
+        <AssociationConnector Association="DistributedDataBase.ProductStoreOrder" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

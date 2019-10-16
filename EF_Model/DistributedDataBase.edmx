@@ -1,0 +1,996 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DistributedDataBase.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DistributedDataBaseTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DistributedDataBase" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DistributedDataBaseContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RealEstateTypes" EntityType="DistributedDataBase.RealEstateType" />
+          <EntitySet Name="RealEstates" EntityType="DistributedDataBase.RealEstate" />
+          <EntitySet Name="RealEstateContacts" EntityType="DistributedDataBase.RealEstateContact" />
+          <EntitySet Name="Departaments" EntityType="DistributedDataBase.Departament" />
+          <EntitySet Name="RawMaterialProviderContracts" EntityType="DistributedDataBase.RawMaterialProviderContract" />
+          <EntitySet Name="StockRawMaterials" EntityType="DistributedDataBase.StockRawMaterial" />
+          <EntitySet Name="RawMaterials" EntityType="DistributedDataBase.RawMaterial" />
+          <EntitySet Name="MeasurementUnits" EntityType="DistributedDataBase.MeasurementUnit" />
+          <EntitySet Name="Components" EntityType="DistributedDataBase.Component" />
+          <EntitySet Name="Merchandises" EntityType="DistributedDataBase.Merchandise" />
+          <EntitySet Name="Products" EntityType="DistributedDataBase.Product" />
+          <EntitySet Name="Employees" EntityType="DistributedDataBase.Employee" />
+          <EntitySet Name="EmployeeWorkLogs" EntityType="DistributedDataBase.EmployeeWorkLog" />
+          <EntitySet Name="Users" EntityType="DistributedDataBase.User" />
+          <EntitySet Name="Positions" EntityType="DistributedDataBase.Position" />
+          <EntitySet Name="CashRegisters" EntityType="DistributedDataBase.CashRegister" />
+          <EntitySet Name="CashRegisterOperations" EntityType="DistributedDataBase.CashRegisterOperation" />
+          <EntitySet Name="HeadOrders" EntityType="DistributedDataBase.HeadOrder" />
+          <EntitySet Name="Purchases" EntityType="DistributedDataBase.Purchase" />
+          <EntitySet Name="CashRegisterAccesses" EntityType="DistributedDataBase.CashRegisterAccess" />
+          <EntitySet Name="StoreOrders" EntityType="DistributedDataBase.StoreOrder" />
+          <EntitySet Name="MerchandiseAcceptanceLogs" EntityType="DistributedDataBase.MerchandiseAcceptanceLog" />
+          <EntitySet Name="LackLogs" EntityType="DistributedDataBase.LackLog" />
+          <EntitySet Name="StatusOrders" EntityType="DistributedDataBase.StatusOrder" />
+          <EntitySet Name="PerformedHeadOrders" EntityType="DistributedDataBase.PerformedHeadOrder" />
+          <EntitySet Name="PerformedStoreOrders" EntityType="DistributedDataBase.PerformedStoreOrder" />
+          <AssociationSet Name="RealEstateTypeRealEstate" Association="DistributedDataBase.RealEstateTypeRealEstate">
+            <End Role="RealEstateType" EntitySet="RealEstateTypes" />
+            <End Role="RealEstate" EntitySet="RealEstates" />
+          </AssociationSet>
+          <AssociationSet Name="DepartamentRealEstateContact" Association="DistributedDataBase.DepartamentRealEstateContact">
+            <End Role="Departament" EntitySet="Departaments" />
+            <End Role="RealEstateContact" EntitySet="RealEstateContacts" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateRealEstateContact" Association="DistributedDataBase.RealEstateRealEstateContact">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="RealEstateContact" EntitySet="RealEstateContacts" />
+          </AssociationSet>
+          <AssociationSet Name="RawMaterialRawMaterialProviderContract" Association="DistributedDataBase.RawMaterialRawMaterialProviderContract">
+            <End Role="RawMaterial" EntitySet="RawMaterials" />
+            <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+          </AssociationSet>
+          <AssociationSet Name="MeasurementUnitRawMaterialProviderContract" Association="DistributedDataBase.MeasurementUnitRawMaterialProviderContract">
+            <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+            <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+          </AssociationSet>
+          <AssociationSet Name="StatusOrderRawMaterialProviderContract" Association="DistributedDataBase.StatusOrderRawMaterialProviderContract">
+            <End Role="StatusOrder" EntitySet="StatusOrders" />
+            <End Role="RawMaterialProviderContract" EntitySet="RawMaterialProviderContracts" />
+          </AssociationSet>
+          <AssociationSet Name="RawMaterialStockRawMaterial" Association="DistributedDataBase.RawMaterialStockRawMaterial">
+            <End Role="RawMaterial" EntitySet="RawMaterials" />
+            <End Role="StockRawMaterial" EntitySet="StockRawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="MeasurementUnitStockRawMaterial" Association="DistributedDataBase.MeasurementUnitStockRawMaterial">
+            <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+            <End Role="StockRawMaterial" EntitySet="StockRawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="RawMaterialComponent" Association="DistributedDataBase.RawMaterialComponent">
+            <End Role="RawMaterial" EntitySet="RawMaterials" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="MeasurementUnitComponent" Association="DistributedDataBase.MeasurementUnitComponent">
+            <End Role="MeasurementUnit" EntitySet="MeasurementUnits" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="ProductComponent" Association="DistributedDataBase.ProductComponent">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="MerchandisePurchase" Association="DistributedDataBase.MerchandisePurchase">
+            <End Role="Merchandise" EntitySet="Merchandises" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateMerchandise" Association="DistributedDataBase.RealEstateMerchandise">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="Merchandise" EntitySet="Merchandises" />
+          </AssociationSet>
+          <AssociationSet Name="ProductMerchandise" Association="DistributedDataBase.ProductMerchandise">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Merchandise" EntitySet="Merchandises" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterAccessEmployee" Association="DistributedDataBase.CashRegisterAccessEmployee">
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="PositionEmployee" Association="DistributedDataBase.PositionEmployee">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="UserEmployee" Association="DistributedDataBase.UserEmployee">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeEmployeeWorkLog" Association="DistributedDataBase.EmployeeEmployeeWorkLog">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeWorkLog" EntitySet="EmployeeWorkLogs" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateEmployee" Association="DistributedDataBase.RealEstateEmployee">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeStoreOrder" Association="DistributedDataBase.EmployeeStoreOrder">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeMerchandiseAcceptanceLog" Association="DistributedDataBase.EmployeeMerchandiseAcceptanceLog">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeePerformedHeadOrder" Association="DistributedDataBase.EmployeePerformedHeadOrder">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PerformedHeadOrder" EntitySet="PerformedHeadOrders" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeePerformedStoreOrder" Association="DistributedDataBase.EmployeePerformedStoreOrder">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeePerformedStoreOrder1" Association="DistributedDataBase.EmployeePerformedStoreOrder1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="PositionHeadOrder" Association="DistributedDataBase.PositionHeadOrder">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="HeadOrder" EntitySet="HeadOrders" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterCashRegisterAccess" Association="DistributedDataBase.CashRegisterCashRegisterAccess">
+            <End Role="CashRegister" EntitySet="CashRegisters" />
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateCashRegister" Association="DistributedDataBase.RealEstateCashRegister">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="CashRegister" EntitySet="CashRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterOperationCashRegisterAccess" Association="DistributedDataBase.CashRegisterOperationCashRegisterAccess">
+            <End Role="CashRegisterOperation" EntitySet="CashRegisterOperations" />
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="HeadOrderStatusOrder" Association="DistributedDataBase.HeadOrderStatusOrder">
+            <End Role="HeadOrder" EntitySet="HeadOrders" />
+            <End Role="StatusOrder" EntitySet="StatusOrders" />
+          </AssociationSet>
+          <AssociationSet Name="CashRegisterAccessPurchase" Association="DistributedDataBase.CashRegisterAccessPurchase">
+            <End Role="CashRegisterAccess" EntitySet="CashRegisterAccesses" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="RealEstateStoreOrder" Association="DistributedDataBase.RealEstateStoreOrder">
+            <End Role="RealEstate" EntitySet="RealEstates" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="MerchandiseAcceptanceLogLackLog" Association="DistributedDataBase.MerchandiseAcceptanceLogLackLog">
+            <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+            <End Role="LackLog" EntitySet="LackLogs" />
+          </AssociationSet>
+          <AssociationSet Name="HeadOrderPerformedHeadOrder" Association="DistributedDataBase.HeadOrderPerformedHeadOrder">
+            <End Role="HeadOrder" EntitySet="HeadOrders" />
+            <End Role="PerformedHeadOrder" EntitySet="PerformedHeadOrders" />
+          </AssociationSet>
+          <AssociationSet Name="StoreOrderPerformedStoreOrder" Association="DistributedDataBase.StoreOrderPerformedStoreOrder">
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+            <End Role="PerformedStoreOrder" EntitySet="PerformedStoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="StatusOrderStoreOrder" Association="DistributedDataBase.StatusOrderStoreOrder">
+            <End Role="StatusOrder" EntitySet="StatusOrders" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+          <AssociationSet Name="StoreOrderMerchandiseAcceptanceLog" Association="DistributedDataBase.StoreOrderMerchandiseAcceptanceLog">
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+            <End Role="MerchandiseAcceptanceLog" EntitySet="MerchandiseAcceptanceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="ProductStoreOrder" Association="DistributedDataBase.ProductStoreOrder">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="StoreOrder" EntitySet="StoreOrders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RealEstateType">
+          <Key>
+            <PropertyRef Name="ID_RealEstateType" />
+          </Key>
+          <Property Name="ID_RealEstateType" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="TypeName" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="RealEstate" Relationship="DistributedDataBase.RealEstateTypeRealEstate" FromRole="RealEstateType" ToRole="RealEstate" />
+        </EntityType>
+        <EntityType Name="RealEstate">
+          <Key>
+            <PropertyRef Name="ID_RealEstate" />
+          </Key>
+          <Property Name="ID_RealEstate" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_RealEstateType" Type="Guid" Nullable="false" />
+          <Property Name="NameRealEstate" Type="String" Nullable="false" />
+          <Property Name="Country" Type="String" Nullable="false" />
+          <Property Name="Region" Type="String" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" />
+          <Property Name="Street" Type="String" Nullable="false" />
+          <Property Name="BuildingNumber" Type="String" Nullable="false" />
+          <NavigationProperty Name="RealEstateType" Relationship="DistributedDataBase.RealEstateTypeRealEstate" FromRole="RealEstate" ToRole="RealEstateType" />
+          <NavigationProperty Name="RealEstateContact" Relationship="DistributedDataBase.RealEstateRealEstateContact" FromRole="RealEstate" ToRole="RealEstateContact" />
+          <NavigationProperty Name="Merchandise" Relationship="DistributedDataBase.RealEstateMerchandise" FromRole="RealEstate" ToRole="Merchandise" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.RealEstateEmployee" FromRole="RealEstate" ToRole="Employee" />
+          <NavigationProperty Name="CashRegister" Relationship="DistributedDataBase.RealEstateCashRegister" FromRole="RealEstate" ToRole="CashRegister" />
+          <NavigationProperty Name="StoreOrder" Relationship="DistributedDataBase.RealEstateStoreOrder" FromRole="RealEstate" ToRole="StoreOrder" />
+        </EntityType>
+        <EntityType Name="RealEstateContact">
+          <Key>
+            <PropertyRef Name="ID_RealEstateContact" />
+          </Key>
+          <Property Name="ID_RealEstateContact" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_RealEstate" Type="Guid" Nullable="false" />
+          <Property Name="ID_Departament" Type="Guid" Nullable="false" />
+          <Property Name="Telephone" Type="String" Nullable="true" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <NavigationProperty Name="Departament" Relationship="DistributedDataBase.DepartamentRealEstateContact" FromRole="RealEstateContact" ToRole="Departament" />
+          <NavigationProperty Name="RealEstate" Relationship="DistributedDataBase.RealEstateRealEstateContact" FromRole="RealEstateContact" ToRole="RealEstate" />
+        </EntityType>
+        <EntityType Name="Departament">
+          <Key>
+            <PropertyRef Name="ID_Departament" />
+          </Key>
+          <Property Name="ID_Departament" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="NameDepartament" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="RealEstateContact" Relationship="DistributedDataBase.DepartamentRealEstateContact" FromRole="Departament" ToRole="RealEstateContact" />
+        </EntityType>
+        <EntityType Name="RawMaterialProviderContract">
+          <Key>
+            <PropertyRef Name="ID_Contract" />
+          </Key>
+          <Property Name="ID_Contract" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_RawMaterial" Type="Guid" Nullable="false" />
+          <Property Name="ID_MeasurementUnit" Type="Guid" Nullable="false" />
+          <Property Name="ManufactureDate" Type="DateTime" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="PricePerCount" Type="Int32" Nullable="false" />
+          <Property Name="ID_StatusContract" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="RawMaterial" Relationship="DistributedDataBase.RawMaterialRawMaterialProviderContract" FromRole="RawMaterialProviderContract" ToRole="RawMaterial" />
+          <NavigationProperty Name="MeasurementUnit" Relationship="DistributedDataBase.MeasurementUnitRawMaterialProviderContract" FromRole="RawMaterialProviderContract" ToRole="MeasurementUnit" />
+          <NavigationProperty Name="StatusOrder" Relationship="DistributedDataBase.StatusOrderRawMaterialProviderContract" FromRole="RawMaterialProviderContract" ToRole="StatusOrder" />
+        </EntityType>
+        <EntityType Name="StockRawMaterial">
+          <Key>
+            <PropertyRef Name="ID_StockRawMaterial" />
+          </Key>
+          <Property Name="ID_StockRawMaterial" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_RawMaterial" Type="Guid" Nullable="false" />
+          <Property Name="ID_MeasurementUnit" Type="Guid" Nullable="false" />
+          <Property Name="ManufactureDate" Type="DateTime" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="PricePerGramm" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RawMaterial" Relationship="DistributedDataBase.RawMaterialStockRawMaterial" FromRole="StockRawMaterial" ToRole="RawMaterial" />
+          <NavigationProperty Name="MeasurementUnit" Relationship="DistributedDataBase.MeasurementUnitStockRawMaterial" FromRole="StockRawMaterial" ToRole="MeasurementUnit" />
+        </EntityType>
+        <EntityType Name="RawMaterial">
+          <Key>
+            <PropertyRef Name="ID_RawMaterial" />
+          </Key>
+          <Property Name="ID_RawMaterial" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="RawMaterialName" Type="String" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" />
+          <Property Name="MinTemperature" Type="Int32" Nullable="true" />
+          <Property Name="MaxTemperature" Type="Int32" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="RawMaterialProviderContract" Relationship="DistributedDataBase.RawMaterialRawMaterialProviderContract" FromRole="RawMaterial" ToRole="RawMaterialProviderContract" />
+          <NavigationProperty Name="StockRawMaterial" Relationship="DistributedDataBase.RawMaterialStockRawMaterial" FromRole="RawMaterial" ToRole="StockRawMaterial" />
+          <NavigationProperty Name="Component" Relationship="DistributedDataBase.RawMaterialComponent" FromRole="RawMaterial" ToRole="Component" />
+        </EntityType>
+        <EntityType Name="MeasurementUnit">
+          <Key>
+            <PropertyRef Name="ID_MeasurementUnit" />
+          </Key>
+          <Property Name="ID_MeasurementUnit" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="NameMeasurementUnit" Type="String" Nullable="false" />
+          <NavigationProperty Name="RawMaterialProviderContract" Relationship="DistributedDataBase.MeasurementUnitRawMaterialProviderContract" FromRole="MeasurementUnit" ToRole="RawMaterialProviderContract" />
+          <NavigationProperty Name="StockRawMaterial" Relationship="DistributedDataBase.MeasurementUnitStockRawMaterial" FromRole="MeasurementUnit" ToRole="StockRawMaterial" />
+          <NavigationProperty Name="Component" Relationship="DistributedDataBase.MeasurementUnitComponent" FromRole="MeasurementUnit" ToRole="Component" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+            <PropertyRef Name="ID_RawMaterial" />
+          </Key>
+          <Property Name="ID_Product" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_RawMaterial" Type="Guid" Nullable="false" />
+          <Property Name="ID_MeasurementUnit" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RawMaterial" Relationship="DistributedDataBase.RawMaterialComponent" FromRole="Component" ToRole="RawMaterial" />
+          <NavigationProperty Name="MeasurementUnit" Relationship="DistributedDataBase.MeasurementUnitComponent" FromRole="Component" ToRole="MeasurementUnit" />
+          <NavigationProperty Name="Product" Relationship="DistributedDataBase.ProductComponent" FromRole="Component" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Merchandise">
+          <Key>
+            <PropertyRef Name="ID_Merchandise" />
+          </Key>
+          <Property Name="ID_Merchandise" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Product" Type="Guid" Nullable="false" />
+          <Property Name="ID_RealEstate" Type="Guid" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="ManufactureDate" Type="DateTime" Nullable="false" />
+          <Property Name="PricePerGramm" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Purchase" Relationship="DistributedDataBase.MerchandisePurchase" FromRole="Merchandise" ToRole="Purchase" />
+          <NavigationProperty Name="RealEstate" Relationship="DistributedDataBase.RealEstateMerchandise" FromRole="Merchandise" ToRole="RealEstate" />
+          <NavigationProperty Name="Product" Relationship="DistributedDataBase.ProductMerchandise" FromRole="Merchandise" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ProductName" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="Recipe" Type="String" Nullable="true" />
+          <Property Name="CalorieContent" Type="Int32" Nullable="true" />
+          <Property Name="Proteins" Type="Int32" Nullable="true" />
+          <Property Name="Fats" Type="Int32" Nullable="true" />
+          <Property Name="Carbohydrates" Type="Int32" Nullable="true" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" />
+          <Property Name="MinTemperature" Type="Int32" Nullable="true" />
+          <Property Name="MaxTemperature" Type="Int32" Nullable="true" />
+          <Property Name="Photo" Type="String" Nullable="true" />
+          <NavigationProperty Name="Component" Relationship="DistributedDataBase.ProductComponent" FromRole="Product" ToRole="Component" />
+          <NavigationProperty Name="Merchandise" Relationship="DistributedDataBase.ProductMerchandise" FromRole="Product" ToRole="Merchandise" />
+          <NavigationProperty Name="StoreOrders" Relationship="DistributedDataBase.ProductStoreOrder" FromRole="Product" ToRole="StoreOrder" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="ID_Employee" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Position" Type="Guid" Nullable="false" />
+          <Property Name="ID_RealEstate" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="SecondName" Type="String" Nullable="false" />
+          <Property Name="MiddleName" Type="String" Nullable="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" />
+          <Property Name="Passport" Type="String" Nullable="false" />
+          <Property Name="IDK" Type="String" Nullable="false" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="DistributedDataBase.CashRegisterAccessEmployee" FromRole="Employee" ToRole="CashRegisterAccess" />
+          <NavigationProperty Name="Position" Relationship="DistributedDataBase.PositionEmployee" FromRole="Employee" ToRole="Position" />
+          <NavigationProperty Name="User" Relationship="DistributedDataBase.UserEmployee" FromRole="Employee" ToRole="User" />
+          <NavigationProperty Name="EmployeeWorkLog" Relationship="DistributedDataBase.EmployeeEmployeeWorkLog" FromRole="Employee" ToRole="EmployeeWorkLog" />
+          <NavigationProperty Name="RealEstate" Relationship="DistributedDataBase.RealEstateEmployee" FromRole="Employee" ToRole="RealEstate" />
+          <NavigationProperty Name="StoreOrder" Relationship="DistributedDataBase.EmployeeStoreOrder" FromRole="Employee" ToRole="StoreOrder" />
+          <NavigationProperty Name="MerchandiseAcceptanceLog" Relationship="DistributedDataBase.EmployeeMerchandiseAcceptanceLog" FromRole="Employee" ToRole="MerchandiseAcceptanceLog" />
+          <NavigationProperty Name="PerformedHeadOrder" Relationship="DistributedDataBase.EmployeePerformedHeadOrder" FromRole="Employee" ToRole="PerformedHeadOrder" />
+          <NavigationProperty Name="PerformedStoreOrder" Relationship="DistributedDataBase.EmployeePerformedStoreOrder" FromRole="Employee" ToRole="PerformedStoreOrder" />
+          <NavigationProperty Name="PerformedStoreOrder1" Relationship="DistributedDataBase.EmployeePerformedStoreOrder1" FromRole="Employee" ToRole="PerformedStoreOrder" />
+        </EntityType>
+        <EntityType Name="EmployeeWorkLog">
+          <Key>
+            <PropertyRef Name="ID_EmployeeWorkLog" />
+          </Key>
+          <Property Name="ID_EmployeeWorkLog" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Employee" Type="Guid" Nullable="false" />
+          <Property Name="DateTimeStart" Type="DateTime" Nullable="false" />
+          <Property Name="DateTimeEnd" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeeEmployeeWorkLog" FromRole="EmployeeWorkLog" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="UserLogin" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Employee" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="UserPassword" Type="String" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.UserEmployee" FromRole="User" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID_Position" />
+          </Key>
+          <Property Name="ID_Position" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="NamePosition" Type="String" Nullable="false" />
+          <Property Name="PaymentHrnPerHour" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.PositionEmployee" FromRole="Position" ToRole="Employee" />
+          <NavigationProperty Name="HeadOrder" Relationship="DistributedDataBase.PositionHeadOrder" FromRole="Position" ToRole="HeadOrder" />
+        </EntityType>
+        <EntityType Name="CashRegister">
+          <Key>
+            <PropertyRef Name="ID_CashRegister" />
+          </Key>
+          <Property Name="ID_CashRegister" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_RealEstate" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="DistributedDataBase.CashRegisterCashRegisterAccess" FromRole="CashRegister" ToRole="CashRegisterAccess" />
+          <NavigationProperty Name="RealEstate" Relationship="DistributedDataBase.RealEstateCashRegister" FromRole="CashRegister" ToRole="RealEstate" />
+        </EntityType>
+        <EntityType Name="CashRegisterOperation">
+          <Key>
+            <PropertyRef Name="ID_Operation" />
+          </Key>
+          <Property Name="ID_Operation" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="NameOperation" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="DistributedDataBase.CashRegisterOperationCashRegisterAccess" FromRole="CashRegisterOperation" ToRole="CashRegisterAccess" />
+        </EntityType>
+        <EntityType Name="HeadOrder">
+          <Key>
+            <PropertyRef Name="ID_HeadOrder" />
+          </Key>
+          <Property Name="ID_HeadOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="ID_Position" Type="Guid" Nullable="false" />
+          <Property Name="ID_StatusOrder" Type="Guid" Nullable="false" />
+          <Property Name="AssignFor" Type="String" Nullable="false" />
+          <NavigationProperty Name="Position" Relationship="DistributedDataBase.PositionHeadOrder" FromRole="HeadOrder" ToRole="Position" />
+          <NavigationProperty Name="StatusOrder" Relationship="DistributedDataBase.HeadOrderStatusOrder" FromRole="HeadOrder" ToRole="StatusOrder" />
+          <NavigationProperty Name="PerformedHeadOrder" Relationship="DistributedDataBase.HeadOrderPerformedHeadOrder" FromRole="HeadOrder" ToRole="PerformedHeadOrder" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="ID_Purchase" />
+          </Key>
+          <Property Name="ID_Purchase" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Merchandise" Type="Guid" Nullable="false" />
+          <Property Name="ID_CashRegisterAccess" Type="Guid" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Merchandise" Relationship="DistributedDataBase.MerchandisePurchase" FromRole="Purchase" ToRole="Merchandise" />
+          <NavigationProperty Name="CashRegisterAccess" Relationship="DistributedDataBase.CashRegisterAccessPurchase" FromRole="Purchase" ToRole="CashRegisterAccess" />
+        </EntityType>
+        <EntityType Name="CashRegisterAccess">
+          <Key>
+            <PropertyRef Name="ID_CashRegisterAccess" />
+          </Key>
+          <Property Name="ID_CashRegisterAccess" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_CashRegister" Type="Guid" Nullable="false" />
+          <Property Name="ID_EmployeeSeller" Type="Guid" Nullable="false" />
+          <Property Name="ID_Operation" Type="Guid" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.CashRegisterAccessEmployee" FromRole="CashRegisterAccess" ToRole="Employee" />
+          <NavigationProperty Name="CashRegister" Relationship="DistributedDataBase.CashRegisterCashRegisterAccess" FromRole="CashRegisterAccess" ToRole="CashRegister" />
+          <NavigationProperty Name="CashRegisterOperation" Relationship="DistributedDataBase.CashRegisterOperationCashRegisterAccess" FromRole="CashRegisterAccess" ToRole="CashRegisterOperation" />
+          <NavigationProperty Name="Purchase" Relationship="DistributedDataBase.CashRegisterAccessPurchase" FromRole="CashRegisterAccess" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="StoreOrder">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Product" Type="Guid" Nullable="false" />
+          <Property Name="ID_RealEstateStore" Type="Guid" Nullable="false" />
+          <Property Name="ID_StoreManager" Type="Guid" Nullable="false" />
+          <Property Name="ID_StatusOrder" Type="Guid" Nullable="false" />
+          <Property Name="InitialDate" Type="DateTime" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeeStoreOrder" FromRole="StoreOrder" ToRole="Employee" />
+          <NavigationProperty Name="RealEstate" Relationship="DistributedDataBase.RealEstateStoreOrder" FromRole="StoreOrder" ToRole="RealEstate" />
+          <NavigationProperty Name="PerformedStoreOrder" Relationship="DistributedDataBase.StoreOrderPerformedStoreOrder" FromRole="StoreOrder" ToRole="PerformedStoreOrder" />
+          <NavigationProperty Name="StatusOrder" Relationship="DistributedDataBase.StatusOrderStoreOrder" FromRole="StoreOrder" ToRole="StatusOrder" />
+          <NavigationProperty Name="MerchandiseAcceptanceLogs" Relationship="DistributedDataBase.StoreOrderMerchandiseAcceptanceLog" FromRole="StoreOrder" ToRole="MerchandiseAcceptanceLog" />
+          <NavigationProperty Name="Product" Relationship="DistributedDataBase.ProductStoreOrder" FromRole="StoreOrder" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="MerchandiseAcceptanceLog">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_AcceptManager" Type="Guid" Nullable="false" />
+          <Property Name="AcceptDate" Type="DateTime" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeeMerchandiseAcceptanceLog" FromRole="MerchandiseAcceptanceLog" ToRole="Employee" />
+          <NavigationProperty Name="LackLog" Relationship="DistributedDataBase.MerchandiseAcceptanceLogLackLog" FromRole="MerchandiseAcceptanceLog" ToRole="LackLog" />
+          <NavigationProperty Name="StoreOrder" Relationship="DistributedDataBase.StoreOrderMerchandiseAcceptanceLog" FromRole="MerchandiseAcceptanceLog" ToRole="StoreOrder" />
+        </EntityType>
+        <EntityType Name="LackLog">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="WeightOfLack" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MerchandiseAcceptanceLog" Relationship="DistributedDataBase.MerchandiseAcceptanceLogLackLog" FromRole="LackLog" ToRole="MerchandiseAcceptanceLog" />
+        </EntityType>
+        <EntityType Name="StatusOrder">
+          <Key>
+            <PropertyRef Name="ID_StatusOrder" />
+          </Key>
+          <Property Name="ID_StatusOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameStatusOrder" Type="String" Nullable="false" />
+          <NavigationProperty Name="RawMaterialProviderContract" Relationship="DistributedDataBase.StatusOrderRawMaterialProviderContract" FromRole="StatusOrder" ToRole="RawMaterialProviderContract" />
+          <NavigationProperty Name="HeadOrder" Relationship="DistributedDataBase.HeadOrderStatusOrder" FromRole="StatusOrder" ToRole="HeadOrder" />
+          <NavigationProperty Name="StoreOrders" Relationship="DistributedDataBase.StatusOrderStoreOrder" FromRole="StatusOrder" ToRole="StoreOrder" />
+        </EntityType>
+        <EntityType Name="PerformedHeadOrder">
+          <Key>
+            <PropertyRef Name="ID_PerformedOrder" />
+          </Key>
+          <Property Name="ID_HeadOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Employee" Type="Guid" Nullable="false" />
+          <Property Name="ID_PerformedOrder" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeePerformedHeadOrder" FromRole="PerformedHeadOrder" ToRole="Employee" />
+          <NavigationProperty Name="HeadOrder" Relationship="DistributedDataBase.HeadOrderPerformedHeadOrder" FromRole="PerformedHeadOrder" ToRole="HeadOrder" />
+        </EntityType>
+        <EntityType Name="PerformedStoreOrder">
+          <Key>
+            <PropertyRef Name="ID_StoreOrder" />
+          </Key>
+          <Property Name="ID_StoreOrder" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_FactoryManager" Type="Guid" Nullable="false" />
+          <Property Name="ID_Carrier" Type="Guid" Nullable="false" />
+          <Property Name="ShippingDate" Type="DateTime" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeePerformedStoreOrder" FromRole="PerformedStoreOrder" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="DistributedDataBase.EmployeePerformedStoreOrder1" FromRole="PerformedStoreOrder" ToRole="Employee" />
+          <NavigationProperty Name="StoreOrder" Relationship="DistributedDataBase.StoreOrderPerformedStoreOrder" FromRole="PerformedStoreOrder" ToRole="StoreOrder" />
+        </EntityType>
+        <Association Name="RealEstateTypeRealEstate">
+          <End Type="DistributedDataBase.RealEstateType" Role="RealEstateType" Multiplicity="1" />
+          <End Type="DistributedDataBase.RealEstate" Role="RealEstate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstateType">
+              <PropertyRef Name="ID_RealEstateType" />
+            </Principal>
+            <Dependent Role="RealEstate">
+              <PropertyRef Name="ID_RealEstateType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DepartamentRealEstateContact">
+          <End Type="DistributedDataBase.Departament" Role="Departament" Multiplicity="1" />
+          <End Type="DistributedDataBase.RealEstateContact" Role="RealEstateContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departament">
+              <PropertyRef Name="ID_Departament" />
+            </Principal>
+            <Dependent Role="RealEstateContact">
+              <PropertyRef Name="ID_Departament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateRealEstateContact">
+          <End Type="DistributedDataBase.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="DistributedDataBase.RealEstateContact" Role="RealEstateContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="RealEstateContact">
+              <PropertyRef Name="ID_RealEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RawMaterialRawMaterialProviderContract">
+          <End Type="DistributedDataBase.RawMaterial" Role="RawMaterial" Multiplicity="1" />
+          <End Type="DistributedDataBase.RawMaterialProviderContract" Role="RawMaterialProviderContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Principal>
+            <Dependent Role="RawMaterialProviderContract">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MeasurementUnitRawMaterialProviderContract">
+          <End Type="DistributedDataBase.MeasurementUnit" Role="MeasurementUnit" Multiplicity="1" />
+          <End Type="DistributedDataBase.RawMaterialProviderContract" Role="RawMaterialProviderContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementUnit">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Principal>
+            <Dependent Role="RawMaterialProviderContract">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatusOrderRawMaterialProviderContract">
+          <End Type="DistributedDataBase.StatusOrder" Role="StatusOrder" Multiplicity="1" />
+          <End Type="DistributedDataBase.RawMaterialProviderContract" Role="RawMaterialProviderContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Principal>
+            <Dependent Role="RawMaterialProviderContract">
+              <PropertyRef Name="ID_StatusContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RawMaterialStockRawMaterial">
+          <End Type="DistributedDataBase.RawMaterial" Role="RawMaterial" Multiplicity="1" />
+          <End Type="DistributedDataBase.StockRawMaterial" Role="StockRawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Principal>
+            <Dependent Role="StockRawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MeasurementUnitStockRawMaterial">
+          <End Type="DistributedDataBase.MeasurementUnit" Role="MeasurementUnit" Multiplicity="1" />
+          <End Type="DistributedDataBase.StockRawMaterial" Role="StockRawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementUnit">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Principal>
+            <Dependent Role="StockRawMaterial">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RawMaterialComponent">
+          <End Type="DistributedDataBase.RawMaterial" Role="RawMaterial" Multiplicity="1" />
+          <End Type="DistributedDataBase.Component" Role="Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RawMaterial">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ID_RawMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MeasurementUnitComponent">
+          <End Type="DistributedDataBase.MeasurementUnit" Role="MeasurementUnit" Multiplicity="1" />
+          <End Type="DistributedDataBase.Component" Role="Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasurementUnit">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ID_MeasurementUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductComponent">
+          <End Type="DistributedDataBase.Product" Role="Product" Multiplicity="1" />
+          <End Type="DistributedDataBase.Component" Role="Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MerchandisePurchase">
+          <End Type="DistributedDataBase.Merchandise" Role="Merchandise" Multiplicity="1" />
+          <End Type="DistributedDataBase.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchandise">
+              <PropertyRef Name="ID_Merchandise" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="ID_Merchandise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateMerchandise">
+          <End Type="DistributedDataBase.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="DistributedDataBase.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="Merchandise">
+              <PropertyRef Name="ID_RealEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductMerchandise">
+          <End Type="DistributedDataBase.Product" Role="Product" Multiplicity="1" />
+          <End Type="DistributedDataBase.Merchandise" Role="Merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Merchandise">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterAccessEmployee">
+          <End Type="DistributedDataBase.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="*" />
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="CashRegisterAccess">
+              <PropertyRef Name="ID_EmployeeSeller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PositionEmployee">
+          <End Type="DistributedDataBase.Position" Role="Position" Multiplicity="1" />
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_Position" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="ID_Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserEmployee">
+          <End Type="DistributedDataBase.User" Role="User" Multiplicity="0..1" />
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeEmployeeWorkLog">
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DistributedDataBase.EmployeeWorkLog" Role="EmployeeWorkLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="EmployeeWorkLog">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateEmployee">
+          <End Type="DistributedDataBase.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="ID_RealEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeStoreOrder">
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DistributedDataBase.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_StoreManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeMerchandiseAcceptanceLog">
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DistributedDataBase.MerchandiseAcceptanceLog" Role="MerchandiseAcceptanceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="MerchandiseAcceptanceLog">
+              <PropertyRef Name="ID_AcceptManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeePerformedHeadOrder">
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DistributedDataBase.PerformedHeadOrder" Role="PerformedHeadOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="PerformedHeadOrder">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeePerformedStoreOrder">
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DistributedDataBase.PerformedStoreOrder" Role="PerformedStoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="PerformedStoreOrder">
+              <PropertyRef Name="ID_FactoryManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeePerformedStoreOrder1">
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DistributedDataBase.PerformedStoreOrder" Role="PerformedStoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="PerformedStoreOrder">
+              <PropertyRef Name="ID_Carrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PositionHeadOrder">
+          <End Type="DistributedDataBase.Position" Role="Position" Multiplicity="1" />
+          <End Type="DistributedDataBase.HeadOrder" Role="HeadOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_Position" />
+            </Principal>
+            <Dependent Role="HeadOrder">
+              <PropertyRef Name="ID_Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterCashRegisterAccess">
+          <End Type="DistributedDataBase.CashRegister" Role="CashRegister" Multiplicity="1" />
+          <End Type="DistributedDataBase.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashRegister">
+              <PropertyRef Name="ID_CashRegister" />
+            </Principal>
+            <Dependent Role="CashRegisterAccess">
+              <PropertyRef Name="ID_CashRegister" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateCashRegister">
+          <End Type="DistributedDataBase.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="DistributedDataBase.CashRegister" Role="CashRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="CashRegister">
+              <PropertyRef Name="ID_RealEstate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterOperationCashRegisterAccess">
+          <End Type="DistributedDataBase.CashRegisterOperation" Role="CashRegisterOperation" Multiplicity="1" />
+          <End Type="DistributedDataBase.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashRegisterOperation">
+              <PropertyRef Name="ID_Operation" />
+            </Principal>
+            <Dependent Role="CashRegisterAccess">
+              <PropertyRef Name="ID_Operation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HeadOrderStatusOrder">
+          <End Type="DistributedDataBase.HeadOrder" Role="HeadOrder" Multiplicity="*" />
+          <End Type="DistributedDataBase.StatusOrder" Role="StatusOrder" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="HeadOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Principal>
+            <Dependent Role="StatusOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CashRegisterAccessPurchase">
+          <End Type="DistributedDataBase.CashRegisterAccess" Role="CashRegisterAccess" Multiplicity="1" />
+          <End Type="DistributedDataBase.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashRegisterAccess">
+              <PropertyRef Name="ID_CashRegisterAccess" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="ID_CashRegisterAccess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RealEstateStoreOrder">
+          <End Type="DistributedDataBase.RealEstate" Role="RealEstate" Multiplicity="1" />
+          <End Type="DistributedDataBase.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstate">
+              <PropertyRef Name="ID_RealEstate" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_RealEstateStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MerchandiseAcceptanceLogLackLog">
+          <End Type="DistributedDataBase.MerchandiseAcceptanceLog" Role="MerchandiseAcceptanceLog" Multiplicity="1" />
+          <End Type="DistributedDataBase.LackLog" Role="LackLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MerchandiseAcceptanceLog">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Principal>
+            <Dependent Role="LackLog">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HeadOrderPerformedHeadOrder">
+          <End Type="DistributedDataBase.HeadOrder" Role="HeadOrder" Multiplicity="1" />
+          <End Type="DistributedDataBase.PerformedHeadOrder" Role="PerformedHeadOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeadOrder">
+              <PropertyRef Name="ID_HeadOrder" />
+            </Principal>
+            <Dependent Role="PerformedHeadOrder">
+              <PropertyRef Name="ID_HeadOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StoreOrderPerformedStoreOrder">
+          <End Type="DistributedDataBase.StoreOrder" Role="StoreOrder" Multiplicity="1" />
+          <End Type="DistributedDataBase.PerformedStoreOrder" Role="PerformedStoreOrder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StoreOrder">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Principal>
+            <Dependent Role="PerformedStoreOrder">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatusOrderStoreOrder">
+          <End Type="DistributedDataBase.StatusOrder" Role="StatusOrder" Multiplicity="1" />
+          <End Type="DistributedDataBase.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_StatusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StoreOrderMerchandiseAcceptanceLog">
+          <End Type="DistributedDataBase.StoreOrder" Role="StoreOrder" Multiplicity="1" />
+          <End Type="DistributedDataBase.MerchandiseAcceptanceLog" Role="MerchandiseAcceptanceLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StoreOrder">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Principal>
+            <Dependent Role="MerchandiseAcceptanceLog">
+              <PropertyRef Name="ID_StoreOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductStoreOrder">
+          <End Type="DistributedDataBase.Product" Role="Product" Multiplicity="1" />
+          <End Type="DistributedDataBase.StoreOrder" Role="StoreOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="StoreOrder">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DistributedDataBase" />
+        <Alias Key="Target" Value="DistributedDataBase.Store" />
+        <EntityContainerMapping CdmEntityContainer="DistributedDataBaseContainer" StorageEntityContainer="DistributedDataBaseTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

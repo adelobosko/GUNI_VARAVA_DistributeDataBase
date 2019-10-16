@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DistributedDataBase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DistributedDataBase.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model\All.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -50,6 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="DistributedDataBase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DistributedDataBase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DistributedDataBase.edmx.diagram">
+      <DependentUpon>DistributedDataBase.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\All.edmx">
