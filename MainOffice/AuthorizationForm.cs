@@ -45,16 +45,7 @@ namespace MainOffice
             resultLabel.Text = "";
             if (Keys.Enter == e.KeyCode)
             {
-                var control = (Control) sender;
-                
-                if(control.Name == loginTextBox.Name)
-                {
-                    passwordTextBox.Focus();
-                }
-                else
-                {
-                    loginButton.Focus();
-                }
+                this.SelectNextControl((Control)sender, true, true, true, true);
             }
         }
 
@@ -84,6 +75,8 @@ namespace MainOffice
             
             this.Hide();
             passwordTextBox.Text = "";
+            GlobalHelper.AuthorizationForm = this;
+
             if (GlobalHelper.User.Employee.Position.NamePosition == "Admin")
             {
                 new AdminForm().Show();

@@ -15,6 +15,8 @@ namespace MainOffice
 
         public  static User User { get; set; }
 
+        public static AuthorizationForm AuthorizationForm { get; set; }
+
         static GlobalHelper()
         {
         }
