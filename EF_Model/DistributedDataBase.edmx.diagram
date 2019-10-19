@@ -19,7 +19,7 @@
         <EntityTypeShape EntityType="DistributedDataBase.Employee" Width="2" PointX="3.625" PointY="0.5" />
         <EntityTypeShape EntityType="DistributedDataBase.EmployeeWorkLog" Width="2" PointX="0.5" PointY="2.625" />
         <EntityTypeShape EntityType="DistributedDataBase.User" Width="2" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="DistributedDataBase.Position" Width="2" PointX="6.125" PointY="0.5" />
+        <EntityTypeShape EntityType="DistributedDataBase.Position" Width="2" PointX="6.125" PointY="1.375" />
         <EntityTypeShape EntityType="DistributedDataBase.CashRegister" Width="2" PointX="3.625" PointY="18.125" />
         <EntityTypeShape EntityType="DistributedDataBase.CashRegisterOperation" Width="2" PointX="3.375" PointY="15.75" />
         <EntityTypeShape EntityType="DistributedDataBase.HeadOrder" Width="2" PointX="11.625" PointY="0.5" />
@@ -30,7 +30,7 @@
         <EntityTypeShape EntityType="DistributedDataBase.LackLog" Width="2" PointX="4.75" PointY="9.75" />
         <EntityTypeShape EntityType="DistributedDataBase.StatusOrder" Width="2" PointX="11.375" PointY="4.375" />
         <EntityTypeShape EntityType="DistributedDataBase.PerformedHeadOrder" Width="2" PointX="8.5" PointY="2.625" />
-        <EntityTypeShape EntityType="DistributedDataBase.PerformedStoreOrder" Width="2" PointX="4.75" PointY="5.875" />
+        <EntityTypeShape EntityType="DistributedDataBase.PerformedStoreOrder" Width="2" PointX="4.625" PointY="6.25" />
         <AssociationConnector Association="DistributedDataBase.RealEstateTypeRealEstate" />
         <AssociationConnector Association="DistributedDataBase.DepartamentRealEstateContact" />
         <AssociationConnector Association="DistributedDataBase.RealEstateRealEstateContact" />
@@ -68,6 +68,9 @@
         <AssociationConnector Association="DistributedDataBase.StatusOrderStoreOrder" />
         <AssociationConnector Association="DistributedDataBase.StoreOrderMerchandiseAcceptanceLog" />
         <AssociationConnector Association="DistributedDataBase.ProductStoreOrder" />
+        <EntityTypeShape EntityType="DistributedDataBase.SQLLog" Width="1.5" PointX="8.5" PointY="0.5" />
+        <AssociationConnector Association="DistributedDataBase.EmployeeSQLLog" />
+        <EntityTypeShape EntityType="DistributedDataBase.ConnectingString" Width="1.75" PointX="14" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

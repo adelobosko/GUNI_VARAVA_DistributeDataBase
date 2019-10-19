@@ -1,12 +1,14 @@
-Use Master
-GO
-DROP DATABASE [VaravaFactory]
-GO
-CREATE DATABASE [VaravaFactory]
-GO
+
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
+-- --------------------------------------------------
+-- Date Created: 10/19/2019 16:36:14
+-- Generated from EDMX file: E:\_NEED\VS_PROJECTS\GUNI\GUNI_VARAVA_DistributeDataBase\EF_Model\DistributedDataBase.edmx
+-- --------------------------------------------------
+
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [VaravaFactory];
+USE [GUNI_VARAVA_DistribureDataBase];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -372,10 +374,102 @@ CREATE TABLE [dbo].[Positions] (
 );
 GO
 
+-- Creating table 'CashRegisters'
+CREATE TABLE [dbo].[CashRegisters] (
+    [ID_CashRegister] uniqueidentifier  NOT NULL,
+    [ID_RealEstate] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'CashRegisterOperations'
+CREATE TABLE [dbo].[CashRegisterOperations] (
+    [ID_Operation] uniqueidentifier  NOT NULL,
+    [NameOperation] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'HeadOrders'
+CREATE TABLE [dbo].[HeadOrders] (
+    [ID_HeadOrder] uniqueidentifier  NOT NULL,
+    [Date] datetime  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [ID_Position] uniqueidentifier  NOT NULL,
+    [ID_StatusOrder] uniqueidentifier  NOT NULL,
+    [AssignFor] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Purchases'
+CREATE TABLE [dbo].[Purchases] (
+    [ID_Purchase] uniqueidentifier  NOT NULL,
+    [ID_Merchandise] uniqueidentifier  NOT NULL,
+    [ID_CashRegisterAccess] uniqueidentifier  NOT NULL,
+    [Weight] int  NOT NULL,
+    [PurchaseDate] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'CashRegisterAccesses'
+CREATE TABLE [dbo].[CashRegisterAccesses] (
+    [ID_CashRegisterAccess] uniqueidentifier  NOT NULL,
+    [ID_CashRegister] uniqueidentifier  NOT NULL,
+    [ID_EmployeeSeller] uniqueidentifier  NOT NULL,
+    [ID_Operation] uniqueidentifier  NOT NULL,
+    [Date] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'StoreOrders'
+CREATE TABLE [dbo].[StoreOrders] (
+    [ID_StoreOrder] uniqueidentifier  NOT NULL,
+    [ID_Product] uniqueidentifier  NOT NULL,
+    [ID_RealEstateStore] uniqueidentifier  NOT NULL,
+    [ID_StoreManager] uniqueidentifier  NOT NULL,
+    [ID_StatusOrder] uniqueidentifier  NOT NULL,
+    [InitialDate] datetime  NOT NULL,
+    [Weight] int  NOT NULL
+);
+GO
+
+-- Creating table 'MerchandiseAcceptanceLogs'
+CREATE TABLE [dbo].[MerchandiseAcceptanceLogs] (
+    [ID_StoreOrder] uniqueidentifier  NOT NULL,
+    [ID_AcceptManager] uniqueidentifier  NOT NULL,
+    [AcceptDate] datetime  NOT NULL,
+    [Weight] int  NOT NULL
+);
+GO
+
+-- Creating table 'LackLogs'
+CREATE TABLE [dbo].[LackLogs] (
+    [ID_StoreOrder] uniqueidentifier  NOT NULL,
+    [WeightOfLack] int  NOT NULL
+);
+GO
+
 -- Creating table 'StatusOrders'
 CREATE TABLE [dbo].[StatusOrders] (
     [ID_StatusOrder] uniqueidentifier  NOT NULL,
     [NameStatusOrder] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PerformedHeadOrders'
+CREATE TABLE [dbo].[PerformedHeadOrders] (
+    [ID_HeadOrder] uniqueidentifier  NOT NULL,
+    [ID_Employee] uniqueidentifier  NOT NULL,
+    [ID_PerformedOrder] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'PerformedStoreOrders'
+CREATE TABLE [dbo].[PerformedStoreOrders] (
+    [ID_StoreOrder] uniqueidentifier  NOT NULL,
+    [ID_FactoryManager] uniqueidentifier  NOT NULL,
+    [ID_Carrier] uniqueidentifier  NOT NULL,
+    [ShippingDate] datetime  NOT NULL,
+    [Weight] int  NOT NULL
 );
 GO
 
@@ -384,6 +478,17 @@ CREATE TABLE [dbo].[SQLLogs] (
     [ID_SQLLog] uniqueidentifier  NOT NULL,
     [ID_Employee] uniqueidentifier  NOT NULL,
     [Description] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'ConnectingStrings'
+CREATE TABLE [dbo].[ConnectingStrings] (
+    [ID_ConnectingString] uniqueidentifier  NOT NULL,
+    [DataSource] nvarchar(max)  NOT NULL,
+    [InitialCatalog] nvarchar(max)  NOT NULL,
+    [UserId] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL,
+    [ConnectionType] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -481,10 +586,82 @@ ADD CONSTRAINT [PK_Positions]
     PRIMARY KEY CLUSTERED ([ID_Position] ASC);
 GO
 
+-- Creating primary key on [ID_CashRegister] in table 'CashRegisters'
+ALTER TABLE [dbo].[CashRegisters]
+ADD CONSTRAINT [PK_CashRegisters]
+    PRIMARY KEY CLUSTERED ([ID_CashRegister] ASC);
+GO
+
+-- Creating primary key on [ID_Operation] in table 'CashRegisterOperations'
+ALTER TABLE [dbo].[CashRegisterOperations]
+ADD CONSTRAINT [PK_CashRegisterOperations]
+    PRIMARY KEY CLUSTERED ([ID_Operation] ASC);
+GO
+
+-- Creating primary key on [ID_HeadOrder] in table 'HeadOrders'
+ALTER TABLE [dbo].[HeadOrders]
+ADD CONSTRAINT [PK_HeadOrders]
+    PRIMARY KEY CLUSTERED ([ID_HeadOrder] ASC);
+GO
+
+-- Creating primary key on [ID_Purchase] in table 'Purchases'
+ALTER TABLE [dbo].[Purchases]
+ADD CONSTRAINT [PK_Purchases]
+    PRIMARY KEY CLUSTERED ([ID_Purchase] ASC);
+GO
+
+-- Creating primary key on [ID_CashRegisterAccess] in table 'CashRegisterAccesses'
+ALTER TABLE [dbo].[CashRegisterAccesses]
+ADD CONSTRAINT [PK_CashRegisterAccesses]
+    PRIMARY KEY CLUSTERED ([ID_CashRegisterAccess] ASC);
+GO
+
+-- Creating primary key on [ID_StoreOrder] in table 'StoreOrders'
+ALTER TABLE [dbo].[StoreOrders]
+ADD CONSTRAINT [PK_StoreOrders]
+    PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
+GO
+
+-- Creating primary key on [ID_StoreOrder] in table 'MerchandiseAcceptanceLogs'
+ALTER TABLE [dbo].[MerchandiseAcceptanceLogs]
+ADD CONSTRAINT [PK_MerchandiseAcceptanceLogs]
+    PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
+GO
+
+-- Creating primary key on [ID_StoreOrder] in table 'LackLogs'
+ALTER TABLE [dbo].[LackLogs]
+ADD CONSTRAINT [PK_LackLogs]
+    PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
+GO
+
 -- Creating primary key on [ID_StatusOrder] in table 'StatusOrders'
 ALTER TABLE [dbo].[StatusOrders]
 ADD CONSTRAINT [PK_StatusOrders]
     PRIMARY KEY CLUSTERED ([ID_StatusOrder] ASC);
+GO
+
+-- Creating primary key on [ID_PerformedOrder] in table 'PerformedHeadOrders'
+ALTER TABLE [dbo].[PerformedHeadOrders]
+ADD CONSTRAINT [PK_PerformedHeadOrders]
+    PRIMARY KEY CLUSTERED ([ID_PerformedOrder] ASC);
+GO
+
+-- Creating primary key on [ID_StoreOrder] in table 'PerformedStoreOrders'
+ALTER TABLE [dbo].[PerformedStoreOrders]
+ADD CONSTRAINT [PK_PerformedStoreOrders]
+    PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
+GO
+
+-- Creating primary key on [ID_SQLLog] in table 'SQLLogs'
+ALTER TABLE [dbo].[SQLLogs]
+ADD CONSTRAINT [PK_SQLLogs]
+    PRIMARY KEY CLUSTERED ([ID_SQLLog] ASC);
+GO
+
+-- Creating primary key on [ID_ConnectingString] in table 'ConnectingStrings'
+ALTER TABLE [dbo].[ConnectingStrings]
+ADD CONSTRAINT [PK_ConnectingStrings]
+    PRIMARY KEY CLUSTERED ([ID_ConnectingString] ASC);
 GO
 
 -- --------------------------------------------------
@@ -650,6 +827,21 @@ ADD CONSTRAINT [FK_ProductComponent]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
+-- Creating foreign key on [ID_Merchandise] in table 'Purchases'
+ALTER TABLE [dbo].[Purchases]
+ADD CONSTRAINT [FK_MerchandisePurchase]
+    FOREIGN KEY ([ID_Merchandise])
+    REFERENCES [dbo].[Merchandises]
+        ([ID_Merchandise])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MerchandisePurchase'
+CREATE INDEX [IX_FK_MerchandisePurchase]
+ON [dbo].[Purchases]
+    ([ID_Merchandise]);
+GO
+
 -- Creating foreign key on [ID_RealEstate] in table 'Merchandises'
 ALTER TABLE [dbo].[Merchandises]
 ADD CONSTRAINT [FK_RealEstateMerchandise]
@@ -678,6 +870,21 @@ GO
 CREATE INDEX [IX_FK_ProductMerchandise]
 ON [dbo].[Merchandises]
     ([ID_Product]);
+GO
+
+-- Creating foreign key on [ID_EmployeeSeller] in table 'CashRegisterAccesses'
+ALTER TABLE [dbo].[CashRegisterAccesses]
+ADD CONSTRAINT [FK_CashRegisterAccessEmployee]
+    FOREIGN KEY ([ID_EmployeeSeller])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CashRegisterAccessEmployee'
+CREATE INDEX [IX_FK_CashRegisterAccessEmployee]
+ON [dbo].[CashRegisterAccesses]
+    ([ID_EmployeeSeller]);
 GO
 
 -- Creating foreign key on [ID_Position] in table 'Employees'
@@ -732,6 +939,258 @@ GO
 CREATE INDEX [IX_FK_RealEstateEmployee]
 ON [dbo].[Employees]
     ([ID_RealEstate]);
+GO
+
+-- Creating foreign key on [ID_StoreManager] in table 'StoreOrders'
+ALTER TABLE [dbo].[StoreOrders]
+ADD CONSTRAINT [FK_EmployeeStoreOrder]
+    FOREIGN KEY ([ID_StoreManager])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeStoreOrder'
+CREATE INDEX [IX_FK_EmployeeStoreOrder]
+ON [dbo].[StoreOrders]
+    ([ID_StoreManager]);
+GO
+
+-- Creating foreign key on [ID_AcceptManager] in table 'MerchandiseAcceptanceLogs'
+ALTER TABLE [dbo].[MerchandiseAcceptanceLogs]
+ADD CONSTRAINT [FK_EmployeeMerchandiseAcceptanceLog]
+    FOREIGN KEY ([ID_AcceptManager])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeMerchandiseAcceptanceLog'
+CREATE INDEX [IX_FK_EmployeeMerchandiseAcceptanceLog]
+ON [dbo].[MerchandiseAcceptanceLogs]
+    ([ID_AcceptManager]);
+GO
+
+-- Creating foreign key on [ID_Employee] in table 'PerformedHeadOrders'
+ALTER TABLE [dbo].[PerformedHeadOrders]
+ADD CONSTRAINT [FK_EmployeePerformedHeadOrder]
+    FOREIGN KEY ([ID_Employee])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeePerformedHeadOrder'
+CREATE INDEX [IX_FK_EmployeePerformedHeadOrder]
+ON [dbo].[PerformedHeadOrders]
+    ([ID_Employee]);
+GO
+
+-- Creating foreign key on [ID_FactoryManager] in table 'PerformedStoreOrders'
+ALTER TABLE [dbo].[PerformedStoreOrders]
+ADD CONSTRAINT [FK_EmployeePerformedStoreOrder]
+    FOREIGN KEY ([ID_FactoryManager])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeePerformedStoreOrder'
+CREATE INDEX [IX_FK_EmployeePerformedStoreOrder]
+ON [dbo].[PerformedStoreOrders]
+    ([ID_FactoryManager]);
+GO
+
+-- Creating foreign key on [ID_Carrier] in table 'PerformedStoreOrders'
+ALTER TABLE [dbo].[PerformedStoreOrders]
+ADD CONSTRAINT [FK_EmployeePerformedStoreOrder1]
+    FOREIGN KEY ([ID_Carrier])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeePerformedStoreOrder1'
+CREATE INDEX [IX_FK_EmployeePerformedStoreOrder1]
+ON [dbo].[PerformedStoreOrders]
+    ([ID_Carrier]);
+GO
+
+-- Creating foreign key on [ID_Position] in table 'HeadOrders'
+ALTER TABLE [dbo].[HeadOrders]
+ADD CONSTRAINT [FK_PositionHeadOrder]
+    FOREIGN KEY ([ID_Position])
+    REFERENCES [dbo].[Positions]
+        ([ID_Position])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PositionHeadOrder'
+CREATE INDEX [IX_FK_PositionHeadOrder]
+ON [dbo].[HeadOrders]
+    ([ID_Position]);
+GO
+
+-- Creating foreign key on [ID_CashRegister] in table 'CashRegisterAccesses'
+ALTER TABLE [dbo].[CashRegisterAccesses]
+ADD CONSTRAINT [FK_CashRegisterCashRegisterAccess]
+    FOREIGN KEY ([ID_CashRegister])
+    REFERENCES [dbo].[CashRegisters]
+        ([ID_CashRegister])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CashRegisterCashRegisterAccess'
+CREATE INDEX [IX_FK_CashRegisterCashRegisterAccess]
+ON [dbo].[CashRegisterAccesses]
+    ([ID_CashRegister]);
+GO
+
+-- Creating foreign key on [ID_RealEstate] in table 'CashRegisters'
+ALTER TABLE [dbo].[CashRegisters]
+ADD CONSTRAINT [FK_RealEstateCashRegister]
+    FOREIGN KEY ([ID_RealEstate])
+    REFERENCES [dbo].[RealEstates]
+        ([ID_RealEstate])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RealEstateCashRegister'
+CREATE INDEX [IX_FK_RealEstateCashRegister]
+ON [dbo].[CashRegisters]
+    ([ID_RealEstate]);
+GO
+
+-- Creating foreign key on [ID_Operation] in table 'CashRegisterAccesses'
+ALTER TABLE [dbo].[CashRegisterAccesses]
+ADD CONSTRAINT [FK_CashRegisterOperationCashRegisterAccess]
+    FOREIGN KEY ([ID_Operation])
+    REFERENCES [dbo].[CashRegisterOperations]
+        ([ID_Operation])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CashRegisterOperationCashRegisterAccess'
+CREATE INDEX [IX_FK_CashRegisterOperationCashRegisterAccess]
+ON [dbo].[CashRegisterAccesses]
+    ([ID_Operation]);
+GO
+
+-- Creating foreign key on [ID_StatusOrder] in table 'HeadOrders'
+ALTER TABLE [dbo].[HeadOrders]
+ADD CONSTRAINT [FK_HeadOrderStatusOrder]
+    FOREIGN KEY ([ID_StatusOrder])
+    REFERENCES [dbo].[StatusOrders]
+        ([ID_StatusOrder])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HeadOrderStatusOrder'
+CREATE INDEX [IX_FK_HeadOrderStatusOrder]
+ON [dbo].[HeadOrders]
+    ([ID_StatusOrder]);
+GO
+
+-- Creating foreign key on [ID_CashRegisterAccess] in table 'Purchases'
+ALTER TABLE [dbo].[Purchases]
+ADD CONSTRAINT [FK_CashRegisterAccessPurchase]
+    FOREIGN KEY ([ID_CashRegisterAccess])
+    REFERENCES [dbo].[CashRegisterAccesses]
+        ([ID_CashRegisterAccess])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CashRegisterAccessPurchase'
+CREATE INDEX [IX_FK_CashRegisterAccessPurchase]
+ON [dbo].[Purchases]
+    ([ID_CashRegisterAccess]);
+GO
+
+-- Creating foreign key on [ID_RealEstateStore] in table 'StoreOrders'
+ALTER TABLE [dbo].[StoreOrders]
+ADD CONSTRAINT [FK_RealEstateStoreOrder]
+    FOREIGN KEY ([ID_RealEstateStore])
+    REFERENCES [dbo].[RealEstates]
+        ([ID_RealEstate])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RealEstateStoreOrder'
+CREATE INDEX [IX_FK_RealEstateStoreOrder]
+ON [dbo].[StoreOrders]
+    ([ID_RealEstateStore]);
+GO
+
+-- Creating foreign key on [ID_StoreOrder] in table 'LackLogs'
+ALTER TABLE [dbo].[LackLogs]
+ADD CONSTRAINT [FK_MerchandiseAcceptanceLogLackLog]
+    FOREIGN KEY ([ID_StoreOrder])
+    REFERENCES [dbo].[MerchandiseAcceptanceLogs]
+        ([ID_StoreOrder])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_HeadOrder] in table 'PerformedHeadOrders'
+ALTER TABLE [dbo].[PerformedHeadOrders]
+ADD CONSTRAINT [FK_HeadOrderPerformedHeadOrder]
+    FOREIGN KEY ([ID_HeadOrder])
+    REFERENCES [dbo].[HeadOrders]
+        ([ID_HeadOrder])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HeadOrderPerformedHeadOrder'
+CREATE INDEX [IX_FK_HeadOrderPerformedHeadOrder]
+ON [dbo].[PerformedHeadOrders]
+    ([ID_HeadOrder]);
+GO
+
+-- Creating foreign key on [ID_StoreOrder] in table 'PerformedStoreOrders'
+ALTER TABLE [dbo].[PerformedStoreOrders]
+ADD CONSTRAINT [FK_StoreOrderPerformedStoreOrder]
+    FOREIGN KEY ([ID_StoreOrder])
+    REFERENCES [dbo].[StoreOrders]
+        ([ID_StoreOrder])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_StatusOrder] in table 'StoreOrders'
+ALTER TABLE [dbo].[StoreOrders]
+ADD CONSTRAINT [FK_StatusOrderStoreOrder]
+    FOREIGN KEY ([ID_StatusOrder])
+    REFERENCES [dbo].[StatusOrders]
+        ([ID_StatusOrder])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_StatusOrderStoreOrder'
+CREATE INDEX [IX_FK_StatusOrderStoreOrder]
+ON [dbo].[StoreOrders]
+    ([ID_StatusOrder]);
+GO
+
+-- Creating foreign key on [ID_StoreOrder] in table 'MerchandiseAcceptanceLogs'
+ALTER TABLE [dbo].[MerchandiseAcceptanceLogs]
+ADD CONSTRAINT [FK_StoreOrderMerchandiseAcceptanceLog]
+    FOREIGN KEY ([ID_StoreOrder])
+    REFERENCES [dbo].[StoreOrders]
+        ([ID_StoreOrder])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_Product] in table 'StoreOrders'
+ALTER TABLE [dbo].[StoreOrders]
+ADD CONSTRAINT [FK_ProductStoreOrder]
+    FOREIGN KEY ([ID_Product])
+    REFERENCES [dbo].[Products]
+        ([ID_Product])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProductStoreOrder'
+CREATE INDEX [IX_FK_ProductStoreOrder]
+ON [dbo].[StoreOrders]
+    ([ID_Product]);
 GO
 
 -- Creating foreign key on [ID_Employee] in table 'SQLLogs'

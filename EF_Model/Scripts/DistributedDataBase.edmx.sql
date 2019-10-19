@@ -1,11 +1,9 @@
-
--- --------------------------------------------------
--- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
--- --------------------------------------------------
--- Date Created: 10/16/2019 16:26:48
--- Generated from EDMX file: E:\_NEED\VS_PROJECTS\GUNI\GUNI_VARAVA_DistributeDataBase\EF_Model\DistributedDataBase.edmx
--- --------------------------------------------------
-
+Use Master
+GO
+DROP DATABASE [GUNI_VARAVA_DistribureDataBase]
+GO
+CREATE DATABASE [GUNI_VARAVA_DistribureDataBase]
+GO
 SET QUOTED_IDENTIFIER OFF;
 GO
 USE [GUNI_VARAVA_DistribureDataBase];
@@ -17,11 +15,200 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_RealEstateTypeRealEstate]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RealEstates] DROP CONSTRAINT [FK_RealEstateTypeRealEstate];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DepartamentRealEstateContact]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RealEstateContacts] DROP CONSTRAINT [FK_DepartamentRealEstateContact];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RealEstateRealEstateContact]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RealEstateContacts] DROP CONSTRAINT [FK_RealEstateRealEstateContact];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RawMaterialRawMaterialProviderContract]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RawMaterialProviderContracts] DROP CONSTRAINT [FK_RawMaterialRawMaterialProviderContract];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MeasurementUnitRawMaterialProviderContract]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RawMaterialProviderContracts] DROP CONSTRAINT [FK_MeasurementUnitRawMaterialProviderContract];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StatusOrderRawMaterialProviderContract]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RawMaterialProviderContracts] DROP CONSTRAINT [FK_StatusOrderRawMaterialProviderContract];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RawMaterialStockRawMaterial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StockRawMaterials] DROP CONSTRAINT [FK_RawMaterialStockRawMaterial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MeasurementUnitStockRawMaterial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StockRawMaterials] DROP CONSTRAINT [FK_MeasurementUnitStockRawMaterial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RawMaterialComponent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Components] DROP CONSTRAINT [FK_RawMaterialComponent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MeasurementUnitComponent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Components] DROP CONSTRAINT [FK_MeasurementUnitComponent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductComponent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Components] DROP CONSTRAINT [FK_ProductComponent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MerchandisePurchase]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_MerchandisePurchase];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RealEstateMerchandise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Merchandises] DROP CONSTRAINT [FK_RealEstateMerchandise];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductMerchandise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Merchandises] DROP CONSTRAINT [FK_ProductMerchandise];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CashRegisterAccessEmployee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CashRegisterAccesses] DROP CONSTRAINT [FK_CashRegisterAccessEmployee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PositionEmployee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Employees] DROP CONSTRAINT [FK_PositionEmployee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserEmployee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserEmployee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeEmployeeWorkLog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmployeeWorkLogs] DROP CONSTRAINT [FK_EmployeeEmployeeWorkLog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RealEstateEmployee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Employees] DROP CONSTRAINT [FK_RealEstateEmployee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeStoreOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_EmployeeStoreOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeMerchandiseAcceptanceLog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MerchandiseAcceptanceLogs] DROP CONSTRAINT [FK_EmployeeMerchandiseAcceptanceLog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeePerformedHeadOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerformedHeadOrders] DROP CONSTRAINT [FK_EmployeePerformedHeadOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeePerformedStoreOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerformedStoreOrders] DROP CONSTRAINT [FK_EmployeePerformedStoreOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeePerformedStoreOrder1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerformedStoreOrders] DROP CONSTRAINT [FK_EmployeePerformedStoreOrder1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PositionHeadOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HeadOrders] DROP CONSTRAINT [FK_PositionHeadOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CashRegisterCashRegisterAccess]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CashRegisterAccesses] DROP CONSTRAINT [FK_CashRegisterCashRegisterAccess];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RealEstateCashRegister]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CashRegisters] DROP CONSTRAINT [FK_RealEstateCashRegister];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CashRegisterOperationCashRegisterAccess]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CashRegisterAccesses] DROP CONSTRAINT [FK_CashRegisterOperationCashRegisterAccess];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HeadOrderStatusOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HeadOrders] DROP CONSTRAINT [FK_HeadOrderStatusOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CashRegisterAccessPurchase]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Purchases] DROP CONSTRAINT [FK_CashRegisterAccessPurchase];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RealEstateStoreOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_RealEstateStoreOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MerchandiseAcceptanceLogLackLog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LackLogs] DROP CONSTRAINT [FK_MerchandiseAcceptanceLogLackLog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HeadOrderPerformedHeadOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerformedHeadOrders] DROP CONSTRAINT [FK_HeadOrderPerformedHeadOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StoreOrderPerformedStoreOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerformedStoreOrders] DROP CONSTRAINT [FK_StoreOrderPerformedStoreOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StatusOrderStoreOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_StatusOrderStoreOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StoreOrderMerchandiseAcceptanceLog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MerchandiseAcceptanceLogs] DROP CONSTRAINT [FK_StoreOrderMerchandiseAcceptanceLog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductStoreOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_ProductStoreOrder];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[RealEstateTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RealEstateTypes];
+GO
+IF OBJECT_ID(N'[dbo].[RealEstates]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RealEstates];
+GO
+IF OBJECT_ID(N'[dbo].[RealEstateContacts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RealEstateContacts];
+GO
+IF OBJECT_ID(N'[dbo].[Departaments]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Departaments];
+GO
+IF OBJECT_ID(N'[dbo].[RawMaterialProviderContracts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RawMaterialProviderContracts];
+GO
+IF OBJECT_ID(N'[dbo].[StockRawMaterials]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StockRawMaterials];
+GO
+IF OBJECT_ID(N'[dbo].[RawMaterials]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RawMaterials];
+GO
+IF OBJECT_ID(N'[dbo].[MeasurementUnits]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MeasurementUnits];
+GO
+IF OBJECT_ID(N'[dbo].[Components]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Components];
+GO
+IF OBJECT_ID(N'[dbo].[Merchandises]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Merchandises];
+GO
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
+GO
+IF OBJECT_ID(N'[dbo].[Employees]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Employees];
+GO
+IF OBJECT_ID(N'[dbo].[EmployeeWorkLogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmployeeWorkLogs];
+GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Positions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Positions];
+GO
+IF OBJECT_ID(N'[dbo].[CashRegisters]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CashRegisters];
+GO
+IF OBJECT_ID(N'[dbo].[CashRegisterOperations]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CashRegisterOperations];
+GO
+IF OBJECT_ID(N'[dbo].[HeadOrders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HeadOrders];
+GO
+IF OBJECT_ID(N'[dbo].[Purchases]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Purchases];
+GO
+IF OBJECT_ID(N'[dbo].[CashRegisterAccesses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CashRegisterAccesses];
+GO
+IF OBJECT_ID(N'[dbo].[StoreOrders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StoreOrders];
+GO
+IF OBJECT_ID(N'[dbo].[MerchandiseAcceptanceLogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MerchandiseAcceptanceLogs];
+GO
+IF OBJECT_ID(N'[dbo].[LackLogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LackLogs];
+GO
+IF OBJECT_ID(N'[dbo].[StatusOrders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StatusOrders];
+GO
+IF OBJECT_ID(N'[dbo].[PerformedHeadOrders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PerformedHeadOrders];
+GO
+IF OBJECT_ID(N'[dbo].[PerformedStoreOrders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PerformedStoreOrders];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -154,7 +341,8 @@ CREATE TABLE [dbo].[Employees] (
     [MiddleName] nvarchar(max)  NOT NULL,
     [Telephone] nvarchar(max)  NOT NULL,
     [Passport] nvarchar(max)  NOT NULL,
-    [IDK] nvarchar(max)  NOT NULL
+    [IDK] nvarchar(max)  NOT NULL,
+    [IsEnabled] bit  NOT NULL
 );
 GO
 
@@ -280,6 +468,25 @@ CREATE TABLE [dbo].[PerformedStoreOrders] (
     [ID_Carrier] uniqueidentifier  NOT NULL,
     [ShippingDate] datetime  NOT NULL,
     [Weight] int  NOT NULL
+);
+GO
+
+-- Creating table 'SQLLogs'
+CREATE TABLE [dbo].[SQLLogs] (
+    [ID_SQLLog] uniqueidentifier  NOT NULL,
+    [ID_Employee] uniqueidentifier  NOT NULL,
+    [Description] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'ConnectingStrings'
+CREATE TABLE [dbo].[ConnectingStrings] (
+    [ID_ConnectingString] uniqueidentifier  NOT NULL,
+    [DataSource] nvarchar(max)  NOT NULL,
+    [InitialCatalog] nvarchar(max)  NOT NULL,
+    [UserId] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL,
+    [ConnectionType] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -441,6 +648,18 @@ GO
 ALTER TABLE [dbo].[PerformedStoreOrders]
 ADD CONSTRAINT [PK_PerformedStoreOrders]
     PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
+GO
+
+-- Creating primary key on [ID_SQLLog] in table 'SQLLogs'
+ALTER TABLE [dbo].[SQLLogs]
+ADD CONSTRAINT [PK_SQLLogs]
+    PRIMARY KEY CLUSTERED ([ID_SQLLog] ASC);
+GO
+
+-- Creating primary key on [ID_ConnectingString] in table 'ConnectingStrings'
+ALTER TABLE [dbo].[ConnectingStrings]
+ADD CONSTRAINT [PK_ConnectingStrings]
+    PRIMARY KEY CLUSTERED ([ID_ConnectingString] ASC);
 GO
 
 -- --------------------------------------------------
@@ -970,6 +1189,21 @@ GO
 CREATE INDEX [IX_FK_ProductStoreOrder]
 ON [dbo].[StoreOrders]
     ([ID_Product]);
+GO
+
+-- Creating foreign key on [ID_Employee] in table 'SQLLogs'
+ALTER TABLE [dbo].[SQLLogs]
+ADD CONSTRAINT [FK_EmployeeSQLLog]
+    FOREIGN KEY ([ID_Employee])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeSQLLog'
+CREATE INDEX [IX_FK_EmployeeSQLLog]
+ON [dbo].[SQLLogs]
+    ([ID_Employee]);
 GO
 
 -- --------------------------------------------------

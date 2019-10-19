@@ -63,6 +63,9 @@
     <Compile Include="Component.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConnectingString.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Departament.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
@@ -81,6 +84,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DistributedDataBase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DistributedDataBaseContainer.cs" />
     <Compile Include="Employee.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
@@ -138,6 +142,9 @@
     <Compile Include="RealEstateType.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="SQLLog.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="StatusOrder.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
@@ -174,6 +181,7 @@
       <LastGenOutput>DistributedDataBase.Context.cs</LastGenOutput>
       <DependentUpon>DistributedDataBase.edmx</DependentUpon>
     </Content>
+    <Content Include="DistributedDataBase.edmx.sql" />
     <Content Include="Scripts\DistributedDataBase.edmx.sql" />
     <Content Include="DistributedDataBase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

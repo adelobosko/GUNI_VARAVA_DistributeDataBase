@@ -32,6 +32,8 @@
     <EntitySet Name="StatusOrders" EntityType="DistributedDataBase.Store.StatusOrders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PerformedHeadOrders" EntityType="DistributedDataBase.Store.PerformedHeadOrders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PerformedStoreOrders" EntityType="DistributedDataBase.Store.PerformedStoreOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SQLLogs" EntityType="DistributedDataBase.Store.SQLLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConnectingStrings" EntityType="DistributedDataBase.Store.ConnectingStrings" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="RealEstateTypeRealEstate" Association="DistributedDataBase.Store.RealEstateTypeRealEstate">
       <End Role="RealEstateType" EntitySet="RealEstateTypes" />
       <End Role="RealEstate" EntitySet="RealEstates" />
@@ -180,6 +182,10 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="StoreOrder" EntitySet="StoreOrders" />
     </AssociationSet>
+    <AssociationSet Name="EmployeeSQLLog" Association="DistributedDataBase.Store.EmployeeSQLLog">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="SQLLog" EntitySet="SQLLogs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="RealEstateTypes">
     <Key>
@@ -312,6 +318,7 @@
     <Property Name="Telephone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Passport" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IDK" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsEnabled" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="EmployeeWorkLogs">
     <Key>
@@ -437,6 +444,25 @@
     <Property Name="ID_Carrier" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ShippingDate" Type="datetime" Nullable="false" />
     <Property Name="Weight" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SQLLogs">
+    <Key>
+      <PropertyRef Name="ID_SQLLog" />
+    </Key>
+    <Property Name="ID_SQLLog" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_Employee" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConnectingStrings">
+    <Key>
+      <PropertyRef Name="ID_ConnectingString" />
+    </Key>
+    <Property Name="ID_ConnectingString" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DataSource" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="InitialCatalog" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ConnectionType" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="RealEstateTypeRealEstate">
     <End Role="RealEstateType" Type="DistributedDataBase.Store.RealEstateTypes" Multiplicity="1" />
@@ -882,6 +908,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="EmployeeSQLLog">
+    <End Role="Employee" Type="DistributedDataBase.Store.Employees" Multiplicity="1" />
+    <End Role="SQLLog" Type="DistributedDataBase.Store.SQLLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID_Employee" />
+      </Principal>
+      <Dependent Role="SQLLog">
+        <PropertyRef Name="ID_Employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1061,6 +1099,12 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="StoreOrder" EntitySet="StoreOrders" />
           </AssociationSet>
+          <EntitySet Name="SQLLogs" EntityType="DistributedDataBase.SQLLog" />
+          <AssociationSet Name="EmployeeSQLLog" Association="DistributedDataBase.EmployeeSQLLog">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SQLLog" EntitySet="SQLLogs" />
+          </AssociationSet>
+          <EntitySet Name="ConnectingStrings" EntityType="DistributedDataBase.ConnectingString" />
         </EntityContainer>
         <EntityType Name="RealEstateType">
           <Key>
@@ -1233,6 +1277,8 @@
           <NavigationProperty Name="PerformedHeadOrder" Relationship="DistributedDataBase.EmployeePerformedHeadOrder" FromRole="Employee" ToRole="PerformedHeadOrder" />
           <NavigationProperty Name="PerformedStoreOrder" Relationship="DistributedDataBase.EmployeePerformedStoreOrder" FromRole="Employee" ToRole="PerformedStoreOrder" />
           <NavigationProperty Name="PerformedStoreOrder1" Relationship="DistributedDataBase.EmployeePerformedStoreOrder1" FromRole="Employee" ToRole="PerformedStoreOrder" />
+          <NavigationProperty Name="SQLLogs" Relationship="DistributedDataBase.EmployeeSQLLog" FromRole="Employee" ToRole="SQLLog" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeeWorkLog">
           <Key>
@@ -1837,6 +1883,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SQLLog">
+          <Key>
+            <PropertyRef Name="ID_SQLLog" />
+          </Key>
+          <Property Name="ID_SQLLog" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID_Employee" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeeSQLLog" FromRole="SQLLog" ToRole="Employee" />
+          <Property Name="Description" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="EmployeeSQLLog">
+          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DistributedDataBase.SQLLog" Role="SQLLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="SQLLog">
+              <PropertyRef Name="ID_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ConnectingString">
+          <Key>
+            <PropertyRef Name="ID_ConnectingString" />
+          </Key>
+          <Property Name="ID_ConnectingString" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DataSource" Type="String" Nullable="false" />
+          <Property Name="InitialCatalog" Type="String" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" />
+          <Property Name="UserPassword" Type="String" Nullable="false" />
+          <Property Name="ConnectionType" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1983,6 +2061,7 @@
           <ScalarProperty Name="Telephone" ColumnName="Telephone" />
           <ScalarProperty Name="Passport" ColumnName="Passport" />
           <ScalarProperty Name="IDK" ColumnName="IDK" />
+          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2122,6 +2201,27 @@
           <ScalarProperty Name="ID_Carrier" ColumnName="ID_Carrier" />
           <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQLLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(DistributedDataBase.SQLLog)">
+        <MappingFragment StoreEntitySet="SQLLogs">
+          <ScalarProperty Name="ID_SQLLog" ColumnName="ID_SQLLog" />
+          <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConnectingStrings">
+      <EntityTypeMapping TypeName="IsTypeOf(DistributedDataBase.ConnectingString)">
+        <MappingFragment StoreEntitySet="ConnectingStrings">
+          <ScalarProperty Name="ID_ConnectingString" ColumnName="ID_ConnectingString" />
+          <ScalarProperty Name="DataSource" ColumnName="DataSource" />
+          <ScalarProperty Name="InitialCatalog" ColumnName="InitialCatalog" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserPassword" ColumnName="Password" />
+          <ScalarProperty Name="ConnectionType" ColumnName="ConnectionType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

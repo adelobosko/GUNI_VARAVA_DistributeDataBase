@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EF_Model;
+using static EF_Model.DistributedDataBaseContainer;
 
 namespace Factory_And_store
 {
@@ -20,7 +20,7 @@ namespace Factory_And_store
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var dataBase = DistributedDataBaseContainer.GenerateConnection(DataBaseType.Factory, ConnectionType.Host);
+            var dataBase = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
 
 
             var res = dataBase.Positions.Select(i => i).ToList();
