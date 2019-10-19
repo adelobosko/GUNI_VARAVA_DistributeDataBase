@@ -46,49 +46,38 @@ namespace EF_Model
 
         public static DistributedDataBaseContainer GenerateConnection(DataBaseType dataBaseType, ConnectionType connectionType)
         {
-            var nameConnectionString = "";
+            var dataSource = "";
+            var initialCatalog = $"Varava{Enum.GetName(typeof(DataBaseType), dataBaseType)}";
+            var userId = "sa";
+            var password = "2584744";
+
             switch (dataBaseType)
             {
                 case DataBaseType.MainOffice:
                 {
-                    nameConnectionString += $"{Enum.GetName(typeof(DataBaseType), DataBaseType.MainOffice)}";
+                    dataSource = "(localdb)\\MSSQLLocalDB";
                     break;
                 }
                 default:
                 {
-                    nameConnectionString += $"{Enum.GetName(typeof(ConnectionType), connectionType)}{Enum.GetName(typeof(DataBaseType), dataBaseType)}";
+                    switch (connectionType)
+                    {
+                        case ConnectionType.Global:
+                            dataSource = "93.74.213.211,31340";
+                            break;
+                        case ConnectionType.Local:
+                            dataSource = "192.168.1.100,31340";
+                            break;
+                        case ConnectionType.Host:
+                            dataSource = "127.0.0.1,31340";
+                            break;
+                    }
                     break;
                 }
             }
 
-            var connectionString = "";
-            switch (nameConnectionString)
-            {
-                case "MainOffice":
-                {
-                    connectionString =
-                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=(localdb)\\MSSQLLocalDB;initial catalog=MainOffice;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
-                    break;
-                }
-                case "LocalStore":
-                {
-                    connectionString =
-                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=192.168.1.100,31340;initial catalog=VaravaStore;User ID=sa;password=2584744;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
-                    break;
-                }
-                case "GlobalStore":
-                {
-                    connectionString =
-                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=93.74.213.211,31340;initial catalog=VaravaStore;User ID=sa;password=2584744;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
-                    break;
-                }
-                case "HostStore":
-                {
-                    connectionString =
-                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=127.0.0.1,31340;initial catalog=VaravaStore;User ID=sa;password=2584744;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
-                    break;
-                }
-            }
+            var connectionString = $"metadata = res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source={dataSource};initial catalog={initialCatalog};User ID={userId};password={password};integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
+            
 
             return new DistributedDataBaseContainer(connectionString);
     }
