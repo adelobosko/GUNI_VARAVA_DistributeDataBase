@@ -7,20 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EF_Model;
 
 namespace MainOffice
 {
-    public partial class Form1 : Form
+    public partial class AdminForm : Form
     {
-        public Form1()
+        public AdminForm()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            var dataBase = DistributedDataBaseContainer.GenerateConnection(DataBaseType.Store, ConnectionType.Host);
         }
     }
 }
