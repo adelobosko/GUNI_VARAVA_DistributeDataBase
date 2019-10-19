@@ -73,19 +73,19 @@ namespace EF_Model
                 case "LocalStore":
                 {
                     connectionString =
-                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=192.168.1.100,31340;initial catalog=VaravaStore;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
+                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=192.168.1.100,31340;initial catalog=VaravaStore;User ID=sa;password=2584744;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
                     break;
                 }
                 case "GlobalStore":
                 {
                     connectionString =
-                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=93.74.213.211,31340;initial catalog=VaravaStore;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
+                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=93.74.213.211,31340;initial catalog=VaravaStore;User ID=sa;password=2584744;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
                     break;
                 }
                 case "HostStore":
                 {
                     connectionString =
-                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=127.0.0.1,31340;initial catalog=VaravaStore;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
+                        "metadata=res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source=127.0.0.1,31340;initial catalog=VaravaStore;User ID=sa;password=2584744;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
                     break;
                 }
             }
