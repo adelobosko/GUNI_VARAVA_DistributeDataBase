@@ -181,6 +181,9 @@
       <DependentUpon>DistributedDataBase.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\LinkedServers.sql" />
+    <Content Include="Scripts\VaravaFactory.sql" />
+    <Content Include="Scripts\VaravaMainOffice.sql" />
+    <Content Include="Scripts\VaravaStore.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
