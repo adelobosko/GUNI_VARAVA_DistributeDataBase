@@ -1,4 +1,12 @@
-Use Master
+EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'VaravaStore'
+GO
+
+USE [master]
+GO
+ALTER DATABASE [VaravaStore] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+GO
+
+USE [master]
 GO
 DROP DATABASE [VaravaStore]
 GO

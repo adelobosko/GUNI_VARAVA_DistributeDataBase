@@ -461,7 +461,7 @@
     <Property Name="DataSource" Type="nvarchar(max)" Nullable="false" />
     <Property Name="InitialCatalog" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ConnectionType" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="RealEstateTypeRealEstate">
@@ -2220,7 +2220,7 @@
           <ScalarProperty Name="DataSource" ColumnName="DataSource" />
           <ScalarProperty Name="InitialCatalog" ColumnName="InitialCatalog" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="UserPassword" ColumnName="Password" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
           <ScalarProperty Name="ConnectionType" ColumnName="ConnectionType" />
         </MappingFragment>
       </EntityTypeMapping>

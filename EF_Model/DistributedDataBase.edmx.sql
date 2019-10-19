@@ -1,10 +1,16 @@
+EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'GUNI_VARAVA_DistribureDataBase'
+GO
 
--- --------------------------------------------------
--- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
--- --------------------------------------------------
--- Date Created: 10/19/2019 16:36:14
--- Generated from EDMX file: E:\_NEED\VS_PROJECTS\GUNI\GUNI_VARAVA_DistributeDataBase\EF_Model\DistributedDataBase.edmx
--- --------------------------------------------------
+USE [master]
+GO
+ALTER DATABASE [GUNI_VARAVA_DistribureDataBase] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+GO
+
+USE [master]
+GO
+DROP DATABASE [GUNI_VARAVA_DistribureDataBase]
+GO
+CREATE DATABASE [GUNI_VARAVA_DistribureDataBase]
 
 SET QUOTED_IDENTIFIER OFF;
 GO
@@ -128,6 +134,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProductStoreOrder]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_ProductStoreOrder];
 GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeSQLLog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SQLLogs] DROP CONSTRAINT [FK_EmployeeSQLLog];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -210,6 +219,9 @@ IF OBJECT_ID(N'[dbo].[PerformedHeadOrders]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PerformedStoreOrders]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PerformedStoreOrders];
+GO
+IF OBJECT_ID(N'[dbo].[SQLLogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SQLLogs];
 GO
 
 -- --------------------------------------------------
@@ -487,7 +499,7 @@ CREATE TABLE [dbo].[ConnectingStrings] (
     [DataSource] nvarchar(max)  NOT NULL,
     [InitialCatalog] nvarchar(max)  NOT NULL,
     [UserId] nvarchar(max)  NOT NULL,
-    [Password] nvarchar(max)  NOT NULL,
+    [UserPassword] nvarchar(max)  NOT NULL,
     [ConnectionType] nvarchar(max)  NOT NULL
 );
 GO
