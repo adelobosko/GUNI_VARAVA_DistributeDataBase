@@ -57,6 +57,7 @@ namespace MainOffice
         {
             var tabPage = new TabPage(Enum.GetName(typeof(DataBaseType), dbName));
             var splitContainer = new SplitContainer();
+            var horizontalSplitContainer = new SplitContainer();
             var splitWidth = 116;
             var textBox = new TextBox();
             var listBox = new ListBox();
@@ -66,8 +67,11 @@ namespace MainOffice
             textBox.Name = $"{tabPage.Text}TextBox";
             listBox.Name = $"{tabPage.Text}ListBox";
             splitContainer.Name = $"{tabPage.Text}SplitContainer";
+            horizontalSplitContainer.Name = $"{tabPage.Text}horizontalSplitContainer";
+
             textBox.Dock = DockStyle.Top;
             listBox.Dock = DockStyle.Fill;
+            horizontalSplitContainer.Dock = DockStyle.Fill;
 
 
 
@@ -76,12 +80,16 @@ namespace MainOffice
 
             textBox.TextChanged += (sender, args) =>
             {
-                
+
                 var databaseName = textBox.Name.Replace(textBox.GetType().Name, "");
                 
                 var admForm = FindControlParentForm(textBox);
 
                 var senderListBox = admForm.Controls.Find($"{databaseName}ListBox", true)[0] as ListBox;
+
+                senderListBox.Items.Clear();
+                senderListBox.Items.AddRange(database.DataBaseTables.Where(t => t.TableName.Contains(textBox.Text)).Select(t => t.TableName).ToArray());
+
             };
 
             autoCompleteStringCollection.AddRange(tables);
@@ -90,11 +98,15 @@ namespace MainOffice
             textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             listBox.Items.AddRange(tables);
 
+            horizontalSplitContainer.Orientation = Orientation.Horizontal;
+
+
             splitContainer.Dock = DockStyle.Fill;
             splitContainer.Orientation = Orientation.Vertical;
             splitContainer.SplitterDistance = splitWidth;
-            splitContainer.Panel1.Controls.Add(textBox);
             splitContainer.Panel1.Controls.Add(listBox);
+            splitContainer.Panel1.Controls.Add(textBox);
+            splitContainer.Panel2.Controls.Add(horizontalSplitContainer);
             tabPage.Controls.Add(splitContainer);
 
             return tabPage;
