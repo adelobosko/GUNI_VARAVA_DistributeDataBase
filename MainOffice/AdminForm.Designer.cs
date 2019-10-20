@@ -132,6 +132,7 @@
             this.Name = "AdminForm";
             this.Text = "AdminForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdminForm_FormClosed);
+            this.Load += new System.EventHandler(this.AdminForm_Load);
             this.adminMenuStrip.ResumeLayout(false);
             this.adminMenuStrip.PerformLayout();
             this.ResumeLayout(false);

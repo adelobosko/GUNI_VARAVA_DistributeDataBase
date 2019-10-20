@@ -17,6 +17,7 @@ namespace EF_Model
         public System.Guid ID_SQLLog { get; set; }
         public System.Guid ID_Employee { get; set; }
         public string Description { get; set; }
+        public System.DateTime DateExecution { get; set; }
     
         public virtual Employee Employee { get; set; }
     }

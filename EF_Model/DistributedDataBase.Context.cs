@@ -53,5 +53,8 @@ namespace EF_Model
         public virtual DbSet<PerformedStoreOrder> PerformedStoreOrders { get; set; }
         public virtual DbSet<SQLLog> SQLLogs { get; set; }
         public virtual DbSet<ConnectingString> ConnectingStrings { get; set; }
+        public virtual DbSet<DataBaseTable> DataBaseTables { get; set; }
+        public virtual DbSet<TableStructure> TableStructures { get; set; }
+        public virtual DbSet<AccessTable> AccessTables { get; set; }
     }
 }

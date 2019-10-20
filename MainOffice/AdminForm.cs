@@ -6,11 +6,14 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EF_Model;
 using Microsoft.Win32;
+using static EF_Model.DistributedDataBaseContainer;
 
 namespace MainOffice
 {
@@ -32,93 +35,92 @@ namespace MainOffice
         }
 
 
-        public static T GetPropertyValue<T>(object obj, string propName)
+        public static T GetPropertyValue<T>(Type type, string propName)
         {
-            return (T)obj.GetType().GetProperty(propName).GetValue(obj, null);
+            return (T)type.GetProperty(propName).GetValue(type, null);
+        }
+
+        private static Control FindControlParentForm(Control theControl)
+        {
+            Control rControl = null;
+
+            if (theControl.Parent != null)
+            {
+                rControl = theControl.Parent is AdminForm ? theControl.Parent : FindControlParentForm(theControl.Parent);
+            }
+
+            return rControl;
         }
 
 
-        private static TabPage TabPageCtreatator(string dbName)
+        private static TabPage TabPageCtreatator(DataBaseType dbName)
         {
-            var tabPage = new TabPage(dbName);
+            var tabPage = new TabPage(Enum.GetName(typeof(DataBaseType), dbName));
             var splitContainer = new SplitContainer();
-            var splitWidth = 305;
+            var splitWidth = 116;
             var textBox = new TextBox();
             var listBox = new ListBox();
             var autoCompleteStringCollection = new AutoCompleteStringCollection();
 
+            tabPage.Name = $"{tabPage.Text}TabPage";
+            textBox.Name = $"{tabPage.Text}TextBox";
+            listBox.Name = $"{tabPage.Text}ListBox";
+            splitContainer.Name = $"{tabPage.Text}SplitContainer";
             textBox.Dock = DockStyle.Top;
             listBox.Dock = DockStyle.Fill;
 
-            var properties = GlobalHelper.MainOffice.GetType().GetProperties();
-            
-            /*foreach (var propertyInfo in properties)
+
+
+            var database = GetPropertyValue<DistributedDataBaseContainer>(typeof(GlobalHelper), tabPage.Text);
+            var tables = database.DataBaseTables.Select(t => t.TableName).ToArray();
+
+            textBox.TextChanged += (sender, args) =>
             {
-                if (propertyInfo.DeclaringType != typeof(EF_Model.DistributedDataBaseContainer) ||
-                    propertyInfo.MemberType != MemberTypes.Property)
-                {
-                    continue;
-                }
-
-                var type = propertyInfo.PropertyType;
-
-                MessageBox.Show($"\r\n{propertyInfo.Name}\r\n{propertyInfo.PropertyType.Name}");
-
-                //try
-                {
-                    var res = GetPropertyValue<object>(GlobalHelper.MainOffice, propertyInfo.Name);
-
-                    if(res is DbSet<>)
-                    {
-                        
-                    }
-
-                    //var list = objectValue;
-
-                    MessageBox.Show($"{objectValue.GetType()}\r\n{propertyInfo.Name}\r\n{propertyInfo.MemberType}\r\n{propertyInfo.ReflectedType}");
-
-                    autoCompleteStringCollection.Add(propertyInfo.Name);
-                }
-               // catch { MessageBox.Show($"\r\n{memberInfo.Name}\r\n{memberInfo.MemberType}\r\n{memberInfo.ReflectedType}", "ERRor"); }
                 
-            }*/
+                var databaseName = textBox.Name.Replace(textBox.GetType().Name, "");
+                
+                var admForm = FindControlParentForm(textBox);
 
+                var senderListBox = admForm.Controls.Find($"{databaseName}ListBox", true)[0] as ListBox;
+            };
+
+            autoCompleteStringCollection.AddRange(tables);
             textBox.AutoCompleteCustomSource = autoCompleteStringCollection;
             textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
+            listBox.Items.AddRange(tables);
 
             splitContainer.Dock = DockStyle.Fill;
             splitContainer.Orientation = Orientation.Vertical;
-
             splitContainer.SplitterDistance = splitWidth;
             splitContainer.Panel1.Controls.Add(textBox);
             splitContainer.Panel1.Controls.Add(listBox);
-
-
-
             tabPage.Controls.Add(splitContainer);
-            /*
-             * myFlowLayoutPanel.Controls.Clear();
 
-myFlowLayoutPanel.Dispose();
-             */
             return tabPage;
         }
 
         private void openDataBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var toolStripmenuItem = (ToolStripMenuItem) sender;
-            var dbName = toolStripmenuItem.Name.Replace("ToolStripMenuItem", "");
+            var toolStripmenuItem = (ToolStripMenuItem)sender;
 
-            foreach (TabPage variTabPage in adminTabControl.TabPages)
+            Enum.TryParse(toolStripmenuItem.Name.Replace("ToolStripMenuItem", ""),
+                true,
+                out DataBaseType dbName);
+
+
+
+            foreach (TabPage tabPage in adminTabControl.TabPages)
             {
-                if (variTabPage.Text != dbName) continue;
+                if (tabPage.Text != Enum.GetName(typeof(DataBaseType), dbName))
+                {
+                    continue;
+                }
 
-                adminTabControl.SelectTab(variTabPage);
+                adminTabControl.SelectTab(tabPage);
                 return;
             }
-            
+
             adminTabControl.TabPages.Add(TabPageCtreatator(dbName));
         }
 
@@ -133,8 +135,24 @@ myFlowLayoutPanel.Dispose();
 
             adminTabControl.TabPages.Remove(selectedTab);
 
+
+            foreach (var control in selectedTab.Controls)
+            {
+                if (control is SplitContainer)
+                {
+                    var container = control as SplitContainer;
+                    container.Panel1.Controls.Clear();
+                    container.Panel2.Controls.Clear();
+                    container.Dispose();
+                }
+            }
+
+            selectedTab.Controls.Clear();
             selectedTab.Dispose();
-            selectedTab = null;
+        }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

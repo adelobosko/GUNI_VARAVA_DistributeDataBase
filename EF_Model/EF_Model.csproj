@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessTable.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="CashRegister.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
@@ -64,6 +67,9 @@
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="ConnectingString.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseTable.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Departament.cs">
@@ -152,6 +158,9 @@
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreOrder.cs">
+      <DependentUpon>DistributedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TableStructure.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

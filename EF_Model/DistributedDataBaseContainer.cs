@@ -29,28 +29,39 @@ namespace EF_Model
             MainOffice
         }
 
+        public static class DomesticDataBase
+        {
+            public static string DataSource { get; set; }
+            public static string InitialCatalog { get; set; }
+            public static string UserId { get; set; }
+            public static string UserPassword { get; set; }
+
+            static DomesticDataBase()
+            {
+                DataSource = "(localdb)\\MSSQLLocalDB";
+                InitialCatalog = "VaravaMainOffice";
+                UserId = "sa";
+                UserPassword = "2584744";
+            }
+        }
+
 
         public static DistributedDataBaseContainer GenerateConnection(DataBaseType dataBaseType, ConnectionType connectionType)
         {
-            var dataSource = "(localdb)\\MSSQLLocalDB";
-            var initialCatalog = $"VaravaMainOffice";
-            var userId = "sa";
-            var userPassword = "2584744";
+            var dataSource = DomesticDataBase.DataSource;
+            var initialCatalog = DomesticDataBase.InitialCatalog;
+            var userId = DomesticDataBase.UserId;
+            var userPassword = DomesticDataBase.UserPassword;
 
             var connectionString = $"metadata = res://*/DistributedDataBase.csdl|res://*/DistributedDataBase.ssdl|res://*/DistributedDataBase.msl;provider=System.Data.SqlClient;provider connection string=\"data source={dataSource};initial catalog={initialCatalog};User ID={userId};Password={userPassword};integrated security=False;MultipleActiveResultSets=True;App=EntityFramework\"";
 
             var localDb = new DistributedDataBaseContainer(connectionString);
 
-            if (dataBaseType == DataBaseType.MainOffice)
-            {
-                return localDb;
-            }
-
             var hostType = Enum.GetName(typeof(ConnectionType), connectionType);
             initialCatalog = $"Varava{Enum.GetName(typeof(DataBaseType), dataBaseType)}";
 
             var res = localDb.ConnectingStrings
-                .FirstOrDefault(cs => 
+                .FirstOrDefault(cs =>
                     cs.ConnectionType == hostType &&
                     cs.InitialCatalog == initialCatalog
                     );

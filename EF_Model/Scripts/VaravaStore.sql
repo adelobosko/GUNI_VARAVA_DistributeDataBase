@@ -134,6 +134,18 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProductStoreOrder]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_ProductStoreOrder];
 GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeSQLLog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SQLLogs] DROP CONSTRAINT [FK_EmployeeSQLLog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DataBaseTableTableStructure]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TableStructures] DROP CONSTRAINT [FK_DataBaseTableTableStructure];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DataBaseTableAccessTable]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessTables] DROP CONSTRAINT [FK_DataBaseTableAccessTable];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PositionAccessTable]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AccessTables] DROP CONSTRAINT [FK_PositionAccessTable];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -216,6 +228,21 @@ IF OBJECT_ID(N'[dbo].[PerformedHeadOrders]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PerformedStoreOrders]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PerformedStoreOrders];
+GO
+IF OBJECT_ID(N'[dbo].[SQLLogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SQLLogs];
+GO
+IF OBJECT_ID(N'[dbo].[ConnectingStrings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ConnectingStrings];
+GO
+IF OBJECT_ID(N'[dbo].[DataBaseTables]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DataBaseTables];
+GO
+IF OBJECT_ID(N'[dbo].[TableStructures]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TableStructures];
+GO
+IF OBJECT_ID(N'[dbo].[AccessTables]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AccessTables];
 GO
 
 
@@ -329,17 +356,6 @@ CREATE TABLE [dbo].[CashRegisterOperations] (
 );
 GO
 
--- Creating table 'HeadOrders'
-CREATE TABLE [dbo].[HeadOrders] (
-    [ID_HeadOrder] uniqueidentifier  NOT NULL,
-    [Date] datetime  NOT NULL,
-    [Description] nvarchar(max)  NULL,
-    [ID_Position] uniqueidentifier  NOT NULL,
-    [ID_StatusOrder] uniqueidentifier  NOT NULL,
-    [AssignFor] nvarchar(max)  NOT NULL
-);
-GO
-
 -- Creating table 'Purchases'
 CREATE TABLE [dbo].[Purchases] (
     [ID_Purchase] uniqueidentifier  NOT NULL,
@@ -395,14 +411,6 @@ CREATE TABLE [dbo].[StatusOrders] (
 );
 GO
 
--- Creating table 'PerformedHeadOrders'
-CREATE TABLE [dbo].[PerformedHeadOrders] (
-    [ID_HeadOrder] uniqueidentifier  NOT NULL,
-    [ID_Employee] uniqueidentifier  NOT NULL,
-    [ID_PerformedOrder] uniqueidentifier  NOT NULL
-);
-GO
-
 -- Creating table 'PerformedStoreOrders'
 CREATE TABLE [dbo].[PerformedStoreOrders] (
     [ID_StoreOrder] uniqueidentifier  NOT NULL,
@@ -417,9 +425,46 @@ GO
 CREATE TABLE [dbo].[SQLLogs] (
     [ID_SQLLog] uniqueidentifier  NOT NULL,
     [ID_Employee] uniqueidentifier  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Description] nvarchar(max)  NOT NULL,
+    [DateExecution] datetime  NOT NULL
 );
 GO
+
+-- Creating table 'DataBaseTables'
+CREATE TABLE [dbo].[DataBaseTables] (
+    [ID_Table] uniqueidentifier  NOT NULL,
+    [TableName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'TableStructures'
+CREATE TABLE [dbo].[TableStructures] (
+    [ID_Table] uniqueidentifier  NOT NULL,
+    [ColumnName] nvarchar(max)  NOT NULL,
+    [ColumnType] nvarchar(max)  NOT NULL,
+    [ID_TableStructure] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'AccessTables'
+CREATE TABLE [dbo].[AccessTables] (
+    [ID_Table] uniqueidentifier  NOT NULL,
+    [ID_Position] uniqueidentifier  NOT NULL,
+    [AccessType] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'ConnectingStrings'
+CREATE TABLE [dbo].[ConnectingStrings] (
+    [ID_ConnectingString] uniqueidentifier  NOT NULL,
+    [DataSource] nvarchar(max)  NOT NULL,
+	[InitialCatalog] nvarchar(max)  NOT NULL,
+	[UserId] nvarchar(max)  NOT NULL,
+	[UserPassword] nvarchar(max)  NOT NULL,
+	[ConnectionType] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -490,12 +535,6 @@ ADD CONSTRAINT [PK_CashRegisterOperations]
     PRIMARY KEY CLUSTERED ([ID_Operation] ASC);
 GO
 
--- Creating primary key on [ID_HeadOrder] in table 'HeadOrders'
-ALTER TABLE [dbo].[HeadOrders]
-ADD CONSTRAINT [PK_HeadOrders]
-    PRIMARY KEY CLUSTERED ([ID_HeadOrder] ASC);
-GO
-
 -- Creating primary key on [ID_Purchase] in table 'Purchases'
 ALTER TABLE [dbo].[Purchases]
 ADD CONSTRAINT [PK_Purchases]
@@ -532,16 +571,39 @@ ADD CONSTRAINT [PK_StatusOrders]
     PRIMARY KEY CLUSTERED ([ID_StatusOrder] ASC);
 GO
 
--- Creating primary key on [ID_PerformedOrder] in table 'PerformedHeadOrders'
-ALTER TABLE [dbo].[PerformedHeadOrders]
-ADD CONSTRAINT [PK_PerformedHeadOrders]
-    PRIMARY KEY CLUSTERED ([ID_PerformedOrder] ASC);
-GO
-
 -- Creating primary key on [ID_StoreOrder] in table 'PerformedStoreOrders'
 ALTER TABLE [dbo].[PerformedStoreOrders]
 ADD CONSTRAINT [PK_PerformedStoreOrders]
     PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
+GO
+
+-- Creating primary key on [ID_SQLLog] in table 'SQLLogs'
+ALTER TABLE [dbo].[SQLLogs]
+ADD CONSTRAINT [PK_SQLLogs]
+    PRIMARY KEY CLUSTERED ([ID_SQLLog] ASC);
+GO-- Creating primary key on [ID_Table] in table 'DataBaseTables'
+ALTER TABLE [dbo].[DataBaseTables]
+ADD CONSTRAINT [PK_DataBaseTables]
+    PRIMARY KEY CLUSTERED ([ID_Table] ASC);
+GO
+
+-- Creating primary key on [ID_TableStructure] in table 'TableStructures'
+ALTER TABLE [dbo].[TableStructures]
+ADD CONSTRAINT [PK_TableStructures]
+    PRIMARY KEY CLUSTERED ([ID_TableStructure] ASC);
+GO
+
+-- Creating primary key on [ID_Table], [ID_Position] in table 'AccessTables'
+ALTER TABLE [dbo].[AccessTables]
+ADD CONSTRAINT [PK_AccessTables]
+    PRIMARY KEY CLUSTERED ([ID_Table], [ID_Position] ASC);
+GO
+
+
+-- Creating primary key on [ID_ConnectingString] in table 'ConnectingStrings'
+ALTER TABLE [dbo].[ConnectingStrings]
+ADD CONSTRAINT [PK_ConnectingStrings]
+    PRIMARY KEY CLUSTERED ([ID_ConnectingString] ASC);
 GO
 
 -- --------------------------------------------------
@@ -728,21 +790,6 @@ ON [dbo].[MerchandiseAcceptanceLogs]
     ([ID_AcceptManager]);
 GO
 
--- Creating foreign key on [ID_Employee] in table 'PerformedHeadOrders'
-ALTER TABLE [dbo].[PerformedHeadOrders]
-ADD CONSTRAINT [FK_EmployeePerformedHeadOrder]
-    FOREIGN KEY ([ID_Employee])
-    REFERENCES [dbo].[Employees]
-        ([ID_Employee])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_EmployeePerformedHeadOrder'
-CREATE INDEX [IX_FK_EmployeePerformedHeadOrder]
-ON [dbo].[PerformedHeadOrders]
-    ([ID_Employee]);
-GO
-
 -- Creating foreign key on [ID_FactoryManager] in table 'PerformedStoreOrders'
 ALTER TABLE [dbo].[PerformedStoreOrders]
 ADD CONSTRAINT [FK_EmployeePerformedStoreOrder]
@@ -771,21 +818,6 @@ GO
 CREATE INDEX [IX_FK_EmployeePerformedStoreOrder1]
 ON [dbo].[PerformedStoreOrders]
     ([ID_Carrier]);
-GO
-
--- Creating foreign key on [ID_Position] in table 'HeadOrders'
-ALTER TABLE [dbo].[HeadOrders]
-ADD CONSTRAINT [FK_PositionHeadOrder]
-    FOREIGN KEY ([ID_Position])
-    REFERENCES [dbo].[Positions]
-        ([ID_Position])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PositionHeadOrder'
-CREATE INDEX [IX_FK_PositionHeadOrder]
-ON [dbo].[HeadOrders]
-    ([ID_Position]);
 GO
 
 -- Creating foreign key on [ID_CashRegister] in table 'CashRegisterAccesses'
@@ -833,21 +865,6 @@ ON [dbo].[CashRegisterAccesses]
     ([ID_Operation]);
 GO
 
--- Creating foreign key on [ID_StatusOrder] in table 'HeadOrders'
-ALTER TABLE [dbo].[HeadOrders]
-ADD CONSTRAINT [FK_HeadOrderStatusOrder]
-    FOREIGN KEY ([ID_StatusOrder])
-    REFERENCES [dbo].[StatusOrders]
-        ([ID_StatusOrder])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HeadOrderStatusOrder'
-CREATE INDEX [IX_FK_HeadOrderStatusOrder]
-ON [dbo].[HeadOrders]
-    ([ID_StatusOrder]);
-GO
-
 -- Creating foreign key on [ID_CashRegisterAccess] in table 'Purchases'
 ALTER TABLE [dbo].[Purchases]
 ADD CONSTRAINT [FK_CashRegisterAccessPurchase]
@@ -887,21 +904,6 @@ ADD CONSTRAINT [FK_MerchandiseAcceptanceLogLackLog]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ID_HeadOrder] in table 'PerformedHeadOrders'
-ALTER TABLE [dbo].[PerformedHeadOrders]
-ADD CONSTRAINT [FK_HeadOrderPerformedHeadOrder]
-    FOREIGN KEY ([ID_HeadOrder])
-    REFERENCES [dbo].[HeadOrders]
-        ([ID_HeadOrder])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HeadOrderPerformedHeadOrder'
-CREATE INDEX [IX_FK_HeadOrderPerformedHeadOrder]
-ON [dbo].[PerformedHeadOrders]
-    ([ID_HeadOrder]);
-GO
-
 -- Creating foreign key on [ID_StoreOrder] in table 'PerformedStoreOrders'
 ALTER TABLE [dbo].[PerformedStoreOrders]
 ADD CONSTRAINT [FK_StoreOrderPerformedStoreOrder]
@@ -920,6 +922,60 @@ ADD CONSTRAINT [FK_StatusOrderStoreOrder]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
+-- Creating foreign key on [ID_Employee] in table 'SQLLogs'
+ALTER TABLE [dbo].[SQLLogs]
+ADD CONSTRAINT [FK_EmployeeSQLLog]
+    FOREIGN KEY ([ID_Employee])
+    REFERENCES [dbo].[Employees]
+        ([ID_Employee])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeSQLLog'
+CREATE INDEX [IX_FK_EmployeeSQLLog]
+ON [dbo].[SQLLogs]
+    ([ID_Employee]);
+GO
+
+-- Creating foreign key on [ID_Table] in table 'TableStructures'
+ALTER TABLE [dbo].[TableStructures]
+ADD CONSTRAINT [FK_DataBaseTableTableStructure]
+    FOREIGN KEY ([ID_Table])
+    REFERENCES [dbo].[DataBaseTables]
+        ([ID_Table])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DataBaseTableTableStructure'
+CREATE INDEX [IX_FK_DataBaseTableTableStructure]
+ON [dbo].[TableStructures]
+    ([ID_Table]);
+GO
+
+-- Creating foreign key on [ID_Table] in table 'AccessTables'
+ALTER TABLE [dbo].[AccessTables]
+ADD CONSTRAINT [FK_DataBaseTableAccessTable]
+    FOREIGN KEY ([ID_Table])
+    REFERENCES [dbo].[DataBaseTables]
+        ([ID_Table])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_Position] in table 'AccessTables'
+ALTER TABLE [dbo].[AccessTables]
+ADD CONSTRAINT [FK_PositionAccessTable]
+    FOREIGN KEY ([ID_Position])
+    REFERENCES [dbo].[Positions]
+        ([ID_Position])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PositionAccessTable'
+CREATE INDEX [IX_FK_PositionAccessTable]
+ON [dbo].[AccessTables]
+    ([ID_Position]);
+GO
+
 -- Creating non-clustered index for FOREIGN KEY 'FK_StatusOrderStoreOrder'
 CREATE INDEX [IX_FK_StatusOrderStoreOrder]
 ON [dbo].[StoreOrders]
@@ -935,20 +991,148 @@ ADD CONSTRAINT [FK_StoreOrderMerchandiseAcceptanceLog]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ID_Employee] in table 'SQLLogs'
-ALTER TABLE [dbo].[SQLLogs]
-ADD CONSTRAINT [FK_EmployeeSQLLog]
-    FOREIGN KEY ([ID_Employee])
-    REFERENCES [dbo].[Employees]
-        ([ID_Employee])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating default data
+INSERT INTO ConnectingStrings (ID_ConnectingString, DataSource, InitialCatalog, UserId, UserPassword, ConnectionType)
+VALUES 
+(NEWID(), '127.0.0.1,31340', 'VaravaStore', 'sa', '2584744', 'Host'),
+(NEWID(), '192.168.1.100,31340', 'VaravaStore', 'sa', '2584744', 'Local'),
+(NEWID(), '93.74.213.211,31340', 'VaravaStore', 'sa', '2584744', 'Global'),
+(NEWID(), '127.0.0.1,31340', 'VaravaFactory', 'sa', '2584744', 'Host'),
+(NEWID(), '192.168.1.100,31340', 'VaravaFactory', 'sa', '2584744', 'Local'),
+(NEWID(), '93.74.213.211,31340', 'VaravaFactory', 'sa', '2584744', 'Global'),
+(NEWID(), '(localdb)\\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Host'),
+(NEWID(), '(localdb)\\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
+(NEWID(), '(localdb)\\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Global');
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeSQLLog'
-CREATE INDEX [IX_FK_EmployeeSQLLog]
-ON [dbo].[SQLLogs]
-    ([ID_Employee]);
+
+INSERT INTO DataBaseTables (ID_Table, TableName)
+VALUES 
+('d701252b-618a-4123-9544-44a9a5233d9b', 'RealEstateTypes'),
+('99133287-1910-4e42-8db6-c3aa53a6fb11', 'RealEstates'),
+('751eec3e-33df-401f-9e2f-33c8615dd1c6', 'RealEstateContacts'),
+('6a93815b-e291-411a-b457-78c3b01b6f84', 'Departaments'),
+('83e709b5-cf67-4e6a-9572-73788563cd74', 'Positions'),
+('39de7b41-1940-4547-9d6c-73de9e09d20b', 'StatusOrders'),
+
+('bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'Merchandises'),
+('d08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'Employees'),
+('b8a98e35-2d50-4142-80cb-f7d8a67390dc', 'EmployeeWorkLogs'),
+('7d19c4b3-485e-4384-9ee4-299143277371', 'ConnectingStrings'),
+('57608aa4-8b31-4116-981a-952bf9983e73', 'SQLLogs'),
+('4aceeb3e-d8ea-45d0-adc3-e8628a567aa5', 'DataBaseTables'),
+('c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 'TableStructures'),
+('8c977328-59b9-405e-b568-a02966956170', 'AccessTables'),
+('742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 'Users'),
+('0e1b9bfc-e347-463a-b017-eae50483c671', 'CashRegisters'),
+('0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 'CashRegisterOperations'),
+('8488e2f5-97f3-4d74-90c8-0704b8fda279', 'Purchases'),
+('3f34b2c4-facb-4c57-9654-59bc27135e27', 'CashRegisterAccesses'),
+('a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'StoreOrders'),
+('b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'MerchandiseAcceptanceLogs'),
+('e22534aa-b217-4936-9ac1-83265f8d3e9f', 'LackLogs');
 GO
+INSERT INTO TableStructures (ID_TableStructure, ID_Table, ColumnType, ColumnName)
+VALUES 
+(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 'Guid', 'ID_RealEstateType'),
+(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 'String', 'TypeName'),
+(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 'String', 'Description'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'Guid', 'ID_RealEstate'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'Guid', 'ID_RealEstateType'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'NameRealEstate'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'Country'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'Region'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'City'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'Street'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'BuildingNumber'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'Guid', 'ID_RealEstateContact'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'Guid', 'ID_RealEstate'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'Guid', 'ID_Departament'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'String', 'Telephone'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'String', 'Email'),
+(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 'Guid', 'ID_Departament'),
+(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 'Guid', 'NameDepartament'),
+(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 'String', 'Description'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'Guid', 'ID_Employee'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'Guid', 'ID_Position'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'Guid', 'ID_RealEstate'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'String', 'FirstName'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'String', 'SecondName'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'String', 'MiddleName'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'String', 'Telephone'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'String', 'Passport'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'String', 'IDK'),
+(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'bool', 'IsEnabled'),
+(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 'Guid', 'ID_EmployeeWorkLog'),
+(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 'Guid', 'ID_Employee'),
+(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 'DateTime', 'DateTimeStart'),
+(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 'DateTime', 'DateTimeEnd'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'Guid', 'DateTimeEnd'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'NamePosition'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'Description'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'int', 'PaymentHrnPerHour'),
+(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 'Guid', 'ID_StatusOrder'),
+(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 'String', 'NameStatusOrder'),
+(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 'Guid', 'ID_ConnectingString'),
+(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 'String', 'DataSource'),
+(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 'String', 'InitialCatalog'),
+(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 'String', 'UserId'),
+(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 'String', 'UserPassword'),
+(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 'String', 'ConnectionType'),
+(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 'Guid', 'ID_SQLLog'),
+(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 'Guid', 'ID_Employee'),
+(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 'String', 'Description'),
+(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 'DateTime', 'DateExecution'),
+(NEWID(), '4aceeb3e-d8ea-45d0-adc3-e8628a567aa5', 'Guid', 'ID_Table'),
+(NEWID(), '4aceeb3e-d8ea-45d0-adc3-e8628a567aa5', 'String', 'TableName'),
+(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 'Guid', 'ID_TableStructure'),
+(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 'Guid', 'ID_Table'),
+(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 'String', 'ColumnName'),
+(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 'String', 'ColumnType'),
+(NEWID(), '8c977328-59b9-405e-b568-a02966956170', 'Guid', 'ID_Table'),
+(NEWID(), '8c977328-59b9-405e-b568-a02966956170', 'Guid', 'ID_Position'),
+(NEWID(), '8c977328-59b9-405e-b568-a02966956170', 'String', 'AccessType'),
+(NEWID(), '742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 'Guid', 'ID_Employee'),
+(NEWID(), '742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 'String', 'UserLogin'),
+(NEWID(), '742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 'String', 'UserPassword'),
+(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'Guid', 'ID_Merchandise'),
+(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'Guid', 'ID_Product'),
+(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'Guid', 'ID_RealEstate'),
+(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'int', 'Weight'),
+(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'int', 'PricePerGramm'),
+(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'DateTime', 'ManufactureDate'),
+(NEWID(), '0e1b9bfc-e347-463a-b017-eae50483c671', 'Guid', 'ID_CashRegister'),
+(NEWID(), '0e1b9bfc-e347-463a-b017-eae50483c671', 'Guid', 'ID_RealEstate'),
+(NEWID(), '0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 'Guid', 'ID_Operation'),
+(NEWID(), '0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 'String', 'NameOperation'),
+(NEWID(), '0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 'String', 'Description'),
+(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 'Guid', 'ID_Purchase'),
+(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 'Guid', 'ID_Merchandise'),
+(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 'Guid', 'ID_CashRegisterAccess'),
+(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 'int', 'Weight'),
+(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 'DateTime', 'PurchaseDate'),
+(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 'Guid', 'ID_CashRegisterAccess'),
+(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 'Guid', 'ID_CashRegister'),
+(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 'Guid', 'ID_EmployeeSeller'),
+(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 'Guid', 'ID_Operation'),
+(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 'DateTime', 'Date'),
+(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'Guid', 'ID_StoreOrder'),
+(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'Guid', 'ID_Product'),
+(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'Guid', 'ID_RealEstateStore'),
+(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'Guid', 'ID_StoreManager'),
+(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'Guid', 'ID_StatusOrder'),
+(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'DateTime', 'InitialDate'),
+(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'int', 'Weight'),
+(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'Guid', 'ID_StoreOrder'),
+(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'Guid', 'ID_AcceptManager'),
+(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'DateTime', 'AcceptDate'),
+(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'int', 'Weight'),
+(NEWID(), 'e22534aa-b217-4936-9ac1-83265f8d3e9f', 'Guid', 'ID_StoreOrder'),
+(NEWID(), 'e22534aa-b217-4936-9ac1-83265f8d3e9f', 'int', 'WeightOfLack');
+GO
+
+
 -- --------------------------------------------------
 -- Script has ended
 -- --------------------------------------------------
