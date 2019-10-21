@@ -28,42 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthorizationForm));
-            this.loginTextBoxStore = new System.Windows.Forms.TextBox();
-            this.passwordTextBoxStore = new System.Windows.Forms.TextBox();
+            this.loginStoreTextBox = new System.Windows.Forms.TextBox();
+            this.resultStoreLabel = new System.Windows.Forms.Label();
+            this.errorStoreProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.connectedStoreLabel = new System.Windows.Forms.Label();
+            this.passwordStoreTextBox = new System.Windows.Forms.TextBox();
+            this.enterStoreButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.errorStoreProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // loginTextBoxStore
+            // loginStoreTextBox
             // 
-            this.loginTextBoxStore.Location = new System.Drawing.Point(238, 137);
-            this.loginTextBoxStore.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.loginTextBoxStore.Name = "loginTextBoxStore";
-            this.loginTextBoxStore.Size = new System.Drawing.Size(148, 32);
-            this.loginTextBoxStore.TabIndex = 0;
-            this.loginTextBoxStore.Text = "manager";
+            this.loginStoreTextBox.Location = new System.Drawing.Point(225, 125);
+            this.loginStoreTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.loginStoreTextBox.Name = "loginStoreTextBox";
+            this.loginStoreTextBox.Size = new System.Drawing.Size(205, 32);
+            this.loginStoreTextBox.TabIndex = 0;
+            this.loginStoreTextBox.Text = "manager";
             // 
-            // passwordTextBoxStore
+            // resultStoreLabel
             // 
-            this.passwordTextBoxStore.Location = new System.Drawing.Point(238, 213);
-            this.passwordTextBoxStore.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.passwordTextBoxStore.Name = "passwordTextBoxStore";
-            this.passwordTextBoxStore.Size = new System.Drawing.Size(148, 32);
-            this.passwordTextBoxStore.TabIndex = 1;
-            this.passwordTextBoxStore.Text = "pass1";
+            this.resultStoreLabel.AutoSize = true;
+            this.resultStoreLabel.BackColor = System.Drawing.Color.Transparent;
+            this.resultStoreLabel.ForeColor = System.Drawing.Color.Brown;
+            this.resultStoreLabel.Location = new System.Drawing.Point(221, 245);
+            this.resultStoreLabel.Name = "resultStoreLabel";
+            this.resultStoreLabel.Size = new System.Drawing.Size(72, 23);
+            this.resultStoreLabel.TabIndex = 2;
+            this.resultStoreLabel.Text = "label1";
+            // 
+            // errorStoreProvider
+            // 
+            this.errorStoreProvider.ContainerControl = this;
+            // 
+            // connectedStoreLabel
+            // 
+            this.connectedStoreLabel.AutoSize = true;
+            this.connectedStoreLabel.BackColor = System.Drawing.Color.Transparent;
+            this.connectedStoreLabel.Location = new System.Drawing.Point(221, 40);
+            this.connectedStoreLabel.Name = "connectedStoreLabel";
+            this.connectedStoreLabel.Size = new System.Drawing.Size(72, 23);
+            this.connectedStoreLabel.TabIndex = 4;
+            this.connectedStoreLabel.Text = "label1";
+            // 
+            // passwordStoreTextBox
+            // 
+            this.passwordStoreTextBox.Location = new System.Drawing.Point(225, 188);
+            this.passwordStoreTextBox.Name = "passwordStoreTextBox";
+            this.passwordStoreTextBox.Size = new System.Drawing.Size(205, 32);
+            this.passwordStoreTextBox.TabIndex = 1;
+            this.passwordStoreTextBox.Text = "pass1";
+            this.passwordStoreTextBox.UseSystemPasswordChar = true;
+            // 
+            // enterStoreButton
+            // 
+            this.enterStoreButton.BackColor = System.Drawing.Color.DarkOrange;
+            this.enterStoreButton.ForeColor = System.Drawing.Color.White;
+            this.enterStoreButton.Location = new System.Drawing.Point(265, 282);
+            this.enterStoreButton.Name = "enterStoreButton";
+            this.enterStoreButton.Size = new System.Drawing.Size(125, 42);
+            this.enterStoreButton.TabIndex = 3;
+            this.enterStoreButton.Text = "Enter";
+            this.enterStoreButton.UseVisualStyleBackColor = false;
+            this.enterStoreButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // AuthorizationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(656, 396);
-            this.Controls.Add(this.passwordTextBoxStore);
-            this.Controls.Add(this.loginTextBoxStore);
+            this.Controls.Add(this.enterStoreButton);
+            this.Controls.Add(this.passwordStoreTextBox);
+            this.Controls.Add(this.connectedStoreLabel);
+            this.Controls.Add(this.resultStoreLabel);
+            this.Controls.Add(this.loginStoreTextBox);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "AuthorizationForm";
             this.Text = "Store authorization";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorStoreProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -71,8 +121,12 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox loginTextBoxStore;
-        private System.Windows.Forms.TextBox passwordTextBoxStore;
+        private System.Windows.Forms.TextBox loginStoreTextBox;
+        private System.Windows.Forms.Label resultStoreLabel;
+        private System.Windows.Forms.ErrorProvider errorStoreProvider;
+        private System.Windows.Forms.Label connectedStoreLabel;
+        private System.Windows.Forms.TextBox passwordStoreTextBox;
+        private System.Windows.Forms.Button enterStoreButton;
     }
 }
 

@@ -16,20 +16,20 @@ namespace Factory_And_store
         public AuthorizationForm()
         {
             InitializeComponent();
-            loginTextBoxStore.Validating += LoginTextBox_Validating;
-            passwordTextBoxStore.Validating += LoginTextBox_Validating;
+            loginStoreTextBox.Validating += LoginStoreTextBoxValidating;
+            passwordStoreTextBox.Validating += LoginStoreTextBoxValidating;
         }
 
-        private void LoginTextBox_Validating(object sender, CancelEventArgs e)
+        private void LoginStoreTextBoxValidating(object sender, CancelEventArgs e)
         {
             var textBox = (TextBox)sender;
             if (string.IsNullOrEmpty(textBox.Text))
             {
-                errorProvider.SetError(textBox, $"Please input {textBox.Name.Replace("TextBox", "")}!");
+                errorStoreProvider.SetError(textBox, $"Please input {textBox.Name.Replace("TextBox", "")}!");
             }
             else
             {
-                errorProvider.Clear();
+                errorStoreProvider.Clear();
             }
         }
 
@@ -51,7 +51,7 @@ namespace Factory_And_store
             MessageBox.Show(res.Count.ToString());
             MessageBox.Show(res[0].NamePosition);
 
-            connectedLabel.Text = GlobalHelper.MainOffice.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
+            connectedStoreLabel.Text = GlobalHelper.MainOffice.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
 
             var connectionType = ConnectionType.Host;
             GlobalHelper.Factory = GenerateConnection(DataBaseType.Factory, connectionType);
@@ -60,7 +60,7 @@ namespace Factory_And_store
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
         {
-            resultLabel.Text = "";
+            resultStoreLabel.Text = "";
             if (Keys.Enter == e.KeyCode)
             {
                 this.SelectNextControl((Control)sender, true, true, true, true);
@@ -84,20 +84,20 @@ namespace Factory_And_store
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            var isLogined = Authorization(loginTextBox.Text, passwordTextBox.Text);
+            var isLogined = Authorization(loginStoreTextBox.Text, passwordStoreTextBox.Text);
             if (!isLogined)
             {
-                resultLabel.Text = "Login or Password is not correct.";
+                resultStoreLabel.Text = "Login or Password is not correct.";
                 return;
             }
 
             this.Hide();
-            passwordTextBox.Text = "";
+            passwordStoreTextBox.Text = "";
             GlobalHelper.AuthorizationForm = this;
 
             if (GlobalHelper.User.Employee.Position.NamePosition == "Admin")
             {
-                new AdminForm().Show();
+                new StoreManagerForm().Show();
             }
         }
     }
