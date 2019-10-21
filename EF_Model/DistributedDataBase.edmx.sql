@@ -140,12 +140,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_DataBaseTableTableStructure]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TableStructures] DROP CONSTRAINT [FK_DataBaseTableTableStructure];
 GO
-IF OBJECT_ID(N'[dbo].[FK_DataBaseTableAccessTable]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessTables] DROP CONSTRAINT [FK_DataBaseTableAccessTable];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PositionAccessTable]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessTables] DROP CONSTRAINT [FK_PositionAccessTable];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -240,9 +234,6 @@ IF OBJECT_ID(N'[dbo].[DataBaseTables]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TableStructures]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TableStructures];
-GO
-IF OBJECT_ID(N'[dbo].[AccessTables]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessTables];
 GO
 
 -- --------------------------------------------------
@@ -538,15 +529,8 @@ CREATE TABLE [dbo].[TableStructures] (
     [ID_Table] uniqueidentifier  NOT NULL,
     [ColumnName] nvarchar(max)  NOT NULL,
     [ColumnType] nvarchar(max)  NOT NULL,
-    [ID_TableStructure] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'AccessTables'
-CREATE TABLE [dbo].[AccessTables] (
-    [ID_Table] uniqueidentifier  NOT NULL,
-    [ID_Position] uniqueidentifier  NOT NULL,
-    [AccessType] nvarchar(max)  NOT NULL
+    [ID_TableStructure] uniqueidentifier  NOT NULL,
+    [IsPrimary] bit  NOT NULL
 );
 GO
 
@@ -732,12 +716,6 @@ GO
 ALTER TABLE [dbo].[TableStructures]
 ADD CONSTRAINT [PK_TableStructures]
     PRIMARY KEY CLUSTERED ([ID_TableStructure] ASC);
-GO
-
--- Creating primary key on [ID_Table], [ID_Position] in table 'AccessTables'
-ALTER TABLE [dbo].[AccessTables]
-ADD CONSTRAINT [PK_AccessTables]
-    PRIMARY KEY CLUSTERED ([ID_Table], [ID_Position] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1297,30 +1275,6 @@ GO
 CREATE INDEX [IX_FK_DataBaseTableTableStructure]
 ON [dbo].[TableStructures]
     ([ID_Table]);
-GO
-
--- Creating foreign key on [ID_Table] in table 'AccessTables'
-ALTER TABLE [dbo].[AccessTables]
-ADD CONSTRAINT [FK_DataBaseTableAccessTable]
-    FOREIGN KEY ([ID_Table])
-    REFERENCES [dbo].[DataBaseTables]
-        ([ID_Table])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ID_Position] in table 'AccessTables'
-ALTER TABLE [dbo].[AccessTables]
-ADD CONSTRAINT [FK_PositionAccessTable]
-    FOREIGN KEY ([ID_Position])
-    REFERENCES [dbo].[Positions]
-        ([ID_Position])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PositionAccessTable'
-CREATE INDEX [IX_FK_PositionAccessTable]
-ON [dbo].[AccessTables]
-    ([ID_Position]);
 GO
 
 -- --------------------------------------------------

@@ -19,7 +19,6 @@ namespace EF_Model
         {
             this.Employee = new HashSet<Employee>();
             this.HeadOrder = new HashSet<HeadOrder>();
-            this.AccessTables = new HashSet<AccessTable>();
         }
     
         public System.Guid ID_Position { get; set; }
@@ -31,7 +30,5 @@ namespace EF_Model
         public virtual ICollection<Employee> Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HeadOrder> HeadOrder { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessTable> AccessTables { get; set; }
     }
 }

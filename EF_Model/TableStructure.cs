@@ -18,6 +18,7 @@ namespace EF_Model
         public string ColumnName { get; set; }
         public string ColumnType { get; set; }
         public System.Guid ID_TableStructure { get; set; }
+        public bool IsPrimary { get; set; }
     
         public virtual DataBaseTable DataBaseTable { get; set; }
     }

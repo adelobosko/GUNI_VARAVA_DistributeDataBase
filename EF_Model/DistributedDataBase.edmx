@@ -36,7 +36,6 @@
     <EntitySet Name="ConnectingStrings" EntityType="DistributedDataBase.Store.ConnectingStrings" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DataBaseTables" EntityType="DistributedDataBase.Store.DataBaseTables" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TableStructures" EntityType="DistributedDataBase.Store.TableStructures" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AccessTables" EntityType="DistributedDataBase.Store.AccessTables" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="RealEstateTypeRealEstate" Association="DistributedDataBase.Store.RealEstateTypeRealEstate">
       <End Role="RealEstateType" EntitySet="RealEstateTypes" />
       <End Role="RealEstate" EntitySet="RealEstates" />
@@ -192,14 +191,6 @@
     <AssociationSet Name="DataBaseTableTableStructure" Association="DistributedDataBase.Store.DataBaseTableTableStructure">
       <End Role="DataBaseTable" EntitySet="DataBaseTables" />
       <End Role="TableStructure" EntitySet="TableStructures" />
-    </AssociationSet>
-    <AssociationSet Name="DataBaseTableAccessTable" Association="DistributedDataBase.Store.DataBaseTableAccessTable">
-      <End Role="DataBaseTable" EntitySet="DataBaseTables" />
-      <End Role="AccessTable" EntitySet="AccessTables" />
-    </AssociationSet>
-    <AssociationSet Name="PositionAccessTable" Association="DistributedDataBase.Store.PositionAccessTable">
-      <End Role="Position" EntitySet="Positions" />
-      <End Role="AccessTable" EntitySet="AccessTables" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="RealEstateTypes">
@@ -495,15 +486,7 @@
     <Property Name="ColumnName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ColumnType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ID_TableStructure" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AccessTables">
-    <Key>
-      <PropertyRef Name="ID_Table" />
-      <PropertyRef Name="ID_Position" />
-    </Key>
-    <Property Name="ID_Table" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ID_Position" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AccessType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="RealEstateTypeRealEstate">
     <End Role="RealEstateType" Type="DistributedDataBase.Store.RealEstateTypes" Multiplicity="1" />
@@ -973,30 +956,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DataBaseTableAccessTable">
-    <End Role="DataBaseTable" Type="DistributedDataBase.Store.DataBaseTables" Multiplicity="1" />
-    <End Role="AccessTable" Type="DistributedDataBase.Store.AccessTables" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DataBaseTable">
-        <PropertyRef Name="ID_Table" />
-      </Principal>
-      <Dependent Role="AccessTable">
-        <PropertyRef Name="ID_Table" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PositionAccessTable">
-    <End Role="Position" Type="DistributedDataBase.Store.Positions" Multiplicity="1" />
-    <End Role="AccessTable" Type="DistributedDataBase.Store.AccessTables" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Position">
-        <PropertyRef Name="ID_Position" />
-      </Principal>
-      <Dependent Role="AccessTable">
-        <PropertyRef Name="ID_Position" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1184,20 +1143,11 @@
           <EntitySet Name="ConnectingStrings" EntityType="DistributedDataBase.ConnectingString" />
           <EntitySet Name="DataBaseTables" EntityType="DistributedDataBase.DataBaseTable" />
           <EntitySet Name="TableStructures" EntityType="DistributedDataBase.TableStructure" />
-          <EntitySet Name="AccessTables" EntityType="DistributedDataBase.AccessTable" />
           <AssociationSet Name="DataBaseTableTableStructure" Association="DistributedDataBase.DataBaseTableTableStructure">
             <End Role="DataBaseTable" EntitySet="DataBaseTables" />
             <End Role="TableStructure" EntitySet="TableStructures" />
           </AssociationSet>
-          <AssociationSet Name="DataBaseTableAccessTable" Association="DistributedDataBase.DataBaseTableAccessTable">
-            <End Role="DataBaseTable" EntitySet="DataBaseTables" />
-            <End Role="AccessTable" EntitySet="AccessTables" />
-          </AssociationSet>
-          <AssociationSet Name="PositionAccessTable" Association="DistributedDataBase.PositionAccessTable">
-            <End Role="Position" EntitySet="Positions" />
-            <End Role="AccessTable" EntitySet="AccessTables" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="RealEstateType">
           <Key>
             <PropertyRef Name="ID_RealEstateType" />
@@ -1401,7 +1351,6 @@
           <Property Name="Description" Type="String" Nullable="true" />
           <NavigationProperty Name="Employee" Relationship="DistributedDataBase.PositionEmployee" FromRole="Position" ToRole="Employee" />
           <NavigationProperty Name="HeadOrder" Relationship="DistributedDataBase.PositionHeadOrder" FromRole="Position" ToRole="HeadOrder" />
-          <NavigationProperty Name="AccessTables" Relationship="DistributedDataBase.PositionAccessTable" FromRole="Position" ToRole="AccessTable" />
         </EntityType>
         <EntityType Name="CashRegister">
           <Key>
@@ -2016,7 +1965,6 @@
           <Property Name="ID_Table" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="TableName" Type="String" Nullable="false" />
           <NavigationProperty Name="TableStructures" Relationship="DistributedDataBase.DataBaseTableTableStructure" FromRole="DataBaseTable" ToRole="TableStructure" />
-          <NavigationProperty Name="AccessTables" Relationship="DistributedDataBase.DataBaseTableAccessTable" FromRole="DataBaseTable" ToRole="AccessTable" />
         </EntityType>
         <EntityType Name="TableStructure">
           <Key>
@@ -2027,17 +1975,7 @@
           <Property Name="ColumnType" Type="String" Nullable="false" />
           <NavigationProperty Name="DataBaseTable" Relationship="DistributedDataBase.DataBaseTableTableStructure" FromRole="TableStructure" ToRole="DataBaseTable" />
           <Property Name="ID_TableStructure" Type="Guid" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AccessTable">
-          <Key>
-            <PropertyRef Name="ID_Table" />
-            <PropertyRef Name="ID_Position" />
-          </Key>
-          <Property Name="ID_Table" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="ID_Position" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="DataBaseTable" Relationship="DistributedDataBase.DataBaseTableAccessTable" FromRole="AccessTable" ToRole="DataBaseTable" />
-          <Property Name="AccessType" Type="String" Nullable="false" />
-          <NavigationProperty Name="Position" Relationship="DistributedDataBase.PositionAccessTable" FromRole="AccessTable" ToRole="Position" />
+          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="DataBaseTableTableStructure">
           <End Type="DistributedDataBase.DataBaseTable" Role="DataBaseTable" Multiplicity="1" />
@@ -2051,31 +1989,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DataBaseTableAccessTable">
-          <End Type="DistributedDataBase.DataBaseTable" Role="DataBaseTable" Multiplicity="1" />
-          <End Type="DistributedDataBase.AccessTable" Role="AccessTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DataBaseTable">
-              <PropertyRef Name="ID_Table" />
-            </Principal>
-            <Dependent Role="AccessTable">
-              <PropertyRef Name="ID_Table" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PositionAccessTable">
-          <End Type="DistributedDataBase.Position" Role="Position" Multiplicity="1" />
-          <End Type="DistributedDataBase.AccessTable" Role="AccessTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Position">
-              <PropertyRef Name="ID_Position" />
-            </Principal>
-            <Dependent Role="AccessTable">
-              <PropertyRef Name="ID_Position" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2401,15 +2315,7 @@
           <ScalarProperty Name="ID_Table" ColumnName="ID_Table" />
           <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
           <ScalarProperty Name="ColumnType" ColumnName="ColumnType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AccessTables">
-      <EntityTypeMapping TypeName="IsTypeOf(DistributedDataBase.AccessTable)">
-        <MappingFragment StoreEntitySet="AccessTables">
-          <ScalarProperty Name="ID_Table" ColumnName="ID_Table" />
-          <ScalarProperty Name="ID_Position" ColumnName="ID_Position" />
-          <ScalarProperty Name="AccessType" ColumnName="AccessType" />
+          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

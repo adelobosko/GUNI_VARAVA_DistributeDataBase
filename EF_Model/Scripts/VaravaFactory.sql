@@ -140,12 +140,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_DataBaseTableTableStructure]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TableStructures] DROP CONSTRAINT [FK_DataBaseTableTableStructure];
 GO
-IF OBJECT_ID(N'[dbo].[FK_DataBaseTableAccessTable]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessTables] DROP CONSTRAINT [FK_DataBaseTableAccessTable];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PositionAccessTable]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AccessTables] DROP CONSTRAINT [FK_PositionAccessTable];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -240,9 +234,6 @@ IF OBJECT_ID(N'[dbo].[DataBaseTables]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TableStructures]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TableStructures];
-GO
-IF OBJECT_ID(N'[dbo].[AccessTables]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AccessTables];
 GO
 
 -- --------------------------------------------------
@@ -435,15 +426,8 @@ CREATE TABLE [dbo].[TableStructures] (
     [ID_Table] uniqueidentifier  NOT NULL,
     [ColumnName] nvarchar(max)  NOT NULL,
     [ColumnType] nvarchar(max)  NOT NULL,
-    [ID_TableStructure] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'AccessTables'
-CREATE TABLE [dbo].[AccessTables] (
-    [ID_Table] uniqueidentifier  NOT NULL,
-    [ID_Position] uniqueidentifier  NOT NULL,
-    [AccessType] nvarchar(max)  NOT NULL
+    [ID_TableStructure] uniqueidentifier  NOT NULL,
+    [IsPrimary] bit  NOT NULL
 );
 GO
 
@@ -568,12 +552,6 @@ GO
 ALTER TABLE [dbo].[TableStructures]
 ADD CONSTRAINT [PK_TableStructures]
     PRIMARY KEY CLUSTERED ([ID_TableStructure] ASC);
-GO
-
--- Creating primary key on [ID_Table], [ID_Position] in table 'AccessTables'
-ALTER TABLE [dbo].[AccessTables]
-ADD CONSTRAINT [PK_AccessTables]
-    PRIMARY KEY CLUSTERED ([ID_Table], [ID_Position] ASC);
 GO
 
 
@@ -860,30 +838,6 @@ ON [dbo].[TableStructures]
     ([ID_Table]);
 GO
 
--- Creating foreign key on [ID_Table] in table 'AccessTables'
-ALTER TABLE [dbo].[AccessTables]
-ADD CONSTRAINT [FK_DataBaseTableAccessTable]
-    FOREIGN KEY ([ID_Table])
-    REFERENCES [dbo].[DataBaseTables]
-        ([ID_Table])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ID_Position] in table 'AccessTables'
-ALTER TABLE [dbo].[AccessTables]
-ADD CONSTRAINT [FK_PositionAccessTable]
-    FOREIGN KEY ([ID_Position])
-    REFERENCES [dbo].[Positions]
-        ([ID_Position])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PositionAccessTable'
-CREATE INDEX [IX_FK_PositionAccessTable]
-ON [dbo].[AccessTables]
-    ([ID_Position]);
-GO
-
 
 
 -- Creating default data
@@ -916,7 +870,6 @@ VALUES
 ('a82c98e0-711c-44c4-bf22-1093f86426b3', 'SQLLogs'),
 ('5687e06a-9d81-464a-8dfc-7ac07a0d9b37', 'DataBaseTables'),
 ('cb48e617-dfed-44ee-b734-af6ba82fc212', 'TableStructures'),
-('ec95849b-ea79-4bec-917b-e0e33d0b0fc5', 'AccessTables'),
 ('aefa774a-5ad0-4281-a9ce-d8093287a08d', 'Users'),
 ('8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'RawMaterialProviderContracts'),
 ('1a70ebac-6165-4c53-aead-6171453f75e7', 'StockRawMaterials'),
@@ -926,112 +879,109 @@ VALUES
 ('59e656db-ac03-416d-b2bf-145674aab0d4', 'Merchandises'),
 ('2f86402c-a36d-4744-bc55-006d135e9cac', 'Products');
 GO
-INSERT INTO TableStructures (ID_TableStructure, ID_Table, ColumnType, ColumnName)
+INSERT INTO TableStructures (ID_TableStructure, ID_Table, IsPrimary, ColumnType, ColumnName)
 VALUES 
-(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 'Guid', 'ID_RealEstateType'),
-(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 'String', 'TypeName'),
-(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 'String', 'Description'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'Guid', 'ID_RealEstate'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'Guid', 'ID_RealEstateType'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'NameRealEstate'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'Country'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'Region'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'City'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'Street'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 'String', 'BuildingNumber'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'Guid', 'ID_RealEstateContact'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'Guid', 'ID_RealEstate'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'Guid', 'ID_Departament'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'String', 'Telephone'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 'String', 'Email'),
-(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 'Guid', 'ID_Departament'),
-(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 'Guid', 'NameDepartament'),
-(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 'String', 'Description'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'Guid', 'ID_Employee'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'Guid', 'ID_Position'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'Guid', 'ID_RealEstate'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'String', 'FirstName'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'String', 'SecondName'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'String', 'MiddleName'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'String', 'Telephone'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'String', 'Passport'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'String', 'IDK'),
-(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 'bool', 'IsEnabled'),
-(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 'Guid', 'ID_EmployeeWorkLog'),
-(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 'Guid', 'ID_Employee'),
-(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 'DateTime', 'DateTimeStart'),
-(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 'DateTime', 'DateTimeEnd'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'Guid', 'ID_Position'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'NamePosition'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'Description'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'int', 'PaymentHrnPerHour'),
-(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 'Guid', 'ID_StatusOrder'),
-(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 'String', 'NameStatusOrder'),
-(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 'Guid', 'ID_ConnectingString'),
-(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 'String', 'DataSource'),
-(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 'String', 'InitialCatalog'),
-(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 'String', 'UserId'),
-(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 'String', 'UserPassword'),
-(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 'String', 'ConnectionType'),
-(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 'Guid', 'ID_SQLLog'),
-(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 'Guid', 'ID_Employee'),
-(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 'String', 'Description'),
-(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 'DateTime', 'DateExecution'),
-(NEWID(), '5687e06a-9d81-464a-8dfc-7ac07a0d9b37', 'Guid', 'ID_Table'),
-(NEWID(), '5687e06a-9d81-464a-8dfc-7ac07a0d9b37', 'String', 'TableName'),
-(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 'Guid', 'ID_TableStructure'),
-(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 'Guid', 'ID_Table'),
-(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 'String', 'ColumnName'),
-(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 'String', 'ColumnType'),
-(NEWID(), 'ec95849b-ea79-4bec-917b-e0e33d0b0fc5', 'Guid', 'ID_Table'),
-(NEWID(), 'ec95849b-ea79-4bec-917b-e0e33d0b0fc5', 'Guid', 'ID_Position'),
-(NEWID(), 'ec95849b-ea79-4bec-917b-e0e33d0b0fc5', 'String', 'AccessType'),
-(NEWID(), 'aefa774a-5ad0-4281-a9ce-d8093287a08d', 'Guid', 'ID_Employee'),
-(NEWID(), 'aefa774a-5ad0-4281-a9ce-d8093287a08d', 'String', 'UserLogin'),
-(NEWID(), 'aefa774a-5ad0-4281-a9ce-d8093287a08d', 'String', 'UserPassword'),
-(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'Guid', 'ID_Contract'),
-(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'Guid', 'ID_RawMaterial'),
-(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'Guid', 'ID_MeasurementUnit'),
-(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'Guid', 'ID_StatusContract'),
-(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'DateTime', 'ManufactureDate'),
-(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'int', 'Count'),
-(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 'int', 'PricePerCount'),
-(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 'Guid', 'ID_StockRawMaterial'),
-(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 'Guid', 'ID_RawMaterial'),
-(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 'Guid', 'ID_MeasurementUnit'),
-(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 'DateTime', 'ManufactureDate'),
-(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 'int', 'Count'),
-(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 'int', 'PricePerGramm'),
-(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 'Guid', 'ID_RawMaterial'),
-(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 'String', 'RawMaterialName'),
-(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 'String', 'Description'),
-(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 'DateTime', 'ExpirationDate'),
-(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 'int', 'MinTemperature'),
-(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 'int', 'MaxTemperature'),
-(NEWID(), '99515ff2-b2b6-459e-9497-5217e8689573', 'Guid', 'ID_MeasurementUnit'),
-(NEWID(), '99515ff2-b2b6-459e-9497-5217e8689573', 'String', 'NameMeasurementUnit'),
-(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 'Guid', 'ID_Product'),
-(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 'Guid', 'ID_RawMaterial'),
-(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 'Guid', 'ID_MeasurementUnit'),
-(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 'int', 'Count'),
-(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 'Guid', 'ID_Merchandise'),
-(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 'Guid', 'ID_Product'),
-(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 'Guid', 'ID_RealEstate'),
-(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 'int', 'Weight'),
-(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 'int', 'PricePerGramm'),
-(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 'DateTime', 'ManufactureDate'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'Guide', 'ID_Product'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'ProductName'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'Description'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'Recipe'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'Photo'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'CalorieContent'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'Proteins'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'Fats'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'Carbohydrates'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'MinTemperature'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'MaxTemperature'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'DateTime', 'ExpirationDate');
+(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 1, 'Guid', 'ID_RealEstateType'),
+(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 0, 'String', 'TypeName'),
+(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 0, 'String', 'Description'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 1, 'Guid', 'ID_RealEstate'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'Guid', 'ID_RealEstateType'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'NameRealEstate'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'Country'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'Region'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'City'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'Street'),
+(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'BuildingNumber'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 1, 'Guid', 'ID_RealEstateContact'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'Guid', 'ID_RealEstate'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'Guid', 'ID_Departament'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'String', 'Telephone'),
+(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'String', 'Email'),
+(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 1, 'Guid', 'ID_Departament'),
+(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 0, 'Guid', 'NameDepartament'),
+(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 0, 'String', 'Description'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 1, 'Guid', 'ID_Employee'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'Guid', 'ID_Position'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'Guid', 'ID_RealEstate'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'String', 'FirstName'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'String', 'SecondName'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'String', 'MiddleName'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'String', 'Telephone'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'String', 'Passport'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'String', 'IDK'),
+(NEWID(), 'a2120f90-3a60-4d4a-b353-e9b168ecaba7', 0, 'bool', 'IsEnabled'),
+(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 1, 'Guid', 'ID_EmployeeWorkLog'),
+(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 0, 'Guid', 'ID_Employee'),
+(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 0, 'DateTime', 'DateTimeStart'),
+(NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 0, 'DateTime', 'DateTimeEnd'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 1, 'Guid', 'ID_Position'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 0, 'String', 'NamePosition'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 0, 'String', 'Description'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 0, 'int', 'PaymentHrnPerHour'),
+(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 1, 'Guid', 'ID_StatusOrder'),
+(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 0, 'String', 'NameStatusOrder'),
+(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 1, 'Guid', 'ID_ConnectingString'),
+(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 0, 'String', 'DataSource'),
+(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 0, 'String', 'InitialCatalog'),
+(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 0, 'String', 'UserId'),
+(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 0, 'String', 'UserPassword'),
+(NEWID(), 'a723e6a4-d1a7-4f82-8acb-552b3623d1c7', 0, 'String', 'ConnectionType'),
+(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 1, 'Guid', 'ID_SQLLog'),
+(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 0, 'Guid', 'ID_Employee'),
+(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 0, 'String', 'Description'),
+(NEWID(), 'a82c98e0-711c-44c4-bf22-1093f86426b3', 0, 'DateTime', 'DateExecution'),
+(NEWID(), '5687e06a-9d81-464a-8dfc-7ac07a0d9b37', 1, 'Guid', 'ID_Table'),
+(NEWID(), '5687e06a-9d81-464a-8dfc-7ac07a0d9b37', 0, 'String', 'TableName'),
+(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 1, 'Guid', 'ID_TableStructure'),
+(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 0, 'Guid', 'ID_Table'),
+(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 0, 'String', 'ColumnName'),
+(NEWID(), 'cb48e617-dfed-44ee-b734-af6ba82fc212', 0, 'String', 'ColumnType'),
+(NEWID(), 'aefa774a-5ad0-4281-a9ce-d8093287a08d', 1, 'Guid', 'ID_Employee'),
+(NEWID(), 'aefa774a-5ad0-4281-a9ce-d8093287a08d', 0, 'String', 'UserLogin'),
+(NEWID(), 'aefa774a-5ad0-4281-a9ce-d8093287a08d', 0, 'String', 'UserPassword'),
+(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 1, 'Guid', 'ID_Contract'),
+(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 0, 'Guid', 'ID_RawMaterial'),
+(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 0, 'Guid', 'ID_MeasurementUnit'),
+(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 0, 'Guid', 'ID_StatusContract'),
+(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 0, 'DateTime', 'ManufactureDate'),
+(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 0, 'int', 'Count'),
+(NEWID(), '8ad8a2ed-e206-41f0-bca4-aa34fe0e2eea', 0, 'int', 'PricePerCount'),
+(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 1, 'Guid', 'ID_StockRawMaterial'),
+(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 0, 'Guid', 'ID_RawMaterial'),
+(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 0, 'Guid', 'ID_MeasurementUnit'),
+(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 0, 'DateTime', 'ManufactureDate'),
+(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 0, 'int', 'Count'),
+(NEWID(), '1a70ebac-6165-4c53-aead-6171453f75e7', 0, 'int', 'PricePerGramm'),
+(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 1, 'Guid', 'ID_RawMaterial'),
+(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 0, 'String', 'RawMaterialName'),
+(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 0, 'String', 'Description'),
+(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 0, 'DateTime', 'ExpirationDate'),
+(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 0, 'int', 'MinTemperature'),
+(NEWID(), '1ca661c2-c390-4619-91f2-704822cfc3ce', 0, 'int', 'MaxTemperature'),
+(NEWID(), '99515ff2-b2b6-459e-9497-5217e8689573', 1, 'Guid', 'ID_MeasurementUnit'),
+(NEWID(), '99515ff2-b2b6-459e-9497-5217e8689573', 0, 'String', 'NameMeasurementUnit'),
+(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 1, 'Guid', 'ID_Product'),
+(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 1, 'Guid', 'ID_RawMaterial'),
+(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 0, 'Guid', 'ID_MeasurementUnit'),
+(NEWID(), 'f8004800-d2fe-49a6-bf68-a2e1e969c0f8', 0, 'int', 'Count'),
+(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 1, 'Guid', 'ID_Merchandise'),
+(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 0, 'Guid', 'ID_Product'),
+(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 0, 'Guid', 'ID_RealEstate'),
+(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 0, 'int', 'Weight'),
+(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 0, 'int', 'PricePerGramm'),
+(NEWID(), '59e656db-ac03-416d-b2bf-145674aab0d4', 0, 'DateTime', 'ManufactureDate'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 1, 'Guide', 'ID_Product'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'ProductName'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'Description'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'Recipe'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'Photo'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'CalorieContent'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'Proteins'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'Fats'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'Carbohydrates'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'MinTemperature'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'MaxTemperature'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'DateTime', 'ExpirationDate');
 GO
 
 
