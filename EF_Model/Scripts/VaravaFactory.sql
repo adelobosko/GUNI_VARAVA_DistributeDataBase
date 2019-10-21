@@ -961,7 +961,7 @@ VALUES
 (NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 'Guid', 'ID_Employee'),
 (NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 'DateTime', 'DateTimeStart'),
 (NEWID(), 'cebc6bb4-1626-438a-8c27-595fcd62373e', 'DateTime', 'DateTimeEnd'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'Guid', 'DateTimeEnd'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'Guid', 'ID_Position'),
 (NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'NamePosition'),
 (NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'Description'),
 (NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'int', 'PaymentHrnPerHour'),
