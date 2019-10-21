@@ -10,10 +10,12 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 using EF_Model;
 using Microsoft.Win32;
 using static EF_Model.DistributedDataBaseContainer;
+using Control = System.Windows.Forms.Control;
 
 namespace MainOffice
 {
@@ -50,6 +52,33 @@ namespace MainOffice
             }
 
             return rControl;
+        }
+
+        private static DataGridView CreateDataGridView(string uniqueName)
+        {
+            var dataGridView = new DataGridView
+            {
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                AllowUserToResizeColumns = false,
+                AllowUserToResizeRows = false,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader,
+                AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders,
+                ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None,
+                ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
+                ColumnHeadersVisible = true,
+                Dock = DockStyle.Fill,
+                ReadOnly = true,
+                Location = new Point(240, 32),
+                MultiSelect = false,
+                Name = $"{uniqueName}DataGridView",
+                RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None,
+                RowHeadersVisible = false,
+                RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing,
+                Size = new Size(240, 175)
+            };
+
+            return dataGridView;
         }
 
 
@@ -97,8 +126,61 @@ namespace MainOffice
             textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             listBox.Items.AddRange(tables);
-
             horizontalSplitContainer.Orientation = Orientation.Horizontal;
+
+            listBox.SelectedIndexChanged += (sender, args) =>
+            {
+                if (listBox.SelectedIndex < 0) return;
+
+                horizontalSplitContainer.Panel1.Controls.Clear();
+                horizontalSplitContainer.Panel2.Controls.Clear();
+
+                var tableName = listBox.Items[listBox.SelectedIndex].ToString();
+
+                //var table = GetPropertyValue<DbSet>(typeof(DistributedDataBaseContainer), tableName);
+
+                var structures = database.TableStructures.Where(s => s.DataBaseTable.TableName == "tableName").Select(s => s);
+
+                dynamic table = DataBinder.Eval(database, $"{tableName}");
+
+
+                var dataGridView = CreateDataGridView($"{tabPage.Text}_{tableName}");
+
+                foreach (var structure in structures)
+                {
+                    switch (structure.ColumnType)
+                    {
+                        case "Guid":
+                        {
+
+                            break;
+                        }
+                        case "String":
+                        {
+                            break;
+                        }
+                        case "int":
+                        {
+
+                            break;
+                        }
+                        case "bool":
+                        {
+                            
+                            break;
+                        }
+                        default:
+                        {
+                            MessageBox.Show(structure.ColumnType);
+                            break;
+                        }
+                    }
+                    
+                    DataBinder.Eval(table, $"{structure.ColumnName}");
+                }
+
+                horizontalSplitContainer.Panel1.Controls.Add(dataGridView);
+            };
 
 
             splitContainer.Dock = DockStyle.Fill;
@@ -114,9 +196,9 @@ namespace MainOffice
 
         private void openDataBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var toolStripmenuItem = (ToolStripMenuItem)sender;
+            var toolStripMenuItem = (ToolStripMenuItem)sender;
 
-            Enum.TryParse(toolStripmenuItem.Name.Replace("ToolStripMenuItem", ""),
+            Enum.TryParse(toolStripMenuItem.Name.Replace("ToolStripMenuItem", ""),
                 true,
                 out DataBaseType dbName);
 
@@ -150,9 +232,8 @@ namespace MainOffice
 
             foreach (var control in selectedTab.Controls)
             {
-                if (control is SplitContainer)
+                if (control is SplitContainer container)
                 {
-                    var container = control as SplitContainer;
                     container.Panel1.Controls.Clear();
                     container.Panel2.Controls.Clear();
                     container.Dispose();
