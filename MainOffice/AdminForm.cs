@@ -82,6 +82,80 @@ namespace MainOffice
         }
 
 
+        private static string GenerateControlName(Type type, params string[] parts)
+        {
+            var controlName = "";
+
+            if (parts.Length == 0)
+                return type.Name;
+
+            for (var i = 0; i < parts.Length - 1; i++)
+            {
+                controlName += $"{parts[i]}_";
+            }
+
+            return controlName + parts[parts.Length - 1] + type.Name;
+        }
+
+
+        private static Control CreateColumnControlByType(string columnName, string type, bool isPrimary)
+        {
+            var panel = new Panel();
+            panel.Name = GenerateControlName(panel.GetType(), columnName);
+            panel.Dock = DockStyle.Top;
+
+            switch (type)
+            {
+                case "DateTime":
+                case "int":
+                case "String":
+                case "Guide":
+                case "Guid":
+                {
+                    var dataLabel = new Label();
+                    var dataTextBox = new TextBox();
+                    dataLabel.Name = GenerateControlName(dataLabel.GetType(), columnName);
+                    dataTextBox.Name = GenerateControlName(dataTextBox.GetType(), columnName);
+                    dataLabel.AutoSize = true;
+
+                    dataLabel.Dock = DockStyle.Left;
+                    dataTextBox.Dock = DockStyle.Fill;
+
+                    dataTextBox.ReadOnly = isPrimary;
+
+
+                    dataLabel.Text = $"{columnName}:";
+
+
+                    panel.Controls.Add(dataTextBox);
+                    panel.Controls.Add(dataLabel);
+                    break;
+                }
+                case "bool":
+                {
+                    var dataCheckBox = new CheckBox();
+                    dataCheckBox.Name = GenerateControlName(dataCheckBox.GetType(), columnName);
+                    dataCheckBox.AutoSize = true;
+                    dataCheckBox.Text = columnName;
+                    dataCheckBox.Dock = DockStyle.Left;
+
+                    panel.Controls.Add(dataCheckBox);
+                    break;
+                }
+                default:
+                {
+                    var str = $"{type}\r\nUnknown column type";
+                    MessageBox.Show(str);
+                    throw new Exception(str);
+                }
+            }
+
+
+            panel.Height = 30;
+            return panel;
+        }
+
+
         private static TabPage TabPageCtreatator(DataBaseType dbName)
         {
             var tabPage = new TabPage(Enum.GetName(typeof(DataBaseType), dbName));
@@ -141,45 +215,114 @@ namespace MainOffice
                 var dataGridView = CreateDataGridView($"{tabPage.Text}_{tableName}");
                 var rowIndex = 0;
 
-                dataGridView.ColumnCount = structures.Count();
+                dataGridView.Columns.Clear();
                 var addButton = new Button();
                 var updateButton = new Button();
                 var deleteButton = new Button();
                 addButton.Dock = DockStyle.Top;
                 updateButton.Dock = DockStyle.Top;
                 deleteButton.Dock = DockStyle.Top;
+                addButton.Text = "Add";
+                addButton.Name = $"{tabPage.Text}_{tableName}_{addButton.Text}Button";
+                deleteButton.Text = "Del";
+                deleteButton.Name = $"{tabPage.Text}_{tableName}_{deleteButton.Text}Button";
+                updateButton.Text = "Upd";
+                updateButton.Name = $"{tabPage.Text}_{tableName}_{updateButton.Text}Button";
 
-
-
-                for (var i = 0; i < structures.Count(); i++)
-                {
-                    if (!dataGridView.Columns.Contains(structures[i].ColumnName))
-                    {
-                        dataGridView.Columns[i].HeaderText = structures[i].ColumnName;
-                        var dataLabel = new Label();
-                        var dataTextBox = new TextBox();
-                        dataLabel.Dock = DockStyle.Top;
-                        dataTextBox.Dock = DockStyle.Top;
-
-                        dataLabel.Name = $"{tabPage.Text}_{tableName}_{structures[i].ColumnName}_{structures[i].ColumnType}Label";
-                        dataTextBox.Name = $"{tabPage.Text}_{tableName}_{structures[i].ColumnName}_{structures[i].ColumnType}TextBox";
-
-                        dataLabel.Text = $"{structures[i].ColumnName}";
-
-                        horizontalSplitContainer.Panel2.Controls.Add(dataTextBox);
-                        horizontalSplitContainer.Panel2.Controls.Add(dataLabel);
-                    }
-                }
 
                 horizontalSplitContainer.Panel2.Controls.Add(deleteButton);
                 horizontalSplitContainer.Panel2.Controls.Add(updateButton);
                 horizontalSplitContainer.Panel2.Controls.Add(addButton);
 
+                for (var i = 0; i < structures.Count(); i++)
+                {
+                    dataGridView.Columns.Add(structures[i].ColumnName, structures[i].ColumnName);
+                    var control = CreateColumnControlByType(structures[i].ColumnName, structures[i].ColumnType, structures[i].IsPrimary);
+                    horizontalSplitContainer.Panel2.Controls.Add(control);
+                    dataGridView.Columns[i].HeaderText = structures[i].ColumnName;
+                    horizontalSplitContainer.Panel2.AutoScroll = false;
+                    horizontalSplitContainer.Panel2.AutoScroll = true;
+                }
+
                 addButton.Click += (o, eventArgs) =>
                 {
+                    var linqCommand = "";
+
+                    /* for (var i = 0; i < structures.Count(); i++)
+                     {
+
+                         switch (structures[i].ColumnType)
+                         {
+                             case "DateTime":
+                             case "int":
+                             case "String":
+                             case "Guide":
+                             case "Guid":
+                             {
+                                 var resControl = horizontalSplitContainer.Panel2.Controls.Find(GenerateControlName(typeof(TextBox), structures[i].ColumnName), true)[0] as TextBox;
+
+                                 linqCommand += ""
+                                 resControl.Text = dataGridView[structures[i].ColumnName, eventArgs.RowIndex].Value.ToString();
+                                 break;
+                             }
+                             case "bool":
+                             {
+                                 var resControl = horizontalSplitContainer.Panel2.Controls.Find(GenerateControlName(typeof(CheckBox), structures[i].ColumnName), true)[0] as CheckBox;
+
+                                 resControl.Checked =
+                                     Convert.ToBoolean(dataGridView[structures[i].ColumnName, eventArgs.RowIndex].Value.ToString());
+                                 break;
+                             }
+                         }
+                     }*/
+                    /*switch (tableName)
+                    {
+                        case "Users":
+                        {
+
+                        }
+                    }
+                    database.SaveChanges();*/
+                };
+                deleteButton.Click += (o, eventArgs) =>
+                {
+                    database.SaveChanges();
                     /*
-                     *
+                     * *
                      */
+
+                };
+
+
+                dataGridView.CellClick += (o, eventArgs) =>
+                {
+                    if(eventArgs.RowIndex < 0) return;
+                    
+                    for (var i = 0; i < structures.Count(); i++)
+                    {
+                        switch (structures[i].ColumnType)
+                        {
+                            case "DateTime":
+                            case "int":
+                            case "String":
+                            case "Guide":
+                            case "Guid":
+                            {
+                                var resControl = horizontalSplitContainer.Panel2.Controls.Find(GenerateControlName(typeof(TextBox), structures[i].ColumnName), true)[0] as TextBox;
+
+                                resControl.Text = dataGridView[structures[i].ColumnName, eventArgs.RowIndex].Value.ToString();
+                                break;
+                            }
+                            case "bool":
+                            {
+                                var resControl = horizontalSplitContainer.Panel2.Controls.Find(GenerateControlName(typeof(CheckBox), structures[i].ColumnName), true)[0] as CheckBox;
+
+                                resControl.Checked =
+                                    Convert.ToBoolean(dataGridView[structures[i].ColumnName, eventArgs.RowIndex].Value.ToString());
+                                break;
+                            }
+                        }
+                    }
                 };
 
 
