@@ -730,7 +730,7 @@ EXEC sp_addlinkedserver 'Global', '', 'SQLNCLI', '93.74.213.211,31340'
 GO
 EXEC sp_addlinkedsrvlogin 'Global', 'FALSE', NULL, 'sa', '2584744'
 GO
-EXEC sp_addlinkedserver 'Local', '', 'SQLNCLI', '192.168.1.100,31340'
+EXEC sp_addlinkedserver 'Local', '', 'SQLNCLI', '192.168.1.31,31340'
 GO
 EXEC sp_addlinkedsrvlogin 'Local', 'FALSE', NULL, 'sa', '2584744'
 GO
@@ -746,10 +746,10 @@ VALUES
 (NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Local'),
 (NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Global'),
 (NEWID(), '127.0.0.1,31340', 'VaravaFactory', 'sa', '2584744', 'Host'),
-(NEWID(), '192.168.1.100,31340', 'VaravaFactory', 'sa', '2584744', 'Local'),
+(NEWID(), '192.168.1.31,31340', 'VaravaFactory', 'sa', '2584744', 'Local'),
 (NEWID(), '93.74.213.211,31340', 'VaravaFactory', 'sa', '2584744', 'Global'),
 (NEWID(), '127.0.0.1,31340', 'VaravaMainOffice', 'sa', '2584744', 'Host'),
-(NEWID(), '192.168.1.100,31340', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
+(NEWID(), '192.168.1.31,31340', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
 (NEWID(), '93.74.213.211,31340', 'VaravaMainOffice', 'sa', '2584744', 'Global');
 GO
 
