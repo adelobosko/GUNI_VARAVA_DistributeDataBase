@@ -723,12 +723,6 @@ ON [dbo].[Merchandises]
     ([ID_RealEstate]);
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ProductMerchandise'
-CREATE INDEX [IX_FK_ProductMerchandise]
-ON [dbo].[Merchandises]
-    ([ID_Product]);
-GO
-
 -- Creating foreign key on [ID_EmployeeSeller] in table 'CashRegisterAccesses'
 ALTER TABLE [dbo].[CashRegisterAccesses]
 ADD CONSTRAINT [FK_CashRegisterAccessEmployee]
