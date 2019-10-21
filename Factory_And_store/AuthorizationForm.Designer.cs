@@ -46,7 +46,7 @@
             this.loginStoreTextBox.Name = "loginStoreTextBox";
             this.loginStoreTextBox.Size = new System.Drawing.Size(205, 32);
             this.loginStoreTextBox.TabIndex = 0;
-            this.loginStoreTextBox.Text = "manager";
+            this.loginStoreTextBox.Text = "pat";
             // 
             // resultStoreLabel
             // 
@@ -55,9 +55,8 @@
             this.resultStoreLabel.ForeColor = System.Drawing.Color.Brown;
             this.resultStoreLabel.Location = new System.Drawing.Point(221, 245);
             this.resultStoreLabel.Name = "resultStoreLabel";
-            this.resultStoreLabel.Size = new System.Drawing.Size(72, 23);
+            this.resultStoreLabel.Size = new System.Drawing.Size(0, 23);
             this.resultStoreLabel.TabIndex = 2;
-            this.resultStoreLabel.Text = "label1";
             // 
             // errorStoreProvider
             // 
@@ -66,12 +65,12 @@
             // connectedStoreLabel
             // 
             this.connectedStoreLabel.AutoSize = true;
-            this.connectedStoreLabel.BackColor = System.Drawing.Color.Transparent;
-            this.connectedStoreLabel.Location = new System.Drawing.Point(221, 40);
+            this.connectedStoreLabel.BackColor = System.Drawing.Color.White;
+            this.connectedStoreLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.connectedStoreLabel.Location = new System.Drawing.Point(12, 9);
             this.connectedStoreLabel.Name = "connectedStoreLabel";
-            this.connectedStoreLabel.Size = new System.Drawing.Size(72, 23);
+            this.connectedStoreLabel.Size = new System.Drawing.Size(2, 25);
             this.connectedStoreLabel.TabIndex = 4;
-            this.connectedStoreLabel.Text = "label1";
             // 
             // passwordStoreTextBox
             // 
@@ -79,7 +78,7 @@
             this.passwordStoreTextBox.Name = "passwordStoreTextBox";
             this.passwordStoreTextBox.Size = new System.Drawing.Size(205, 32);
             this.passwordStoreTextBox.TabIndex = 1;
-            this.passwordStoreTextBox.Text = "pass1";
+            this.passwordStoreTextBox.Text = "pat32";
             this.passwordStoreTextBox.UseSystemPasswordChar = true;
             // 
             // enterStoreButton
@@ -96,6 +95,7 @@
             // 
             // AuthorizationForm
             // 
+            this.AcceptButton = this.enterStoreButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;

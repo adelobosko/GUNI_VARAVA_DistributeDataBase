@@ -1,0 +1,201 @@
+USE [VaravaStore]
+GO
+-- --------------------------------------------------
+-- RealEstateTypes
+-- --------------------------------------------------
+INSERT INTO [dbo].[RealEstateTypes]
+           ([ID_RealEstateType]
+           ,[TypeName]
+           ,[Description])
+     VALUES
+           ('7D5ECEF9-7F42-4E33-B933-61FC96AE4D4E'
+           ,'Store'
+           ,'Retail store, a shop where merchandise is sold')
+GO
+-- --------------------------------------------------
+-- RealEstates
+-- --------------------------------------------------
+INSERT INTO [dbo].[RealEstates]
+           ([ID_RealEstate]
+           ,[ID_RealEstateType]
+           ,[NameRealEstate]
+           ,[Country]
+           ,[Region]
+           ,[City]
+           ,[Street]
+           ,[BuildingNumber])
+     VALUES
+           ('bad27b32-30ea-4b6d-8ece-cd3859a51104'
+           ,'7D5ECEF9-7F42-4E33-B933-61FC96AE4D4E'
+           ,'The Center Crotchet Store'
+           ,'Ukraine'
+           ,'Kievskaia'
+           ,'Kiev'
+           ,'Liva Tolstogo'
+           ,'10')
+GO
+-- --------------------------------------------------
+-- Positions
+-- --------------------------------------------------
+INSERT INTO [dbo].[Positions]
+           ([ID_Position]
+           ,[NamePosition]
+           ,[PaymentHrnPerHour]
+           ,[Description])
+     VALUES
+           ('59a77f9b-0366-4878-9580-11a90578bea4'
+           ,'StoreManager'
+           ,60
+           ,'Organizate store work')
+GO
+
+INSERT INTO [dbo].[Positions]
+           ([ID_Position]
+           ,[NamePosition]
+           ,[PaymentHrnPerHour]
+           ,[Description])
+     VALUES
+           ('465d117f-cbf9-4bbb-88c5-c085f8922dc1'
+           ,'Casher'
+           ,30
+           ,'Serve customers')
+GO
+-- --------------------------------------------------
+-- Employees
+-- --------------------------------------------------
+INSERT INTO [dbo].[Employees]
+           ([ID_Employee]
+           ,[ID_Position]
+           ,[ID_RealEstate]
+           ,[FirstName]
+           ,[SecondName]
+           ,[MiddleName]
+           ,[Telephone]
+           ,[Passport]
+           ,[IDK]
+           ,[IsEnabled])
+     VALUES
+           ('4a42ab2b-7d91-4bdf-aa0b-dff20e995f4b'
+           ,'59A77F9B-0366-4878-9580-11A90578BEA4'
+           ,'BAD27B32-30EA-4B6D-8ECE-CD3859A51104'
+           ,'Patricia'
+           ,'Chambers'
+           ,'Conley'
+           ,'+380685693320'
+           ,'BI259844'
+           ,'8799632625'
+           ,1)
+GO
+INSERT INTO [dbo].[Employees]
+           ([ID_Employee]
+           ,[ID_Position]
+           ,[ID_RealEstate]
+           ,[FirstName]
+           ,[SecondName]
+           ,[MiddleName]
+           ,[Telephone]
+           ,[Passport]
+           ,[IDK]
+           ,[IsEnabled])
+     VALUES
+           ('27dd6db4-848b-4796-9698-f3220f50b6cc'
+           ,'59A77F9B-0366-4878-9580-11A90578BEA4'
+           ,'BAD27B32-30EA-4B6D-8ECE-CD3859A51104'
+           ,'William'
+           ,'Walker'
+           ,'Bruce'
+           ,'+380912547863'
+           ,'CO249873'
+           ,'1259876348'
+           ,1)
+GO
+INSERT INTO [dbo].[Employees]
+           ([ID_Employee]
+           ,[ID_Position]
+           ,[ID_RealEstate]
+           ,[FirstName]
+           ,[SecondName]
+           ,[MiddleName]
+           ,[Telephone]
+           ,[Passport]
+           ,[IDK]
+           ,[IsEnabled])
+     VALUES
+           ('3b4b7f16-8ca3-4fc4-8e5a-8b4c62d8c38d'
+           ,'465D117F-CBF9-4BBB-88C5-C085F8922DC1'
+           ,'BAD27B32-30EA-4B6D-8ECE-CD3859A51104'
+           ,'Anabel'
+           ,'Stephens'
+           ,'Richards'
+           ,'+380912547854'
+           ,'CT254896'
+           ,'2549823486'
+           ,1)
+GO
+INSERT INTO [dbo].[Employees]
+           ([ID_Employee]
+           ,[ID_Position]
+           ,[ID_RealEstate]
+           ,[FirstName]
+           ,[SecondName]
+           ,[MiddleName]
+           ,[Telephone]
+           ,[Passport]
+           ,[IDK]
+           ,[IsEnabled])
+     VALUES
+           ('2b5da375-7ab1-46ba-8b57-c5668c76ea53'
+           ,'465D117F-CBF9-4BBB-88C5-C085F8922DC1'
+           ,'BAD27B32-30EA-4B6D-8ECE-CD3859A51104'
+           ,'Oliver'
+           ,'Charles'
+           ,'Richardson'
+           ,'+380912345120'
+           ,'CT256421'
+           ,'4589562556'
+           ,1)
+GO
+INSERT INTO [dbo].[Employees]
+           ([ID_Employee]
+           ,[ID_Position]
+           ,[ID_RealEstate]
+           ,[FirstName]
+           ,[SecondName]
+           ,[MiddleName]
+           ,[Telephone]
+           ,[Passport]
+           ,[IDK]
+           ,[IsEnabled])
+     VALUES
+           ('fb8f47b0-ff16-440b-9273-c29f8376529b'
+           ,'465D117F-CBF9-4BBB-88C5-C085F8922DC1'
+           ,'BAD27B32-30EA-4B6D-8ECE-CD3859A51104'
+           ,'Peter'
+           ,'Kelly'
+           ,'Hines'
+           ,'+380912362771'
+           ,'BP598703'
+           ,'0123620179'
+           ,1)
+GO
+-- --------------------------------------------------
+-- Employees
+-- --------------------------------------------------
+INSERT INTO [dbo].[Users]
+           ([UserLogin]
+           ,[ID_Employee]
+           ,[UserPassword])
+     VALUES
+           ('pat'
+           ,'4a42ab2b-7d91-4bdf-aa0b-dff20e995f4b'
+           ,'pat32')
+GO
+INSERT INTO [dbo].[Users]
+           ([UserLogin]
+           ,[ID_Employee]
+           ,[UserPassword])
+     VALUES
+           ('wil'
+           ,'27dd6db4-848b-4796-9698-f3220f50b6cc'
+           ,'wil100')
+GO
