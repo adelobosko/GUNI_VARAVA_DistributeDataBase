@@ -102,7 +102,7 @@ namespace MainOffice
             listBox.Dock = DockStyle.Fill;
             horizontalSplitContainer.Dock = DockStyle.Fill;
 
-
+            
 
             var database = GetPropertyValue<DistributedDataBaseContainer>(typeof(GlobalHelper), tabPage.Text);
             var tables = database.DataBaseTables.Select(t => t.TableName).ToArray();
@@ -137,47 +137,31 @@ namespace MainOffice
 
                 var tableName = listBox.Items[listBox.SelectedIndex].ToString();
 
-                //var table = GetPropertyValue<DbSet>(typeof(DistributedDataBaseContainer), tableName);
+                var structures = database.TableStructures.Where(s => s.DataBaseTable.TableName == tableName).Select(s => s).ToList();
 
-                var structures = database.TableStructures.Where(s => s.DataBaseTable.TableName == "tableName").Select(s => s);
+                
 
+                //SqlQuery<Phone>("SELECT * FROM Phones WHERE Name LIKE @name",param)
                 dynamic table = DataBinder.Eval(database, $"{tableName}");
 
+                
+               
 
                 var dataGridView = CreateDataGridView($"{tabPage.Text}_{tableName}");
 
-                foreach (var structure in structures)
+
+                foreach (var row in table)
                 {
-                    switch (structure.ColumnType)
+                    var str = "";
+                    for (var i = 0; i < structures.Count(); i++)
                     {
-                        case "Guid":
-                        {
-
-                            break;
-                        }
-                        case "String":
-                        {
-                            break;
-                        }
-                        case "int":
-                        {
-
-                            break;
-                        }
-                        case "bool":
-                        {
-                            
-                            break;
-                        }
-                        default:
-                        {
-                            MessageBox.Show(structure.ColumnType);
-                            break;
-                        }
+                        str += $"{structures[i].ColumnName} : {DataBinder.Eval(row, structures[i].ColumnName)} : {structures[i].ColumnType}\r\n";
                     }
-                    
-                    DataBinder.Eval(table, $"{structure.ColumnName}");
+
+                    MessageBox.Show(str);
                 }
+
+                DataBinder.Eval(database, tableName);
 
                 horizontalSplitContainer.Panel1.Controls.Add(dataGridView);
             };

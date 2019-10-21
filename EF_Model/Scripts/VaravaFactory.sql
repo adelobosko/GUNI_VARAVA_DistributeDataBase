@@ -889,15 +889,15 @@ GO
 -- Creating default data
 INSERT INTO ConnectingStrings (ID_ConnectingString, DataSource, InitialCatalog, UserId, UserPassword, ConnectionType)
 VALUES 
-(NEWID(), '127.0.0.1,31340', 'VaravaStore', 'sa', '2584744', 'Host'),
-(NEWID(), '192.168.1.100,31340', 'VaravaStore', 'sa', '2584744', 'Local'),
-(NEWID(), '93.74.213.211,31340', 'VaravaStore', 'sa', '2584744', 'Global'),
+(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Host'),
+(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Local'),
+(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Global'),
 (NEWID(), '127.0.0.1,31340', 'VaravaFactory', 'sa', '2584744', 'Host'),
 (NEWID(), '192.168.1.100,31340', 'VaravaFactory', 'sa', '2584744', 'Local'),
 (NEWID(), '93.74.213.211,31340', 'VaravaFactory', 'sa', '2584744', 'Global'),
-(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Host'),
-(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
-(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Global');
+(NEWID(), '127.0.0.1,31340', 'VaravaMainOffice', 'sa', '2584744', 'Host'),
+(NEWID(), '192.168.1.100,31340', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
+(NEWID(), '93.74.213.211,31340', 'VaravaMainOffice', 'sa', '2584744', 'Global');
 GO
 
 

@@ -35,7 +35,7 @@ namespace MainOffice
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DomesticDataBase.DataSource = "(localdb)\\MSSQLLocalDB";
+            DomesticDataBase.DataSource = "127.0.0.1,31340";
             DomesticDataBase.InitialCatalog = "VaravaMainOffice";
             DomesticDataBase.UserId = "sa";
             DomesticDataBase.UserPassword = "2584744";

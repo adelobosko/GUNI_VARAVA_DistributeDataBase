@@ -300,6 +300,23 @@ CREATE TABLE [dbo].[Merchandises] (
 );
 GO
 
+-- Creating table 'Products'
+CREATE TABLE [dbo].[Products] (
+    [ID_Product] uniqueidentifier  NOT NULL,
+    [ProductName] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [Recipe] nvarchar(max)  NULL,
+    [CalorieContent] int  NULL,
+    [Proteins] int  NULL,
+    [Fats] int  NULL,
+    [Carbohydrates] int  NULL,
+    [ExpirationDate] datetime  NOT NULL,
+    [MinTemperature] int  NULL,
+    [MaxTemperature] int  NULL,
+    [Photo] nvarchar(max)  NULL
+);
+GO
+
 -- Creating table 'Employees'
 CREATE TABLE [dbo].[Employees] (
     [ID_Employee] uniqueidentifier  NOT NULL,
@@ -511,6 +528,12 @@ ADD CONSTRAINT [PK_EmployeeWorkLogs]
     PRIMARY KEY CLUSTERED ([ID_EmployeeWorkLog] ASC);
 GO
 
+-- Creating primary key on [ID_Product] in table 'Products'
+ALTER TABLE [dbo].[Products]
+ADD CONSTRAINT [PK_Products]
+    PRIMARY KEY CLUSTERED ([ID_Product] ASC);
+GO
+
 -- Creating primary key on [ID_Employee] in table 'Users'
 ALTER TABLE [dbo].[Users]
 ADD CONSTRAINT [PK_Users]
@@ -662,6 +685,21 @@ ADD CONSTRAINT [FK_MerchandisePurchase]
     REFERENCES [dbo].[Merchandises]
         ([ID_Merchandise])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_Product] in table 'Merchandises'
+ALTER TABLE [dbo].[Merchandises]
+ADD CONSTRAINT [FK_ProductMerchandise]
+    FOREIGN KEY ([ID_Product])
+    REFERENCES [dbo].[Products]
+        ([ID_Product])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProductMerchandise'
+CREATE INDEX [IX_FK_ProductMerchandise]
+ON [dbo].[Merchandises]
+    ([ID_Product]);
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MerchandisePurchase'
@@ -995,15 +1033,15 @@ GO
 -- Creating default data
 INSERT INTO ConnectingStrings (ID_ConnectingString, DataSource, InitialCatalog, UserId, UserPassword, ConnectionType)
 VALUES 
-(NEWID(), '127.0.0.1,31340', 'VaravaStore', 'sa', '2584744', 'Host'),
-(NEWID(), '192.168.1.100,31340', 'VaravaStore', 'sa', '2584744', 'Local'),
-(NEWID(), '93.74.213.211,31340', 'VaravaStore', 'sa', '2584744', 'Global'),
+(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Host'),
+(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Local'),
+(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaStore', 'sa', '2584744', 'Global'),
 (NEWID(), '127.0.0.1,31340', 'VaravaFactory', 'sa', '2584744', 'Host'),
 (NEWID(), '192.168.1.100,31340', 'VaravaFactory', 'sa', '2584744', 'Local'),
 (NEWID(), '93.74.213.211,31340', 'VaravaFactory', 'sa', '2584744', 'Global'),
-(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Host'),
-(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
-(NEWID(), '(localdb)\MSSQLLocalDB', 'VaravaMainOffice', 'sa', '2584744', 'Global');
+(NEWID(), '127.0.0.1,31340', 'VaravaMainOffice', 'sa', '2584744', 'Host'),
+(NEWID(), '192.168.1.100,31340', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
+(NEWID(), '93.74.213.211,31340', 'VaravaMainOffice', 'sa', '2584744', 'Global');
 GO
 
 
@@ -1015,6 +1053,9 @@ VALUES
 ('6a93815b-e291-411a-b457-78c3b01b6f84', 'Departaments'),
 ('83e709b5-cf67-4e6a-9572-73788563cd74', 'Positions'),
 ('39de7b41-1940-4547-9d6c-73de9e09d20b', 'StatusOrders'),
+
+
+('2f86402c-a36d-4744-bc55-006d135e9cac', 'Products'),
 
 ('bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'Merchandises'),
 ('d08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'Employees'),
@@ -1129,7 +1170,19 @@ VALUES
 (NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'DateTime', 'AcceptDate'),
 (NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'int', 'Weight'),
 (NEWID(), 'e22534aa-b217-4936-9ac1-83265f8d3e9f', 'Guid', 'ID_StoreOrder'),
-(NEWID(), 'e22534aa-b217-4936-9ac1-83265f8d3e9f', 'int', 'WeightOfLack');
+(NEWID(), 'e22534aa-b217-4936-9ac1-83265f8d3e9f', 'int', 'WeightOfLack'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'Guide', 'ID_Product'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'ProductName'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'Description'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'Recipe'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'String', 'Photo'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'CalorieContent'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'Proteins'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'Fats'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'Carbohydrates'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'MinTemperature'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'int', 'MaxTemperature'),
+(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 'DateTime', 'ExpirationDate');
 GO
 
 
