@@ -136,32 +136,41 @@ namespace MainOffice
                 horizontalSplitContainer.Panel2.Controls.Clear();
 
                 var tableName = listBox.Items[listBox.SelectedIndex].ToString();
-
                 var structures = database.TableStructures.Where(s => s.DataBaseTable.TableName == tableName).Select(s => s).ToList();
-
-                
-
-                //SqlQuery<Phone>("SELECT * FROM Phones WHERE Name LIKE @name",param)
-                dynamic table = DataBinder.Eval(database, $"{tableName}");
-
-                
-               
-
+                dynamic table = DataBinder.Eval(database, tableName);
                 var dataGridView = CreateDataGridView($"{tabPage.Text}_{tableName}");
+                var rowIndex = 0;
+
+                dataGridView.ColumnCount = structures.Count();
 
 
                 foreach (var row in table)
                 {
-                    var str = "";
+                    dataGridView.RowCount = rowIndex + 1;
                     for (var i = 0; i < structures.Count(); i++)
                     {
-                        str += $"{structures[i].ColumnName} : {DataBinder.Eval(row, structures[i].ColumnName)} : {structures[i].ColumnType}\r\n";
+                        if (!dataGridView.Columns.Contains(structures[i].ColumnName))
+                        {
+                            dataGridView.Columns[i].HeaderText = structures[i].ColumnName;
+                        }
+
+                        string obj = "";
+                        try
+                        {
+                            obj = DataBinder.Eval(row, structures[i].ColumnName).ToString();
+                        }
+                        catch
+                        {
+                            MessageBox.Show($"{structures[i].ColumnName} : {DataBinder.Eval(row, structures[i].ColumnName)}");
+                        }
+                        
+
+                        dataGridView[i, rowIndex].Value = obj;
                     }
 
-                    MessageBox.Show(str);
+                    rowIndex++;
                 }
-
-                DataBinder.Eval(database, tableName);
+                
 
                 horizontalSplitContainer.Panel1.Controls.Add(dataGridView);
             };
@@ -199,7 +208,9 @@ namespace MainOffice
                 return;
             }
 
-            adminTabControl.TabPages.Add(TabPageCtreatator(dbName));
+            var databaseTabPage = TabPageCtreatator(dbName);
+            adminTabControl.TabPages.Add(databaseTabPage);
+            adminTabControl.SelectTab(databaseTabPage);
         }
 
         private void closeActiveToolStripMenuItem_Click(object sender, EventArgs e)

@@ -829,7 +829,7 @@ VALUES
 (NEWID(), '4b082d0a-6aa4-411c-a7d3-0f41f933562d', 'Guid', 'ID_Employee'),
 (NEWID(), '4b082d0a-6aa4-411c-a7d3-0f41f933562d', 'DateTime', 'DateTimeStart'),
 (NEWID(), '4b082d0a-6aa4-411c-a7d3-0f41f933562d', 'DateTime', 'DateTimeEnd'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'Guid', 'DateTimeEnd'),
+(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'Guid', 'ID_Position'),
 (NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'NamePosition'),
 (NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'String', 'Description'),
 (NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 'int', 'PaymentHrnPerHour'),
