@@ -21,5 +21,14 @@ namespace Factory_And_store
         {
             GlobalHelper.AuthorizationForm.Show();
         }
+
+        private void setStartTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //visitEmployeeComboBox.Items.Clear();
+            //List<string> employeeList = new List<string> { };
+            //employeeList.Add(GlobalHelper.Store.Employees.Select(e1 => $"{e1.FirstName} {e1.SecondName} {e1.MiddleName}").ToString());
+
+            //visitEmployeeComboBox.Items.AddRange(eList);
+        }
     }
 }

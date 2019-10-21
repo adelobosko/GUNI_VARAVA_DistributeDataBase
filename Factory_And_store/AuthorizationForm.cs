@@ -40,22 +40,14 @@ namespace Factory_And_store
             DomesticDataBase.UserId = "sa";
             DomesticDataBase.UserPassword = "2584744";
 
-
             GlobalHelper.Store = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
 
+            //var tablesName = GlobalHelper.Store.DataBaseTables.Select(t => t.TableName).ToList();
+            //var res = GlobalHelper.Store.Positions.Select(i => i).ToList();
+            //MessageBox.Show(res.Count.ToString());
+            //MessageBox.Show(res[0].NamePosition);
 
-
-            var tablesName = GlobalHelper.Store.DataBaseTables.Select(t => t.TableName).ToList();
-
-            var res = GlobalHelper.Store.Positions.Select(i => i).ToList();
-            MessageBox.Show(res.Count.ToString());
-            MessageBox.Show(res[0].NamePosition);
-
-            connectedStoreLabel.Text = GlobalHelper.MainOffice.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
-
-            var connectionType = ConnectionType.Host;
-            GlobalHelper.Factory = GenerateConnection(DataBaseType.Factory, connectionType);
-            GlobalHelper.Store = GenerateConnection(DataBaseType.Store, connectionType);
+            connectedStoreLabel.Text = GlobalHelper.Store.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
         }
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
@@ -69,7 +61,7 @@ namespace Factory_And_store
 
         private static bool Authorization(string login, string password)
         {
-            var user = GlobalHelper.MainOffice.Users
+            var user = GlobalHelper.Store.Users
                 .FirstOrDefault(u => u.UserLogin == login && u.UserPassword == password);
 
             if (user == null)
@@ -95,9 +87,11 @@ namespace Factory_And_store
             passwordStoreTextBox.Text = "";
             GlobalHelper.AuthorizationForm = this;
 
-            if (GlobalHelper.User.Employee.Position.NamePosition == "Admin")
+            if (GlobalHelper.User.Employee.Position.NamePosition == "StoreManager")
             {
-                new StoreManagerForm().Show();
+                var s = new StoreManagerForm();
+                s.Show();
+                s.Text += " - Hello, " + GlobalHelper.User.Employee.FirstName;
             }
         }
     }
