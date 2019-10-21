@@ -62,7 +62,7 @@ namespace MainOffice
                 AllowUserToDeleteRows = false,
                 AllowUserToResizeColumns = false,
                 AllowUserToResizeRows = false,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells,
                 AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders,
                 ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None,
                 ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
@@ -87,7 +87,7 @@ namespace MainOffice
             var tabPage = new TabPage(Enum.GetName(typeof(DataBaseType), dbName));
             var splitContainer = new SplitContainer();
             var horizontalSplitContainer = new SplitContainer();
-            var splitWidth = 116;
+            var splitWidth = 30;
             var textBox = new TextBox();
             var listBox = new ListBox();
             var autoCompleteStringCollection = new AutoCompleteStringCollection();
@@ -102,7 +102,7 @@ namespace MainOffice
             listBox.Dock = DockStyle.Fill;
             horizontalSplitContainer.Dock = DockStyle.Fill;
 
-            
+
 
             var database = GetPropertyValue<DistributedDataBaseContainer>(typeof(GlobalHelper), tabPage.Text);
             var tables = database.DataBaseTables.Select(t => t.TableName).ToArray();
@@ -111,7 +111,7 @@ namespace MainOffice
             {
 
                 var databaseName = textBox.Name.Replace(textBox.GetType().Name, "");
-                
+
                 var admForm = FindControlParentForm(textBox);
 
                 var senderListBox = admForm.Controls.Find($"{databaseName}ListBox", true)[0] as ListBox;
@@ -142,6 +142,45 @@ namespace MainOffice
                 var rowIndex = 0;
 
                 dataGridView.ColumnCount = structures.Count();
+                var addButton = new Button();
+                var updateButton = new Button();
+                var deleteButton = new Button();
+                addButton.Dock = DockStyle.Top;
+                updateButton.Dock = DockStyle.Top;
+                deleteButton.Dock = DockStyle.Top;
+
+
+
+                for (var i = 0; i < structures.Count(); i++)
+                {
+                    if (!dataGridView.Columns.Contains(structures[i].ColumnName))
+                    {
+                        dataGridView.Columns[i].HeaderText = structures[i].ColumnName;
+                        var dataLabel = new Label();
+                        var dataTextBox = new TextBox();
+                        dataLabel.Dock = DockStyle.Top;
+                        dataTextBox.Dock = DockStyle.Top;
+
+                        dataLabel.Name = $"{tabPage.Text}_{tableName}_{structures[i].ColumnName}_{structures[i].ColumnType}Label";
+                        dataTextBox.Name = $"{tabPage.Text}_{tableName}_{structures[i].ColumnName}_{structures[i].ColumnType}TextBox";
+
+                        dataLabel.Text = $"{structures[i].ColumnName}";
+
+                        horizontalSplitContainer.Panel2.Controls.Add(dataTextBox);
+                        horizontalSplitContainer.Panel2.Controls.Add(dataLabel);
+                    }
+                }
+
+                horizontalSplitContainer.Panel2.Controls.Add(deleteButton);
+                horizontalSplitContainer.Panel2.Controls.Add(updateButton);
+                horizontalSplitContainer.Panel2.Controls.Add(addButton);
+
+                addButton.Click += (o, eventArgs) =>
+                {
+                    /*
+                     *
+                     */
+                };
 
 
                 foreach (var row in table)
@@ -149,28 +188,25 @@ namespace MainOffice
                     dataGridView.RowCount = rowIndex + 1;
                     for (var i = 0; i < structures.Count(); i++)
                     {
-                        if (!dataGridView.Columns.Contains(structures[i].ColumnName))
-                        {
-                            dataGridView.Columns[i].HeaderText = structures[i].ColumnName;
-                        }
-
-                        string obj = "";
+                        var obj = "";
                         try
                         {
                             obj = DataBinder.Eval(row, structures[i].ColumnName).ToString();
                         }
                         catch
                         {
-                            MessageBox.Show($"{structures[i].ColumnName} : {DataBinder.Eval(row, structures[i].ColumnName)}");
+                            MessageBox.Show($"{tableName} : {structures[i].ColumnName}\r\nERROR: Can not find column", "ERROR: Can not find column");
+
+                            obj = DataBinder.Eval(row, structures[i].ColumnName).ToString();
                         }
-                        
+
 
                         dataGridView[i, rowIndex].Value = obj;
                     }
 
                     rowIndex++;
                 }
-                
+
 
                 horizontalSplitContainer.Panel1.Controls.Add(dataGridView);
             };
@@ -178,12 +214,12 @@ namespace MainOffice
 
             splitContainer.Dock = DockStyle.Fill;
             splitContainer.Orientation = Orientation.Vertical;
-            splitContainer.SplitterDistance = splitWidth;
             splitContainer.Panel1.Controls.Add(listBox);
             splitContainer.Panel1.Controls.Add(textBox);
             splitContainer.Panel2.Controls.Add(horizontalSplitContainer);
             tabPage.Controls.Add(splitContainer);
 
+            splitContainer.SplitterDistance = splitWidth;
             return tabPage;
         }
 

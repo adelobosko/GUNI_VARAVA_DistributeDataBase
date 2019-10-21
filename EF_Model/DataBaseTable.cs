@@ -18,7 +18,6 @@ namespace EF_Model
         public DataBaseTable()
         {
             this.TableStructures = new HashSet<TableStructure>();
-            this.AccessTables = new HashSet<AccessTable>();
         }
     
         public System.Guid ID_Table { get; set; }
@@ -26,7 +25,5 @@ namespace EF_Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TableStructure> TableStructures { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccessTable> AccessTables { get; set; }
     }
 }

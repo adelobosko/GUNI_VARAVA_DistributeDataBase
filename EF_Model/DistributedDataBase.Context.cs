@@ -55,6 +55,5 @@ namespace EF_Model
         public virtual DbSet<ConnectingString> ConnectingStrings { get; set; }
         public virtual DbSet<DataBaseTable> DataBaseTables { get; set; }
         public virtual DbSet<TableStructure> TableStructures { get; set; }
-        public virtual DbSet<AccessTable> AccessTables { get; set; }
     }
 }

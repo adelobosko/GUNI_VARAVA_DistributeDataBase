@@ -51,9 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessTable.cs">
-      <DependentUpon>DistributedDataBase.tt</DependentUpon>
-    </Compile>
     <Compile Include="CashRegister.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
