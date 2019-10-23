@@ -134,12 +134,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProductStoreOrder]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_ProductStoreOrder];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EmployeeSQLLog]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SQLLogs] DROP CONSTRAINT [FK_EmployeeSQLLog];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DataBaseTableTableStructure]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TableStructures] DROP CONSTRAINT [FK_DataBaseTableTableStructure];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -223,17 +217,8 @@ GO
 IF OBJECT_ID(N'[dbo].[PerformedStoreOrders]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PerformedStoreOrders];
 GO
-IF OBJECT_ID(N'[dbo].[SQLLogs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SQLLogs];
-GO
 IF OBJECT_ID(N'[dbo].[ConnectingStrings]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ConnectingStrings];
-GO
-IF OBJECT_ID(N'[dbo].[DataBaseTables]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DataBaseTables];
-GO
-IF OBJECT_ID(N'[dbo].[TableStructures]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TableStructures];
 GO
 
 
@@ -301,7 +286,7 @@ CREATE TABLE [dbo].[Products] (
     [Proteins] int  NULL,
     [Fats] int  NULL,
     [Carbohydrates] int  NULL,
-    [ExpirationDate] datetime  NOT NULL,
+    [ExpirationDate] int  NOT NULL,
     [MinTemperature] int  NULL,
     [MaxTemperature] int  NULL,
     [Photo] nvarchar(max)  NULL
@@ -426,32 +411,6 @@ CREATE TABLE [dbo].[PerformedStoreOrders] (
     [ID_Carrier] uniqueidentifier  NOT NULL,
     [ShippingDate] datetime  NOT NULL,
     [Weight] int  NOT NULL
-);
-GO
-
--- Creating table 'SQLLogs'
-CREATE TABLE [dbo].[SQLLogs] (
-    [ID_SQLLog] uniqueidentifier  NOT NULL,
-    [ID_Employee] uniqueidentifier  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
-    [DateExecution] datetime  NOT NULL
-);
-GO
-
--- Creating table 'DataBaseTables'
-CREATE TABLE [dbo].[DataBaseTables] (
-    [ID_Table] uniqueidentifier  NOT NULL,
-    [TableName] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'TableStructures'
-CREATE TABLE [dbo].[TableStructures] (
-    [ID_Table] uniqueidentifier  NOT NULL,
-    [ColumnName] nvarchar(max)  NOT NULL,
-    [ColumnType] nvarchar(max)  NOT NULL,
-    [ID_TableStructure] uniqueidentifier  NOT NULL,
-    [IsPrimary] bit  NOT NULL
 );
 GO
 
@@ -583,23 +542,6 @@ ALTER TABLE [dbo].[PerformedStoreOrders]
 ADD CONSTRAINT [PK_PerformedStoreOrders]
     PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
 GO
-
--- Creating primary key on [ID_SQLLog] in table 'SQLLogs'
-ALTER TABLE [dbo].[SQLLogs]
-ADD CONSTRAINT [PK_SQLLogs]
-    PRIMARY KEY CLUSTERED ([ID_SQLLog] ASC);
-GO-- Creating primary key on [ID_Table] in table 'DataBaseTables'
-ALTER TABLE [dbo].[DataBaseTables]
-ADD CONSTRAINT [PK_DataBaseTables]
-    PRIMARY KEY CLUSTERED ([ID_Table] ASC);
-GO
-
--- Creating primary key on [ID_TableStructure] in table 'TableStructures'
-ALTER TABLE [dbo].[TableStructures]
-ADD CONSTRAINT [PK_TableStructures]
-    PRIMARY KEY CLUSTERED ([ID_TableStructure] ASC);
-GO
-
 
 -- Creating primary key on [ID_ConnectingString] in table 'ConnectingStrings'
 ALTER TABLE [dbo].[ConnectingStrings]
@@ -932,36 +874,6 @@ ADD CONSTRAINT [FK_StatusOrderStoreOrder]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ID_Employee] in table 'SQLLogs'
-ALTER TABLE [dbo].[SQLLogs]
-ADD CONSTRAINT [FK_EmployeeSQLLog]
-    FOREIGN KEY ([ID_Employee])
-    REFERENCES [dbo].[Employees]
-        ([ID_Employee])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeSQLLog'
-CREATE INDEX [IX_FK_EmployeeSQLLog]
-ON [dbo].[SQLLogs]
-    ([ID_Employee]);
-GO
-
--- Creating foreign key on [ID_Table] in table 'TableStructures'
-ALTER TABLE [dbo].[TableStructures]
-ADD CONSTRAINT [FK_DataBaseTableTableStructure]
-    FOREIGN KEY ([ID_Table])
-    REFERENCES [dbo].[DataBaseTables]
-        ([ID_Table])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_DataBaseTableTableStructure'
-CREATE INDEX [IX_FK_DataBaseTableTableStructure]
-ON [dbo].[TableStructures]
-    ([ID_Table]);
-GO
-
 -- Creating non-clustered index for FOREIGN KEY 'FK_StatusOrderStoreOrder'
 CREATE INDEX [IX_FK_StatusOrderStoreOrder]
 ON [dbo].[StoreOrders]
@@ -991,146 +903,6 @@ VALUES
 (NEWID(), '192.168.1.31,31340', 'VaravaMainOffice', 'sa', '2584744', 'Local'),
 (NEWID(), '93.74.213.211,31340', 'VaravaMainOffice', 'sa', '2584744', 'Global');
 GO
-
-
-INSERT INTO DataBaseTables (ID_Table, TableName)
-VALUES 
-('d701252b-618a-4123-9544-44a9a5233d9b', 'RealEstateTypes'),
-('99133287-1910-4e42-8db6-c3aa53a6fb11', 'RealEstates'),
-('751eec3e-33df-401f-9e2f-33c8615dd1c6', 'RealEstateContacts'),
-('6a93815b-e291-411a-b457-78c3b01b6f84', 'Departaments'),
-('83e709b5-cf67-4e6a-9572-73788563cd74', 'Positions'),
-('39de7b41-1940-4547-9d6c-73de9e09d20b', 'StatusOrders'),
-
-
-('2f86402c-a36d-4744-bc55-006d135e9cac', 'Products'),
-
-('bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 'Merchandises'),
-('d08eed5b-dfaf-457b-92bc-bd1ecf096b84', 'Employees'),
-('b8a98e35-2d50-4142-80cb-f7d8a67390dc', 'EmployeeWorkLogs'),
-('7d19c4b3-485e-4384-9ee4-299143277371', 'ConnectingStrings'),
-('57608aa4-8b31-4116-981a-952bf9983e73', 'SQLLogs'),
-('4aceeb3e-d8ea-45d0-adc3-e8628a567aa5', 'DataBaseTables'),
-('c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 'TableStructures'),
-('742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 'Users'),
-('0e1b9bfc-e347-463a-b017-eae50483c671', 'CashRegisters'),
-('0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 'CashRegisterOperations'),
-('8488e2f5-97f3-4d74-90c8-0704b8fda279', 'Purchases'),
-('3f34b2c4-facb-4c57-9654-59bc27135e27', 'CashRegisterAccesses'),
-('a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 'StoreOrders'),
-('b8d2c22d-b5e5-412e-83a9-10f30804c60f', 'MerchandiseAcceptanceLogs'),
-('e22534aa-b217-4936-9ac1-83265f8d3e9f', 'LackLogs');
-GO
-INSERT INTO TableStructures (ID_TableStructure, ID_Table, IsPrimary, ColumnType, ColumnName)
-VALUES 
-(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 1, 'Guid', 'ID_RealEstateType'),
-(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 0, 'String', 'TypeName'),
-(NEWID(), 'd701252b-618a-4123-9544-44a9a5233d9b', 0, 'String', 'Description'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 1, 'Guid', 'ID_RealEstate'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'Guid', 'ID_RealEstateType'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'NameRealEstate'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'Country'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'Region'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'City'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'Street'),
-(NEWID(), '99133287-1910-4e42-8db6-c3aa53a6fb11', 0, 'String', 'BuildingNumber'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 1, 'Guid', 'ID_RealEstateContact'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'Guid', 'ID_RealEstate'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'Guid', 'ID_Departament'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'String', 'Telephone'),
-(NEWID(), '751eec3e-33df-401f-9e2f-33c8615dd1c6', 0, 'String', 'Email'),
-(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 1, 'Guid', 'ID_Departament'),
-(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 0, 'Guid', 'NameDepartament'),
-(NEWID(), '6a93815b-e291-411a-b457-78c3b01b6f84', 0, 'String', 'Description'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 1, 'Guid', 'ID_Employee'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'Guid', 'ID_Position'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'Guid', 'ID_RealEstate'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'String', 'FirstName'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'String', 'SecondName'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'String', 'MiddleName'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'String', 'Telephone'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'String', 'Passport'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'String', 'IDK'),
-(NEWID(), 'd08eed5b-dfaf-457b-92bc-bd1ecf096b84', 0, 'bool', 'IsEnabled'),
-(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 0, 'Guid', 'ID_EmployeeWorkLog'),
-(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 0, 'Guid', 'ID_Employee'),
-(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 0, 'DateTime', 'DateTimeStart'),
-(NEWID(), 'b8a98e35-2d50-4142-80cb-f7d8a67390dc', 0, 'DateTime', 'DateTimeEnd'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 1, 'Guid', 'ID_Position'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 0, 'String', 'NamePosition'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 0, 'String', 'Description'),
-(NEWID(), '83e709b5-cf67-4e6a-9572-73788563cd74', 0, 'int', 'PaymentHrnPerHour'),
-(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 1, 'Guid', 'ID_StatusOrder'),
-(NEWID(), '39de7b41-1940-4547-9d6c-73de9e09d20b', 0, 'String', 'NameStatusOrder'),
-(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 1, 'Guid', 'ID_ConnectingString'),
-(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 0, 'String', 'DataSource'),
-(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 0, 'String', 'InitialCatalog'),
-(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 0, 'String', 'UserId'),
-(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 0, 'String', 'UserPassword'),
-(NEWID(), '7d19c4b3-485e-4384-9ee4-299143277371', 0, 'String', 'ConnectionType'),
-(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 1, 'Guid', 'ID_SQLLog'),
-(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 0, 'Guid', 'ID_Employee'),
-(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 0, 'String', 'Description'),
-(NEWID(), '57608aa4-8b31-4116-981a-952bf9983e73', 0, 'DateTime', 'DateExecution'),
-(NEWID(), '4aceeb3e-d8ea-45d0-adc3-e8628a567aa5', 1, 'Guid', 'ID_Table'),
-(NEWID(), '4aceeb3e-d8ea-45d0-adc3-e8628a567aa5', 0, 'String', 'TableName'),
-(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 1, 'Guid', 'ID_TableStructure'),
-(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 0, 'Guid', 'ID_Table'),
-(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 0, 'String', 'ColumnName'),
-(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 0, 'String', 'ColumnType'),
-(NEWID(), 'c1fbc683-a51e-4ad1-8249-8e318e1f3bca', 0, 'bool', 'IsPrimary'),
-(NEWID(), '742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 1, 'Guid', 'ID_Employee'),
-(NEWID(), '742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 0, 'String', 'UserLogin'),
-(NEWID(), '742ef5f8-3fc3-4c23-85a8-d770f9b432fa', 0, 'String', 'UserPassword'),
-(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 1, 'Guid', 'ID_Merchandise'),
-(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 0, 'Guid', 'ID_Product'),
-(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 0, 'Guid', 'ID_RealEstate'),
-(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 0, 'int', 'Weight'),
-(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 0, 'int', 'PricePerGramm'),
-(NEWID(), 'bec77c93-d95c-4ba6-9fc5-8e1b41e2791a', 0, 'DateTime', 'ManufactureDate'),
-(NEWID(), '0e1b9bfc-e347-463a-b017-eae50483c671', 1, 'Guid', 'ID_CashRegister'),
-(NEWID(), '0e1b9bfc-e347-463a-b017-eae50483c671', 0, 'Guid', 'ID_RealEstate'),
-(NEWID(), '0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 1, 'Guid', 'ID_Operation'),
-(NEWID(), '0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 0, 'String', 'NameOperation'),
-(NEWID(), '0343a9c0-8e1d-4efa-9eb0-d83ac84f6c3a', 0, 'String', 'Description'),
-(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 1, 'Guid', 'ID_Purchase'),
-(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 0, 'Guid', 'ID_Merchandise'),
-(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 0, 'Guid', 'ID_CashRegisterAccess'),
-(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 0, 'int', 'Weight'),
-(NEWID(), '8488e2f5-97f3-4d74-90c8-0704b8fda279', 0, 'DateTime', 'PurchaseDate'),
-(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 1, 'Guid', 'ID_CashRegisterAccess'),
-(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 0, 'Guid', 'ID_CashRegister'),
-(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 0, 'Guid', 'ID_EmployeeSeller'),
-(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 0, 'Guid', 'ID_Operation'),
-(NEWID(), '3f34b2c4-facb-4c57-9654-59bc27135e27', 0, 'DateTime', 'Date'),
-(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 1, 'Guid', 'ID_StoreOrder'),
-(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 0, 'Guid', 'ID_Product'),
-(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 0, 'Guid', 'ID_RealEstateStore'),
-(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 0, 'Guid', 'ID_StoreManager'),
-(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 0, 'Guid', 'ID_StatusOrder'),
-(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 0, 'DateTime', 'InitialDate'),
-(NEWID(), 'a1a16436-c1f7-4ec1-bdcd-4768909d2e5a', 0, 'int', 'Weight'),
-(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 1, 'Guid', 'ID_StoreOrder'),
-(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 0, 'Guid', 'ID_AcceptManager'),
-(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 0, 'DateTime', 'AcceptDate'),
-(NEWID(), 'b8d2c22d-b5e5-412e-83a9-10f30804c60f', 0, 'int', 'Weight'),
-(NEWID(), 'e22534aa-b217-4936-9ac1-83265f8d3e9f', 1, 'Guid', 'ID_StoreOrder'),
-(NEWID(), 'e22534aa-b217-4936-9ac1-83265f8d3e9f', 0, 'int', 'WeightOfLack'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 1, 'Guid', 'ID_Product'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'ProductName'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'Description'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'Recipe'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'String', 'Photo'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'CalorieContent'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'Proteins'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'Fats'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'Carbohydrates'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'MinTemperature'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'int', 'MaxTemperature'),
-(NEWID(), '2f86402c-a36d-4744-bc55-006d135e9cac', 0, 'DateTime', 'ExpirationDate');
-GO
-
-
 -- --------------------------------------------------
 -- Script has ended
 -- --------------------------------------------------

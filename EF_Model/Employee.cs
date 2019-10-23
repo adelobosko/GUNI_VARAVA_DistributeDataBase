@@ -24,7 +24,6 @@ namespace EF_Model
             this.PerformedHeadOrder = new HashSet<PerformedHeadOrder>();
             this.PerformedStoreOrder = new HashSet<PerformedStoreOrder>();
             this.PerformedStoreOrder1 = new HashSet<PerformedStoreOrder>();
-            this.SQLLogs = new HashSet<SQLLog>();
         }
     
         public System.Guid ID_Employee { get; set; }
@@ -55,7 +54,5 @@ namespace EF_Model
         public virtual ICollection<PerformedStoreOrder> PerformedStoreOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PerformedStoreOrder> PerformedStoreOrder1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SQLLog> SQLLogs { get; set; }
     }
 }

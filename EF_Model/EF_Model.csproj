@@ -66,9 +66,6 @@
     <Compile Include="ConnectingString.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBaseTable.cs">
-      <DependentUpon>DistributedDataBase.tt</DependentUpon>
-    </Compile>
     <Compile Include="Departament.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
@@ -145,9 +142,6 @@
     <Compile Include="RealEstateType.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
-    <Compile Include="SQLLog.cs">
-      <DependentUpon>DistributedDataBase.tt</DependentUpon>
-    </Compile>
     <Compile Include="StatusOrder.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
@@ -155,9 +149,6 @@
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreOrder.cs">
-      <DependentUpon>DistributedDataBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TableStructure.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

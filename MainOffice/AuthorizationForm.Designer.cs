@@ -72,6 +72,9 @@
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(174, 29);
             this.loginTextBox.TabIndex = 0;
+            this.loginTextBox.Tag = "admin";
+            this.loginTextBox.Text = "admin";
+            this.loginTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.loginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // leftmarignPanel
@@ -100,6 +103,9 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(174, 29);
             this.passwordTextBox.TabIndex = 1;
+            this.passwordTextBox.Tag = "admin";
+            this.passwordTextBox.Text = "admin";
+            this.passwordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.passwordTextBox.UseSystemPasswordChar = true;
             this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 

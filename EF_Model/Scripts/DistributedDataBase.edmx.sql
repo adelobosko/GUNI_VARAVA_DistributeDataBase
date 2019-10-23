@@ -134,12 +134,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProductStoreOrder]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[StoreOrders] DROP CONSTRAINT [FK_ProductStoreOrder];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EmployeeSQLLog]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SQLLogs] DROP CONSTRAINT [FK_EmployeeSQLLog];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DataBaseTableTableStructure]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TableStructures] DROP CONSTRAINT [FK_DataBaseTableTableStructure];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -223,17 +217,8 @@ GO
 IF OBJECT_ID(N'[dbo].[PerformedStoreOrders]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PerformedStoreOrders];
 GO
-IF OBJECT_ID(N'[dbo].[SQLLogs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SQLLogs];
-GO
 IF OBJECT_ID(N'[dbo].[ConnectingStrings]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ConnectingStrings];
-GO
-IF OBJECT_ID(N'[dbo].[DataBaseTables]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DataBaseTables];
-GO
-IF OBJECT_ID(N'[dbo].[TableStructures]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TableStructures];
 GO
 
 -- --------------------------------------------------
@@ -350,7 +335,7 @@ CREATE TABLE [dbo].[Products] (
     [Proteins] int  NULL,
     [Fats] int  NULL,
     [Carbohydrates] int  NULL,
-    [ExpirationDate] datetime  NOT NULL,
+    [ExpirationDate] int  NOT NULL,
     [MinTemperature] int  NULL,
     [MaxTemperature] int  NULL,
     [Photo] nvarchar(max)  NULL
@@ -483,7 +468,8 @@ GO
 CREATE TABLE [dbo].[PerformedHeadOrders] (
     [ID_HeadOrder] uniqueidentifier  NOT NULL,
     [ID_Employee] uniqueidentifier  NOT NULL,
-    [ID_PerformedOrder] uniqueidentifier  NOT NULL
+    [ID_PerformedOrder] uniqueidentifier  NOT NULL,
+    [Date] datetime  NOT NULL
 );
 GO
 
@@ -497,15 +483,6 @@ CREATE TABLE [dbo].[PerformedStoreOrders] (
 );
 GO
 
--- Creating table 'SQLLogs'
-CREATE TABLE [dbo].[SQLLogs] (
-    [ID_SQLLog] uniqueidentifier  NOT NULL,
-    [ID_Employee] uniqueidentifier  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
-    [DateExecution] datetime  NOT NULL
-);
-GO
-
 -- Creating table 'ConnectingStrings'
 CREATE TABLE [dbo].[ConnectingStrings] (
     [ID_ConnectingString] uniqueidentifier  NOT NULL,
@@ -514,23 +491,6 @@ CREATE TABLE [dbo].[ConnectingStrings] (
     [UserId] nvarchar(max)  NOT NULL,
     [UserPassword] nvarchar(max)  NOT NULL,
     [ConnectionType] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'DataBaseTables'
-CREATE TABLE [dbo].[DataBaseTables] (
-    [ID_Table] uniqueidentifier  NOT NULL,
-    [TableName] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'TableStructures'
-CREATE TABLE [dbo].[TableStructures] (
-    [ID_Table] uniqueidentifier  NOT NULL,
-    [ColumnName] nvarchar(max)  NOT NULL,
-    [ColumnType] nvarchar(max)  NOT NULL,
-    [ID_TableStructure] uniqueidentifier  NOT NULL,
-    [IsPrimary] bit  NOT NULL
 );
 GO
 
@@ -694,28 +654,10 @@ ADD CONSTRAINT [PK_PerformedStoreOrders]
     PRIMARY KEY CLUSTERED ([ID_StoreOrder] ASC);
 GO
 
--- Creating primary key on [ID_SQLLog] in table 'SQLLogs'
-ALTER TABLE [dbo].[SQLLogs]
-ADD CONSTRAINT [PK_SQLLogs]
-    PRIMARY KEY CLUSTERED ([ID_SQLLog] ASC);
-GO
-
 -- Creating primary key on [ID_ConnectingString] in table 'ConnectingStrings'
 ALTER TABLE [dbo].[ConnectingStrings]
 ADD CONSTRAINT [PK_ConnectingStrings]
     PRIMARY KEY CLUSTERED ([ID_ConnectingString] ASC);
-GO
-
--- Creating primary key on [ID_Table] in table 'DataBaseTables'
-ALTER TABLE [dbo].[DataBaseTables]
-ADD CONSTRAINT [PK_DataBaseTables]
-    PRIMARY KEY CLUSTERED ([ID_Table] ASC);
-GO
-
--- Creating primary key on [ID_TableStructure] in table 'TableStructures'
-ALTER TABLE [dbo].[TableStructures]
-ADD CONSTRAINT [PK_TableStructures]
-    PRIMARY KEY CLUSTERED ([ID_TableStructure] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1245,36 +1187,6 @@ GO
 CREATE INDEX [IX_FK_ProductStoreOrder]
 ON [dbo].[StoreOrders]
     ([ID_Product]);
-GO
-
--- Creating foreign key on [ID_Employee] in table 'SQLLogs'
-ALTER TABLE [dbo].[SQLLogs]
-ADD CONSTRAINT [FK_EmployeeSQLLog]
-    FOREIGN KEY ([ID_Employee])
-    REFERENCES [dbo].[Employees]
-        ([ID_Employee])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeSQLLog'
-CREATE INDEX [IX_FK_EmployeeSQLLog]
-ON [dbo].[SQLLogs]
-    ([ID_Employee]);
-GO
-
--- Creating foreign key on [ID_Table] in table 'TableStructures'
-ALTER TABLE [dbo].[TableStructures]
-ADD CONSTRAINT [FK_DataBaseTableTableStructure]
-    FOREIGN KEY ([ID_Table])
-    REFERENCES [dbo].[DataBaseTables]
-        ([ID_Table])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_DataBaseTableTableStructure'
-CREATE INDEX [IX_FK_DataBaseTableTableStructure]
-ON [dbo].[TableStructures]
-    ([ID_Table]);
 GO
 
 -- --------------------------------------------------
