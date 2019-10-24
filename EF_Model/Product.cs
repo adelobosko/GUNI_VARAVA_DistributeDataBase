@@ -30,7 +30,7 @@ namespace EF_Model
         public Nullable<int> Proteins { get; set; }
         public Nullable<int> Fats { get; set; }
         public Nullable<int> Carbohydrates { get; set; }
-        public System.DateTime ExpirationDate { get; set; }
+        public int ExpirationDate { get; set; }
         public Nullable<int> MinTemperature { get; set; }
         public Nullable<int> MaxTemperature { get; set; }
         public string Photo { get; set; }

@@ -32,10 +32,7 @@
     <EntitySet Name="StatusOrders" EntityType="DistributedDataBase.Store.StatusOrders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PerformedHeadOrders" EntityType="DistributedDataBase.Store.PerformedHeadOrders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PerformedStoreOrders" EntityType="DistributedDataBase.Store.PerformedStoreOrders" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SQLLogs" EntityType="DistributedDataBase.Store.SQLLogs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ConnectingStrings" EntityType="DistributedDataBase.Store.ConnectingStrings" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="DataBaseTables" EntityType="DistributedDataBase.Store.DataBaseTables" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TableStructures" EntityType="DistributedDataBase.Store.TableStructures" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="RealEstateTypeRealEstate" Association="DistributedDataBase.Store.RealEstateTypeRealEstate">
       <End Role="RealEstateType" EntitySet="RealEstateTypes" />
       <End Role="RealEstate" EntitySet="RealEstates" />
@@ -184,14 +181,6 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="StoreOrder" EntitySet="StoreOrders" />
     </AssociationSet>
-    <AssociationSet Name="EmployeeSQLLog" Association="DistributedDataBase.Store.EmployeeSQLLog">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="SQLLog" EntitySet="SQLLogs" />
-    </AssociationSet>
-    <AssociationSet Name="DataBaseTableTableStructure" Association="DistributedDataBase.Store.DataBaseTableTableStructure">
-      <End Role="DataBaseTable" EntitySet="DataBaseTables" />
-      <End Role="TableStructure" EntitySet="TableStructures" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="RealEstateTypes">
     <Key>
@@ -306,7 +295,7 @@
     <Property Name="Proteins" Type="int" Nullable="true" />
     <Property Name="Fats" Type="int" Nullable="true" />
     <Property Name="Carbohydrates" Type="int" Nullable="true" />
-    <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+    <Property Name="ExpirationDate" Type="int" Nullable="false" />
     <Property Name="MinTemperature" Type="int" Nullable="true" />
     <Property Name="MaxTemperature" Type="int" Nullable="true" />
     <Property Name="Photo" Type="nvarchar(max)" Nullable="true" />
@@ -440,6 +429,7 @@
     <Property Name="ID_HeadOrder" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ID_Employee" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ID_PerformedOrder" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="PerformedStoreOrders">
     <Key>
@@ -451,15 +441,6 @@
     <Property Name="ShippingDate" Type="datetime" Nullable="false" />
     <Property Name="Weight" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="SQLLogs">
-    <Key>
-      <PropertyRef Name="ID_SQLLog" />
-    </Key>
-    <Property Name="ID_SQLLog" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ID_Employee" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DateExecution" Type="datetime" Nullable="false" />
-  </EntityType>
   <EntityType Name="ConnectingStrings">
     <Key>
       <PropertyRef Name="ID_ConnectingString" />
@@ -470,23 +451,6 @@
     <Property Name="UserId" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ConnectionType" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="DataBaseTables">
-    <Key>
-      <PropertyRef Name="ID_Table" />
-    </Key>
-    <Property Name="ID_Table" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="TableName" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TableStructures">
-    <Key>
-      <PropertyRef Name="ID_TableStructure" />
-    </Key>
-    <Property Name="ID_Table" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ColumnName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ColumnType" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ID_TableStructure" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsPrimary" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="RealEstateTypeRealEstate">
     <End Role="RealEstateType" Type="DistributedDataBase.Store.RealEstateTypes" Multiplicity="1" />
@@ -932,30 +896,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="EmployeeSQLLog">
-    <End Role="Employee" Type="DistributedDataBase.Store.Employees" Multiplicity="1" />
-    <End Role="SQLLog" Type="DistributedDataBase.Store.SQLLogs" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="ID_Employee" />
-      </Principal>
-      <Dependent Role="SQLLog">
-        <PropertyRef Name="ID_Employee" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="DataBaseTableTableStructure">
-    <End Role="DataBaseTable" Type="DistributedDataBase.Store.DataBaseTables" Multiplicity="1" />
-    <End Role="TableStructure" Type="DistributedDataBase.Store.TableStructures" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DataBaseTable">
-        <PropertyRef Name="ID_Table" />
-      </Principal>
-      <Dependent Role="TableStructure">
-        <PropertyRef Name="ID_Table" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1135,18 +1075,7 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="StoreOrder" EntitySet="StoreOrders" />
           </AssociationSet>
-          <EntitySet Name="SQLLogs" EntityType="DistributedDataBase.SQLLog" />
-          <AssociationSet Name="EmployeeSQLLog" Association="DistributedDataBase.EmployeeSQLLog">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="SQLLog" EntitySet="SQLLogs" />
-          </AssociationSet>
           <EntitySet Name="ConnectingStrings" EntityType="DistributedDataBase.ConnectingString" />
-          <EntitySet Name="DataBaseTables" EntityType="DistributedDataBase.DataBaseTable" />
-          <EntitySet Name="TableStructures" EntityType="DistributedDataBase.TableStructure" />
-          <AssociationSet Name="DataBaseTableTableStructure" Association="DistributedDataBase.DataBaseTableTableStructure">
-            <End Role="DataBaseTable" EntitySet="DataBaseTables" />
-            <End Role="TableStructure" EntitySet="TableStructures" />
-          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RealEstateType">
           <Key>
@@ -1288,7 +1217,7 @@
           <Property Name="Proteins" Type="Int32" Nullable="true" />
           <Property Name="Fats" Type="Int32" Nullable="true" />
           <Property Name="Carbohydrates" Type="Int32" Nullable="true" />
-          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="Int32" Nullable="false" />
           <Property Name="MinTemperature" Type="Int32" Nullable="true" />
           <Property Name="MaxTemperature" Type="Int32" Nullable="true" />
           <Property Name="Photo" Type="String" Nullable="true" />
@@ -1319,7 +1248,6 @@
           <NavigationProperty Name="PerformedHeadOrder" Relationship="DistributedDataBase.EmployeePerformedHeadOrder" FromRole="Employee" ToRole="PerformedHeadOrder" />
           <NavigationProperty Name="PerformedStoreOrder" Relationship="DistributedDataBase.EmployeePerformedStoreOrder" FromRole="Employee" ToRole="PerformedStoreOrder" />
           <NavigationProperty Name="PerformedStoreOrder1" Relationship="DistributedDataBase.EmployeePerformedStoreOrder1" FromRole="Employee" ToRole="PerformedStoreOrder" />
-          <NavigationProperty Name="SQLLogs" Relationship="DistributedDataBase.EmployeeSQLLog" FromRole="Employee" ToRole="SQLLog" />
           <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeeWorkLog">
@@ -1467,6 +1395,7 @@
           <Property Name="ID_PerformedOrder" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeePerformedHeadOrder" FromRole="PerformedHeadOrder" ToRole="Employee" />
           <NavigationProperty Name="HeadOrder" Relationship="DistributedDataBase.HeadOrderPerformedHeadOrder" FromRole="PerformedHeadOrder" ToRole="HeadOrder" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="PerformedStoreOrder">
           <Key>
@@ -1925,28 +1854,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="SQLLog">
-          <Key>
-            <PropertyRef Name="ID_SQLLog" />
-          </Key>
-          <Property Name="ID_SQLLog" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="ID_Employee" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="DistributedDataBase.EmployeeSQLLog" FromRole="SQLLog" ToRole="Employee" />
-          <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="DateExecution" Type="DateTime" Nullable="false" />
-        </EntityType>
-        <Association Name="EmployeeSQLLog">
-          <End Type="DistributedDataBase.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="DistributedDataBase.SQLLog" Role="SQLLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID_Employee" />
-            </Principal>
-            <Dependent Role="SQLLog">
-              <PropertyRef Name="ID_Employee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ConnectingString">
           <Key>
             <PropertyRef Name="ID_ConnectingString" />
@@ -1958,37 +1865,6 @@
           <Property Name="UserPassword" Type="String" Nullable="false" />
           <Property Name="ConnectionType" Type="String" Nullable="false" />
         </EntityType>
-        <EntityType Name="DataBaseTable">
-          <Key>
-            <PropertyRef Name="ID_Table" />
-          </Key>
-          <Property Name="ID_Table" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="TableName" Type="String" Nullable="false" />
-          <NavigationProperty Name="TableStructures" Relationship="DistributedDataBase.DataBaseTableTableStructure" FromRole="DataBaseTable" ToRole="TableStructure" />
-        </EntityType>
-        <EntityType Name="TableStructure">
-          <Key>
-            <PropertyRef Name="ID_TableStructure" />
-          </Key>
-          <Property Name="ID_Table" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ColumnName" Type="String" Nullable="false" />
-          <Property Name="ColumnType" Type="String" Nullable="false" />
-          <NavigationProperty Name="DataBaseTable" Relationship="DistributedDataBase.DataBaseTableTableStructure" FromRole="TableStructure" ToRole="DataBaseTable" />
-          <Property Name="ID_TableStructure" Type="Guid" Nullable="false" />
-          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <Association Name="DataBaseTableTableStructure">
-          <End Type="DistributedDataBase.DataBaseTable" Role="DataBaseTable" Multiplicity="1" />
-          <End Type="DistributedDataBase.TableStructure" Role="TableStructure" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DataBaseTable">
-              <PropertyRef Name="ID_Table" />
-            </Principal>
-            <Dependent Role="TableStructure">
-              <PropertyRef Name="ID_Table" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2264,6 +2140,7 @@
           <ScalarProperty Name="ID_PerformedOrder" ColumnName="ID_PerformedOrder" />
           <ScalarProperty Name="ID_HeadOrder" ColumnName="ID_HeadOrder" />
           <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2278,16 +2155,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SQLLogs">
-      <EntityTypeMapping TypeName="IsTypeOf(DistributedDataBase.SQLLog)">
-        <MappingFragment StoreEntitySet="SQLLogs">
-          <ScalarProperty Name="ID_SQLLog" ColumnName="ID_SQLLog" />
-          <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="DateExecution" ColumnName="DateExecution" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ConnectingStrings">
       <EntityTypeMapping TypeName="IsTypeOf(DistributedDataBase.ConnectingString)">
         <MappingFragment StoreEntitySet="ConnectingStrings">
@@ -2297,25 +2164,6 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
           <ScalarProperty Name="ConnectionType" ColumnName="ConnectionType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DataBaseTables">
-      <EntityTypeMapping TypeName="IsTypeOf(DistributedDataBase.DataBaseTable)">
-        <MappingFragment StoreEntitySet="DataBaseTables">
-          <ScalarProperty Name="ID_Table" ColumnName="ID_Table" />
-          <ScalarProperty Name="TableName" ColumnName="TableName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TableStructures">
-      <EntityTypeMapping TypeName="IsTypeOf(DistributedDataBase.TableStructure)">
-        <MappingFragment StoreEntitySet="TableStructures">
-          <ScalarProperty Name="ID_TableStructure" ColumnName="ID_TableStructure" />
-          <ScalarProperty Name="ID_Table" ColumnName="ID_Table" />
-          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
-          <ScalarProperty Name="ColumnType" ColumnName="ColumnType" />
-          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

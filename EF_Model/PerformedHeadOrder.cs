@@ -17,6 +17,7 @@ namespace EF_Model
         public System.Guid ID_HeadOrder { get; set; }
         public System.Guid ID_Employee { get; set; }
         public System.Guid ID_PerformedOrder { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual HeadOrder HeadOrder { get; set; }
