@@ -199,3 +199,157 @@ INSERT INTO [dbo].[Users]
            ,'27dd6db4-848b-4796-9698-f3220f50b6cc'
            ,'wil100')
 GO
+-- --------------------------------------------------
+-- EmployeeWorkLogs
+-- --------------------------------------------------
+INSERT INTO [dbo].[EmployeeWorkLogs]
+           ([ID_EmployeeWorkLog]
+           ,[ID_Employee]
+           ,[DateTimeStart]
+           ,[DateTimeEnd])
+     VALUES
+           ('857264b8-55e4-461b-941c-f1a4744084ca'
+           ,'FB8F47B0-FF16-440B-9273-C29F8376529B'
+           ,'2019-10-23 8:00:0.0'
+           ,'2019-10-23 16:00:0.0')
+GO
+INSERT INTO [dbo].[EmployeeWorkLogs]
+           ([ID_EmployeeWorkLog]
+           ,[ID_Employee]
+           ,[DateTimeStart]
+           ,[DateTimeEnd])
+     VALUES
+           ('68dfda88-a6dc-4e7a-a541-cb09c17f1571'
+           ,'4A42AB2B-7D91-4BDF-AA0B-DFF20E995F4B'
+           ,'2019-10-23 9:30:0.0'
+           ,'2019-10-23 16:00:0.0')
+GO
+INSERT INTO [dbo].[EmployeeWorkLogs]
+           ([ID_EmployeeWorkLog]
+           ,[ID_Employee]
+           ,[DateTimeStart]
+           ,[DateTimeEnd])
+     VALUES
+           ('d10e1315-bcca-4345-a1d7-017e8a399228'
+           ,'4A42AB2B-7D91-4BDF-AA0B-DFF20E995F4B'
+           ,'2019-10-20 9:30:0.0'
+           ,'2019-10-20 19:30:0.0')
+GO
+-- --------------------------------------------------
+-- Products
+-- --------------------------------------------------
+INSERT INTO [dbo].[Products]
+           ([ID_Product]
+           ,[ProductName]
+           ,[Description]
+           ,[Recipe]
+           ,[CalorieContent]
+           ,[Proteins]
+           ,[Fats]
+           ,[Carbohydrates]
+           ,[ExpirationDate]
+           ,[MinTemperature]
+           ,[MaxTemperature]
+           ,[Photo])
+     VALUES
+           ('a0c32d4c-18d9-4084-8172-d5c084cbec8f'
+           ,'Chocolate chips'
+           ,'Delicious shortbread cookies with pieces of chocolate.'
+           ,'In a large bowl, whisk together the sugars, salt, and butter until a paste forms with no lumps. Whisk in the egg and vanilla, beating until light ribbons fall off the whisk and remain for a short while before falling back into the mixture. Sift in the flour and baking soda, then fold the mixture with a spatula (Be careful not to overmix, which would cause the gluten in the flour to toughen resulting in cakier cookies). Fold in the chocolate chunks, then chill the dough for at least 30 minutes. For a more intense toffee-like flavor and deeper color, chill the dough overnight. The longer the dough rests, the more complex its flavor will be. Preheat oven to 350°F (180°C). Line a baking sheet with parchment paper. Scoop the dough with an ice-cream scoop onto a parchment paper-lined baking sheet, leaving at least 4 inches (10 cm) of space between cookies and 2 inches (5 cm) of space from the edges of the pan so that the cookies can spread evenly. Bake for 12-15 minutes, or until the edges have started to barely brown. Cool completely before serving.'
+           ,'410'
+           ,8
+           ,9
+           ,72
+           ,30
+           ,2
+           ,27
+           ,'D:\_Projects\GUNI_VARAVA_DistributeDataBase\Factory_And_store\images\Products\Chocolatе chips.png')
+GO
+INSERT INTO [dbo].[Products]
+           ([ID_Product]
+           ,[ProductName]
+           ,[Description]
+           ,[Recipe]
+           ,[CalorieContent]
+           ,[Proteins]
+           ,[Fats]
+           ,[Carbohydrates]
+           ,[ExpirationDate]
+           ,[MinTemperature]
+           ,[MaxTemperature]
+           ,[Photo])
+     VALUES
+           ('ba3ffb17-9813-4157-b60c-66973bca2050'
+           ,'Oreo'
+           ,'Delicious shortbread cookies with pieces of chocolate.'
+           ,'Crush the chocolate cookies in a resealable bag and pour into a large bowl. Reserve ¼ cup (25g) of the crushed cookies for topping. Pour melted butter into the large bowl and stir until combined. Spread out over the bottom of a parchment lined baking sheet, and press down to make a crust. Freeze for 30 minutes. Spread Greek yogurt over the hardened cookie crust and top with the reserved crushed cookies. Freeze again for 3 hours or until frozen. Remove from baking sheet and break bark apart.'
+           ,'410'
+           ,8
+           ,9
+           ,72
+           ,30
+           ,2
+           ,27
+           ,'D:\_Projects\GUNI_VARAVA_DistributeDataBase\Factory_And_store\images\Products\Oreo.png')
+GO
+INSERT INTO [dbo].[Products]
+           ([ID_Product]
+           ,[ProductName]
+           ,[Description]
+           ,[Recipe]
+           ,[CalorieContent]
+           ,[Proteins]
+           ,[Fats]
+           ,[Carbohydrates]
+           ,[ExpirationDate]
+           ,[MinTemperature]
+           ,[MaxTemperature]
+           ,[Photo])
+     VALUES
+           ('3caada19-c7ae-4000-b619-26d1d7e44cf8'
+           ,'Sweet shell'
+           ,'Delicious shortbread cookies with pieces of chocolate.'
+           ,'Make the taco shells: in a medium bowl, whisk together the eggs and sugar until combined. Add the milk, vanilla, and butter, and whisk until fully incorporated. Sift in the flour and cocoa powder. Whisk until smooth. Heat a small non-stick pan over medium-low heat, then add ⅓ cup (95 g) of batter at a time and tilt the pan to spread the batter evenly like a crepe. Cook until bubbles appear on the surface and the batter is set, about 6-8 minutes. Flip the taco shell and cook on other side for another 3-4 minutes, until cooked through. If desired, remove the taco shell from pan and place on a grated cooling rack while still hot. Place a sheet of parchment over the shell and press into the rack, allowing the grate marks to set into the shell. Rotate the shell 90 degrees and press the cone into the grates again for a waffled look. Or, skip to the next step. Place the taco shells between the cups of an inverted muffin tin to form their shape. Let set for about 10 minutes, then freeze for 20 minutes to harden. Make the magic shell: combine the chocolate and coconut oil in a medium bowl and microwave for 2 minutes, stirring every 30 seconds until melted and shiny. Remove the taco shells from the freezer and use a spoon to coat the inside of each taco shell with melted magic shell. Return to the freezer for 20 minutes, until the magic shell hardens. Reserve the leftover magic shell. Add the ice cream to a piping bag fitted with a round tip or a zip-top bag with the corner cut off. Remove the shells from the freezer and pipe in the ice cream, filling the tacos. Smooth out the tops with a knife or rubber spatula. Freeze for 2 hours. Microwave the reserved magic shell, if needed, to re-melt. Remove the tacos from the freezer and dip the tops of each taco in the magic shell, then immediately sprinkle with the crushed peanuts. Serve immediately or return to the freezer until ready to eat.'
+           ,'410'
+           ,8
+           ,9
+           ,72
+           ,15
+           ,2
+           ,27
+           ,'D:\_Projects\GUNI_VARAVA_DistributeDataBase\Factory_And_store\images\Products\Sweet shell.png')
+GO
+-- --------------------------------------------------
+-- StatusOrder
+-- --------------------------------------------------
+INSERT INTO [dbo].[StatusOrders]
+           ([ID_StatusOrder]
+           ,[NameStatusOrder])
+     VALUES
+           (NEWID()
+           ,'Created')
+GO
+
+INSERT INTO [dbo].[StatusOrders]
+           ([ID_StatusOrder]
+           ,[NameStatusOrder])
+     VALUES
+           (NEWID()
+           ,'Accepted for execution')
+GO
+
+INSERT INTO [dbo].[StatusOrders]
+           ([ID_StatusOrder]
+           ,[NameStatusOrder])
+     VALUES
+           (NEWID()
+           ,'Sent')
+GO
+
+INSERT INTO [dbo].[StatusOrders]
+           ([ID_StatusOrder]
+           ,[NameStatusOrder])
+     VALUES
+           (NEWID()
+           ,'Accepted by the store')
+GO
