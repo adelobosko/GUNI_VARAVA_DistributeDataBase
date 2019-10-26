@@ -1,6 +1,6 @@
 ﻿namespace MainOffice
 {
-    partial class AuthorizationForm
+    public partial class AuthorizationForm
     {
         /// <summary>
         /// Required designer variable.

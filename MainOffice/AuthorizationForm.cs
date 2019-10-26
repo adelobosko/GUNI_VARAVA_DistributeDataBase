@@ -22,10 +22,10 @@ namespace MainOffice
 
         private void LoginTextBox_Validating(object sender, CancelEventArgs e)
         {
-            var textBox = (TextBox) sender;
+            var textBox = (TextBox)sender;
             if (string.IsNullOrEmpty(textBox.Text))
             {
-                errorProvider.SetError(textBox, $"Please input {textBox.Name.Replace("TextBox","")}!");
+                errorProvider.SetError(textBox, $"Please input {textBox.Name.Replace("TextBox", "")}!");
             }
             else
             {
@@ -80,7 +80,7 @@ namespace MainOffice
                 resultLabel.Text = "Login or Password is not correct.";
                 return;
             }
-            
+
             this.Hide();
             passwordTextBox.Text = "";
             GlobalHelper.AuthorizationForm = this;

@@ -31,18 +31,10 @@ namespace EF_Model
 
         public static class DomesticDataBase
         {
-            public static string DataSource { get; set; }
-            public static string InitialCatalog { get; set; }
-            public static string UserId { get; set; }
-            public static string UserPassword { get; set; }
-
-            static DomesticDataBase()
-            {
-                DataSource = "(localdb)\\MSSQLLocalDB";
-                InitialCatalog = "VaravaMainOffice";
-                UserId = "sa";
-                UserPassword = "2584744";
-            }
+            public static string DataSource { get; set; } = @"(localdb)\MSSQLLocalDB";
+            public static string InitialCatalog { get; set; } = @"VaravaMainOffice";
+            public static string UserId { get; set; } = @"sa";
+            public static string UserPassword { get; set; } = @"2584744";
         }
 
 

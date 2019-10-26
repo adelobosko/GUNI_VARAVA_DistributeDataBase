@@ -56,12 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlGenerator.cs" />
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataExchanger.cs" />
     <Compile Include="AuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
