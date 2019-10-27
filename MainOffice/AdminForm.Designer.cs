@@ -35,6 +35,7 @@ namespace MainOffice
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             this.adminTabControl = new System.Windows.Forms.TabControl();
             this.mainOfficeTabPage = new System.Windows.Forms.TabPage();
             this.mainOfficeSplitContainer = new System.Windows.Forms.SplitContainer();
@@ -48,6 +49,12 @@ namespace MainOffice
             this.factorySplitContainer = new System.Windows.Forms.SplitContainer();
             this.factoryListBox = new System.Windows.Forms.ListBox();
             this.factoryHorizontalSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.SQLTabPage = new System.Windows.Forms.TabPage();
+            this.SQLSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.SQLTextBox = new System.Windows.Forms.TextBox();
+            this.SQLTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.SQLQueryButton = new System.Windows.Forms.Button();
+            this.SQLCommandButton = new System.Windows.Forms.Button();
             this.adminTabControl.SuspendLayout();
             this.mainOfficeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainOfficeSplitContainer)).BeginInit();
@@ -70,6 +77,12 @@ namespace MainOffice
             this.factorySplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.factoryHorizontalSplitContainer)).BeginInit();
             this.factoryHorizontalSplitContainer.SuspendLayout();
+            this.SQLTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SQLSplitContainer)).BeginInit();
+            this.SQLSplitContainer.Panel1.SuspendLayout();
+            this.SQLSplitContainer.Panel2.SuspendLayout();
+            this.SQLSplitContainer.SuspendLayout();
+            this.SQLTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // adminTabControl
@@ -77,6 +90,7 @@ namespace MainOffice
             this.adminTabControl.Controls.Add(this.mainOfficeTabPage);
             this.adminTabControl.Controls.Add(this.storeTabPage);
             this.adminTabControl.Controls.Add(this.factoryTabPage);
+            this.adminTabControl.Controls.Add(this.SQLTabPage);
             this.adminTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.adminTabControl.Location = new System.Drawing.Point(0, 0);
             this.adminTabControl.Name = "adminTabControl";
@@ -238,6 +252,82 @@ namespace MainOffice
             this.factoryHorizontalSplitContainer.SplitterDistance = 203;
             this.factoryHorizontalSplitContainer.TabIndex = 0;
             // 
+            // SQLTabPage
+            // 
+            this.SQLTabPage.Controls.Add(this.SQLSplitContainer);
+            this.SQLTabPage.Location = new System.Drawing.Point(4, 22);
+            this.SQLTabPage.Name = "SQLTabPage";
+            this.SQLTabPage.Size = new System.Drawing.Size(792, 424);
+            this.SQLTabPage.TabIndex = 3;
+            this.SQLTabPage.Text = "TSQL";
+            this.SQLTabPage.UseVisualStyleBackColor = true;
+            // 
+            // SQLSplitContainer
+            // 
+            this.SQLSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SQLSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.SQLSplitContainer.Name = "SQLSplitContainer";
+            this.SQLSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // SQLSplitContainer.Panel1
+            // 
+            this.SQLSplitContainer.Panel1.Controls.Add(this.SQLTextBox);
+            // 
+            // SQLSplitContainer.Panel2
+            // 
+            this.SQLSplitContainer.Panel2.Controls.Add(this.SQLTableLayoutPanel);
+            this.SQLSplitContainer.Size = new System.Drawing.Size(792, 424);
+            this.SQLSplitContainer.SplitterDistance = 203;
+            this.SQLSplitContainer.TabIndex = 1;
+            // 
+            // SQLTextBox
+            // 
+            this.SQLTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SQLTextBox.Location = new System.Drawing.Point(0, 0);
+            this.SQLTextBox.Multiline = true;
+            this.SQLTextBox.Name = "SQLTextBox";
+            this.SQLTextBox.Size = new System.Drawing.Size(792, 203);
+            this.SQLTextBox.TabIndex = 0;
+            this.SQLTextBox.Text = resources.GetString("SQLTextBox.Text");
+            // 
+            // SQLTableLayoutPanel
+            // 
+            this.SQLTableLayoutPanel.ColumnCount = 3;
+            this.SQLTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.SQLTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.SQLTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.SQLTableLayoutPanel.Controls.Add(this.SQLCommandButton, 1, 0);
+            this.SQLTableLayoutPanel.Controls.Add(this.SQLQueryButton, 0, 0);
+            this.SQLTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SQLTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.SQLTableLayoutPanel.Name = "SQLTableLayoutPanel";
+            this.SQLTableLayoutPanel.RowCount = 1;
+            this.SQLTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.SQLTableLayoutPanel.Size = new System.Drawing.Size(792, 40);
+            this.SQLTableLayoutPanel.TabIndex = 0;
+            // 
+            // SQLQueryButton
+            // 
+            this.SQLQueryButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SQLQueryButton.Location = new System.Drawing.Point(3, 3);
+            this.SQLQueryButton.Name = "SQLQueryButton";
+            this.SQLQueryButton.Size = new System.Drawing.Size(257, 34);
+            this.SQLQueryButton.TabIndex = 1;
+            this.SQLQueryButton.Text = "ExecuteReader";
+            this.SQLQueryButton.UseVisualStyleBackColor = true;
+            this.SQLQueryButton.Click += new System.EventHandler(this.SQLQueryButton_Click);
+            // 
+            // SQLCommandButton
+            // 
+            this.SQLCommandButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SQLCommandButton.Location = new System.Drawing.Point(266, 3);
+            this.SQLCommandButton.Name = "SQLCommandButton";
+            this.SQLCommandButton.Size = new System.Drawing.Size(257, 34);
+            this.SQLCommandButton.TabIndex = 2;
+            this.SQLCommandButton.Text = "SQLCommand";
+            this.SQLCommandButton.UseVisualStyleBackColor = true;
+            this.SQLCommandButton.Click += new System.EventHandler(this.SQLCommandButton_Click);
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,6 +360,13 @@ namespace MainOffice
             this.factorySplitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.factoryHorizontalSplitContainer)).EndInit();
             this.factoryHorizontalSplitContainer.ResumeLayout(false);
+            this.SQLTabPage.ResumeLayout(false);
+            this.SQLSplitContainer.Panel1.ResumeLayout(false);
+            this.SQLSplitContainer.Panel1.PerformLayout();
+            this.SQLSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SQLSplitContainer)).EndInit();
+            this.SQLSplitContainer.ResumeLayout(false);
+            this.SQLTableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -289,5 +386,11 @@ namespace MainOffice
         private System.Windows.Forms.SplitContainer factorySplitContainer;
         private System.Windows.Forms.ListBox factoryListBox;
         private System.Windows.Forms.SplitContainer factoryHorizontalSplitContainer;
+        private System.Windows.Forms.TabPage SQLTabPage;
+        private System.Windows.Forms.SplitContainer SQLSplitContainer;
+        private System.Windows.Forms.TextBox SQLTextBox;
+        private System.Windows.Forms.TableLayoutPanel SQLTableLayoutPanel;
+        private System.Windows.Forms.Button SQLCommandButton;
+        private System.Windows.Forms.Button SQLQueryButton;
     }
 }

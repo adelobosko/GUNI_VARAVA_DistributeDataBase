@@ -66,6 +66,7 @@
     <Compile Include="ConnectingString.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseExtension.cs" />
     <Compile Include="Departament.cs">
       <DependentUpon>DistributedDataBase.tt</DependentUpon>
     </Compile>

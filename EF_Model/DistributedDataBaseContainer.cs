@@ -32,7 +32,7 @@ namespace EF_Model
         public static class DomesticDataBase
         {
             public static string DataSource { get; set; } = @"(localdb)\MSSQLLocalDB";
-            public static string InitialCatalog { get; set; } = @"VaravaMainOffice";
+            public static string InitialCatalog { get; set; } = @"VaravaStore";
             public static string UserId { get; set; } = @"sa";
             public static string UserPassword { get; set; } = @"2584744";
         }
