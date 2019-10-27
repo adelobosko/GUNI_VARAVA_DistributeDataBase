@@ -60,6 +60,18 @@ INSERT INTO [dbo].[Positions]
            ,30
            ,'Serve customers')
 GO
+
+INSERT INTO [dbo].[Positions]
+           ([ID_Position]
+           ,[NamePosition]
+           ,[PaymentHrnPerHour]
+           ,[Description])
+     VALUES
+           ('71465f62-8043-4deb-a979-4e5a0c879d99'
+           ,'Carrier'
+           ,50
+           ,'Transports goods.')
+GO
 -- --------------------------------------------------
 -- Employees
 -- --------------------------------------------------
@@ -176,6 +188,29 @@ INSERT INTO [dbo].[Employees]
            ,'+380912362771'
            ,'BP598703'
            ,'0123620179'
+           ,1)
+GO
+INSERT INTO [dbo].[Employees]
+           ([ID_Employee]
+           ,[ID_Position]
+           ,[ID_RealEstate]
+           ,[FirstName]
+           ,[SecondName]
+           ,[MiddleName]
+           ,[Telephone]
+           ,[Passport]
+           ,[IDK]
+           ,[IsEnabled])
+     VALUES
+           ('953b5bb5-2b1e-4b88-873b-8bd90cd01db9'
+           ,'71465f62-8043-4deb-a979-4e5a0c879d99'
+           ,'BAD27B32-30EA-4B6D-8ECE-CD3859A51104'
+           ,'Well'
+           ,'Giljams'
+           ,'Donely'
+           ,'+380685693120'
+           ,'BI259843'
+           ,'7799632625'
            ,1)
 GO
 -- --------------------------------------------------

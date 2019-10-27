@@ -16,19 +16,10 @@ namespace Factory_And_store
         public StoreManagerForm()
         {
             InitializeComponent();
-            storeVisitEmployeeDataGridView.Columns.Add("workerFirstName", "First name");
-            storeVisitEmployeeDataGridView.Columns.Add("workerSecondName", "Second name");
-            storeVisitEmployeeDataGridView.Columns.Add("workerMiddleName", "Middle name");
+            storeVisitEmployeeDataGridView.Columns.Add("worker", "Worker");
             storeVisitEmployeeDataGridView.Columns.Add("workerStartData", "Start data");
             storeVisitEmployeeDataGridView.Columns.Add("workerEndData", "End data");
 
-
-            dataGridView1.Columns.Add("OrderNum", "№");
-            dataGridView1.Columns.Add("OrderCookieName", "Cookie name");
-            dataGridView1.Columns.Add("Store", "Store");
-            dataGridView1.Columns.Add("OrderCookieAmount", "Weight");
-            dataGridView1.Columns.Add("OrderDate", "Date");
-            dataGridView1.Columns.Add("Manager", "Manager");
         }
 
         private void StoreManagerForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -38,7 +29,7 @@ namespace Factory_And_store
 
         private void setStartTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            newsPanel.Hide();
+            acceptPanel.Hide();
             merchandisePanel.Hide();
             orderPanel.Hide();
             workVisitPanel.Show();
@@ -55,9 +46,7 @@ namespace Factory_And_store
             }
             foreach (var i in tempLogEmployees)
             {
-                storeVisitEmployeeDataGridView.Rows.Add($"{tempEmployees.Where(item => item.ID_Employee == i.ID_Employee).Select(item => item.FirstName).Single().ToString()}",
-                                                                    $"{tempEmployees.Where(item => item.ID_Employee == i.ID_Employee).Select(item => item.SecondName).Single().ToString()}",
-                                                                    $"{tempEmployees.Where(item => item.ID_Employee == i.ID_Employee).Select(item => item.MiddleName).Single().ToString()}",
+                storeVisitEmployeeDataGridView.Rows.Add($"{i.Employee.FirstName} {i.Employee.SecondName} {i.Employee.MiddleName}",
                                                                     $"{i.DateTimeStart}",
                                                                     $"{i.DateTimeEnd}");
             }
@@ -169,7 +158,7 @@ namespace Factory_And_store
 
         private void makeAnOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            newsPanel.Hide();
+            acceptPanel.Hide();
             merchandisePanel.Hide();
             orderPanel.Show();
             workVisitPanel.Hide();
@@ -177,8 +166,8 @@ namespace Factory_And_store
             comboBox1.Items.Clear();
 
             var tempCookies = GlobalHelper.Store.Products.Select(item => item);
-            var tempOrders= GlobalHelper.Store.StoreOrders.Select(item => item);
-            
+            var tempOrders = GlobalHelper.Store.StoreOrders.Select(item => item);
+
             foreach (var i in tempCookies)
             {
                 comboBox1.Items.Add(new { Text = $"{i.ProductName}", Value = i });
@@ -217,7 +206,7 @@ namespace Factory_And_store
                 ID_StatusOrder = GlobalHelper.Store.StatusOrders.Where(item => item.NameStatusOrder == "Created").Select(item => item.ID_StatusOrder).Single(),
                 InitialDate = DateTime.Now,
                 Weight = (int)numericUpDown1.Value
-        };
+            };
 
             GlobalHelper.Store.StoreOrders.Add(newOrder);
 
@@ -253,13 +242,83 @@ namespace Factory_And_store
             foreach (var i in comList)
             {
                 c++;
-                dataGridView1.Rows.Add(c.ToString(),
+                dataGridView1.Rows.Add(i.ID_StoreOrder,
                     $"{i.Product.ProductName}",
                     $"{i.RealEstate.NameRealEstate}",
                     $"{i.Weight}",
                     $"{i.InitialDate}",
                     $"{i.Employee.FirstName} {i.Employee.SecondName} {i.Employee.MiddleName}");
 
+            }
+        }
+
+        private void acceptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            acceptPanel.Show();
+            merchandisePanel.Hide();
+            orderPanel.Hide();
+            workVisitPanel.Hide();
+
+            var tempOrders = GlobalHelper.Store.StoreOrders.Select(item => item);
+            int c = 0;
+            foreach (var i in tempOrders)
+            {
+                dataGridView2.Rows.Add();
+                dataGridView2.Rows[c].Cells[1].Value = i.ID_StoreOrder;
+                dataGridView2.Rows[c].Cells[2].Value = Image.FromFile(i.Product.Photo);
+                dataGridView2.Rows[c].Cells[3].Value = i.InitialDate.ToString();
+                dataGridView2.Rows[c].Cells[5].Value = i.Weight;
+                c++;
+            }
+            foreach (var j in GlobalHelper.Store.Employees.Where(item => item.Position.NamePosition == "Carrier"))
+            {
+                Column4.Items.Add(new { Text = $"{j.FirstName} {j.SecondName} {j.MiddleName}", Value = j });
+            }
+            Column4.Sorted = true;
+            Column4.ValueMember = "Value";
+            Column4.DisplayMember = "Text";
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private int lastRow = -1;
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex != -1)
+            {
+                int countCheckedRows = 0;
+                for (int i = 0; i < dataGridView2.RowCount; i++)
+                {;
+                    if (Convert.ToBoolean(dataGridView2[0, i].Value))
+                        countCheckedRows++;
+                }
+
+                
+                countCheckedRows += (Convert.ToBoolean(dataGridView2.Rows[e.RowIndex].Cells[0].EditedFormattedValue))
+                    ? 1
+                    : lastRow == e.RowIndex
+                        ? 0
+                        :-1;
+                lastRow = e.RowIndex;
+                label3.Text = $"Count selected orders: {countCheckedRows}";
+            }
+        }
+
+        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex != -1)
+            {
+                int countCheckedRows = 0;
+                for (int i = 0; i < dataGridView2.RowCount; i++)
+                {
+                    if (Convert.ToBoolean(dataGridView2[0, i].Value))
+                        countCheckedRows++;
+                }
+                label3.Text = $"Count selected orders: {countCheckedRows}";
             }
         }
     }

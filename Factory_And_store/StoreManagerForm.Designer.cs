@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StoreManagerForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeAnOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acceptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acceptedOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.merchandiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workVisitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setStartTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.visitEmployeeStoreLabel4 = new System.Windows.Forms.Label();
             this.storeVisitEmployeeRefreshButton = new System.Windows.Forms.Button();
@@ -56,11 +57,33 @@
             this.visitEmployeeStoreComboBox = new System.Windows.Forms.ComboBox();
             this.storeVisitEmployeeDataGridView = new System.Windows.Forms.DataGridView();
             this.workVisitPanel = new System.Windows.Forms.Panel();
-            this.newsPanel = new System.Windows.Forms.Panel();
+            this.acceptPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.merchandisePanel = new System.Windows.Forms.Panel();
             this.orderPanel = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ColumnIDOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderCookieName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Store = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderCookieAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.refreshOrderButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -68,17 +91,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
-            this.refreshOrderButton = new System.Windows.Forms.Button();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.storeVisitEmployeeDataGridView)).BeginInit();
             this.workVisitPanel.SuspendLayout();
+            this.acceptPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.orderPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -92,8 +111,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.orderToolStripMenuItem,
             this.merchandiseToolStripMenuItem,
-            this.workVisitToolStripMenuItem,
-            this.newsToolStripMenuItem});
+            this.workVisitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
@@ -106,6 +124,7 @@
             this.orderToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.makeAnOrderToolStripMenuItem,
             this.acceptToolStripMenuItem,
+            this.acceptedOrderToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.orderToolStripMenuItem.Name = "orderToolStripMenuItem";
@@ -115,25 +134,32 @@
             // makeAnOrderToolStripMenuItem
             // 
             this.makeAnOrderToolStripMenuItem.Name = "makeAnOrderToolStripMenuItem";
-            this.makeAnOrderToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
+            this.makeAnOrderToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.makeAnOrderToolStripMenuItem.Text = "Make";
             this.makeAnOrderToolStripMenuItem.Click += new System.EventHandler(this.makeAnOrderToolStripMenuItem_Click);
             // 
             // acceptToolStripMenuItem
             // 
             this.acceptToolStripMenuItem.Name = "acceptToolStripMenuItem";
-            this.acceptToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
+            this.acceptToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.acceptToolStripMenuItem.Text = "Accept";
+            this.acceptToolStripMenuItem.Click += new System.EventHandler(this.acceptToolStripMenuItem_Click);
+            // 
+            // acceptedOrderToolStripMenuItem
+            // 
+            this.acceptedOrderToolStripMenuItem.Name = "acceptedOrderToolStripMenuItem";
+            this.acceptedOrderToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.acceptedOrderToolStripMenuItem.Text = "View accepted order";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(127, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(218, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // merchandiseToolStripMenuItem
@@ -164,12 +190,6 @@
             this.setStartTimeToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
             this.setStartTimeToolStripMenuItem.Text = "Input visits";
             this.setStartTimeToolStripMenuItem.Click += new System.EventHandler(this.setStartTimeToolStripMenuItem_Click);
-            // 
-            // newsToolStripMenuItem
-            // 
-            this.newsToolStripMenuItem.Name = "newsToolStripMenuItem";
-            this.newsToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
-            this.newsToolStripMenuItem.Text = "News";
             // 
             // panel1
             // 
@@ -353,14 +373,106 @@
             this.workVisitPanel.TabIndex = 3;
             this.workVisitPanel.Visible = false;
             // 
-            // newsPanel
+            // acceptPanel
             // 
-            this.newsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.newsPanel.Location = new System.Drawing.Point(0, 0);
-            this.newsPanel.Name = "newsPanel";
-            this.newsPanel.Size = new System.Drawing.Size(1000, 591);
-            this.newsPanel.TabIndex = 3;
-            this.newsPanel.Visible = false;
+            this.acceptPanel.Controls.Add(this.label3);
+            this.acceptPanel.Controls.Add(this.button2);
+            this.acceptPanel.Controls.Add(this.dataGridView2);
+            this.acceptPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.acceptPanel.Location = new System.Drawing.Point(0, 30);
+            this.acceptPanel.Name = "acceptPanel";
+            this.acceptPanel.Size = new System.Drawing.Size(1000, 561);
+            this.acceptPanel.TabIndex = 3;
+            this.acceptPanel.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 495);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 21);
+            this.label3.TabIndex = 2;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(714, 495);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(274, 54);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Confirm selected order";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.ID,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5});
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView2.MultiSelect = false;
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 100;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(1000, 475);
+            this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            this.dataGridView2.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Column1.FillWeight = 20F;
+            this.Column1.HeaderText = "Select";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 67;
+            // 
+            // ID
+            // 
+            this.ID.FillWeight = 5F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 5F;
+            this.Column2.HeaderText = "Image";
+            this.Column2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column3.FillWeight = 27.7537F;
+            this.Column3.HeaderText = "Initial date";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 129;
+            // 
+            // Column4
+            // 
+            this.Column4.FillWeight = 27.7537F;
+            this.Column4.HeaderText = "Carrier";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Column5.FillWeight = 21.36252F;
+            this.Column5.HeaderText = "Weight";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 98;
             // 
             // merchandisePanel
             // 
@@ -384,17 +496,60 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnIDOrder,
+            this.OrderCookieName,
+            this.Store,
+            this.OrderCookieAmount,
+            this.OrderDate,
+            this.Manager});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 171);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(1000, 390);
             this.dataGridView1.TabIndex = 1;
+            // 
+            // ColumnIDOrder
+            // 
+            this.ColumnIDOrder.FillWeight = 50F;
+            this.ColumnIDOrder.HeaderText = "№";
+            this.ColumnIDOrder.Name = "ColumnIDOrder";
+            this.ColumnIDOrder.ReadOnly = true;
+            // 
+            // OrderCookieName
+            // 
+            this.OrderCookieName.HeaderText = "Cookie name";
+            this.OrderCookieName.Name = "OrderCookieName";
+            this.OrderCookieName.ReadOnly = true;
+            // 
+            // Store
+            // 
+            this.Store.HeaderText = "Store";
+            this.Store.Name = "Store";
+            this.Store.ReadOnly = true;
+            // 
+            // OrderCookieAmount
+            // 
+            this.OrderCookieAmount.FillWeight = 50F;
+            this.OrderCookieAmount.HeaderText = "Weight";
+            this.OrderCookieAmount.Name = "OrderCookieAmount";
+            this.OrderCookieAmount.ReadOnly = true;
+            // 
+            // OrderDate
+            // 
+            this.OrderDate.HeaderText = "Date";
+            this.OrderDate.Name = "OrderDate";
+            this.OrderDate.ReadOnly = true;
+            // 
+            // Manager
+            // 
+            this.Manager.FillWeight = 150F;
+            this.Manager.HeaderText = "Manager";
+            this.Manager.Name = "Manager";
+            this.Manager.ReadOnly = true;
             // 
             // panel2
             // 
@@ -418,6 +573,78 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1000, 171);
             this.panel2.TabIndex = 0;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.checkBox7.Location = new System.Drawing.Point(22, 53);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(110, 25);
+            this.checkBox7.TabIndex = 13;
+            this.checkBox7.Text = "Manager";
+            this.checkBox7.UseVisualStyleBackColor = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DisplayMember = "Text";
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(162, 49);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(246, 29);
+            this.comboBox2.TabIndex = 12;
+            this.comboBox2.ValueMember = "Value";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(162, 10);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(129, 28);
+            this.dateTimePicker1.TabIndex = 11;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.checkBox6.Location = new System.Drawing.Point(22, 13);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(127, 25);
+            this.checkBox6.TabIndex = 10;
+            this.checkBox6.Text = "Order date";
+            this.checkBox6.UseVisualStyleBackColor = false;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.checkBox5.Location = new System.Drawing.Point(22, 133);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(98, 25);
+            this.checkBox5.TabIndex = 9;
+            this.checkBox5.Text = "Amount";
+            this.checkBox5.UseVisualStyleBackColor = false;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.checkBox4.Location = new System.Drawing.Point(22, 93);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(91, 25);
+            this.checkBox4.TabIndex = 8;
+            this.checkBox4.Text = "Cookie";
+            this.checkBox4.UseVisualStyleBackColor = false;
+            // 
+            // refreshOrderButton
+            // 
+            this.refreshOrderButton.Location = new System.Drawing.Point(289, 113);
+            this.refreshOrderButton.Name = "refreshOrderButton";
+            this.refreshOrderButton.Size = new System.Drawing.Size(110, 45);
+            this.refreshOrderButton.TabIndex = 7;
+            this.refreshOrderButton.Text = "Refresh";
+            this.refreshOrderButton.UseVisualStyleBackColor = true;
+            this.refreshOrderButton.Click += new System.EventHandler(this.RefreshOrderButton_Click);
             // 
             // button1
             // 
@@ -496,88 +723,22 @@
             this.splitter2.TabIndex = 0;
             this.splitter2.TabStop = false;
             // 
-            // refreshOrderButton
+            // contextMenuStrip1
             // 
-            this.refreshOrderButton.Location = new System.Drawing.Point(289, 113);
-            this.refreshOrderButton.Name = "refreshOrderButton";
-            this.refreshOrderButton.Size = new System.Drawing.Size(110, 45);
-            this.refreshOrderButton.TabIndex = 7;
-            this.refreshOrderButton.Text = "Refresh";
-            this.refreshOrderButton.UseVisualStyleBackColor = true;
-            this.refreshOrderButton.Click += new System.EventHandler(this.RefreshOrderButton_Click);
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.checkBox4.Location = new System.Drawing.Point(22, 93);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(91, 25);
-            this.checkBox4.TabIndex = 8;
-            this.checkBox4.Text = "Cookie";
-            this.checkBox4.UseVisualStyleBackColor = false;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.checkBox5.Location = new System.Drawing.Point(22, 133);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(98, 25);
-            this.checkBox5.TabIndex = 9;
-            this.checkBox5.Text = "Amount";
-            this.checkBox5.UseVisualStyleBackColor = false;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.checkBox6.Location = new System.Drawing.Point(22, 13);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(127, 25);
-            this.checkBox6.TabIndex = 10;
-            this.checkBox6.Text = "Order date";
-            this.checkBox6.UseVisualStyleBackColor = false;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(162, 10);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(129, 28);
-            this.dateTimePicker1.TabIndex = 11;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DisplayMember = "Text";
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(162, 49);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(246, 29);
-            this.comboBox2.TabIndex = 12;
-            this.comboBox2.ValueMember = "Value";
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.checkBox7.Location = new System.Drawing.Point(22, 53);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(110, 25);
-            this.checkBox7.TabIndex = 13;
-            this.checkBox7.Text = "Manager";
-            this.checkBox7.UseVisualStyleBackColor = false;
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // StoreManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 591);
+            this.Controls.Add(this.acceptPanel);
             this.Controls.Add(this.orderPanel);
             this.Controls.Add(this.workVisitPanel);
             this.Controls.Add(this.merchandisePanel);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.newsPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -592,6 +753,9 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.storeVisitEmployeeDataGridView)).EndInit();
             this.workVisitPanel.ResumeLayout(false);
+            this.acceptPanel.ResumeLayout(false);
+            this.acceptPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.orderPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -615,7 +779,6 @@
         private System.Windows.Forms.ToolStripMenuItem setStartTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newsToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox visitEmployeeStoreComboBox;
         private System.Windows.Forms.DataGridView storeVisitEmployeeDataGridView;
@@ -632,7 +795,7 @@
         private System.Windows.Forms.Button storeVisitEmployeeRefreshButton;
         private System.Windows.Forms.Label visitEmployeeStoreLabel3;
         private System.Windows.Forms.Panel workVisitPanel;
-        private System.Windows.Forms.Panel newsPanel;
+        private System.Windows.Forms.Panel acceptPanel;
         private System.Windows.Forms.Panel merchandisePanel;
         private System.Windows.Forms.Panel orderPanel;
         private System.Windows.Forms.Panel panel2;
@@ -651,5 +814,22 @@
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button refreshOrderButton;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewImageColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIDOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCookieName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Store;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCookieAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Manager;
+        private System.Windows.Forms.ToolStripMenuItem acceptedOrderToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
     }
 }
