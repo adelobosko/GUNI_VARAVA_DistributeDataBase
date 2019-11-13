@@ -48,7 +48,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -260,7 +260,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -458,7 +458,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -706,7 +706,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -920,7 +920,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -1154,7 +1154,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -1401,7 +1401,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -1635,7 +1635,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -1891,7 +1891,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -2167,7 +2167,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -2415,7 +2415,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
 
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
@@ -2705,7 +2705,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -2929,7 +2929,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -3079,7 +3079,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -3222,7 +3222,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -3376,7 +3376,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -3509,7 +3509,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -3648,7 +3648,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -3772,7 +3772,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -3915,7 +3915,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -4039,7 +4039,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -4166,7 +4166,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -4309,7 +4309,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -4459,7 +4459,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -4605,7 +4605,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 
@@ -4736,7 +4736,7 @@ namespace MainOffice
                     var tabIndex = 30;
                     var addButton = CeateButton("Add", tabIndex++);
                     var updButton = CeateButton("Upd", tabIndex++);
-                    var delButton = CeateButton("Upd", tabIndex++);
+                    var delButton = CeateButton("Del", tabIndex++);
                     tabIndex = 0;
                     hSplitContainer.Panel2.Controls.AddRange(new[] { delButton, updButton, addButton });
 

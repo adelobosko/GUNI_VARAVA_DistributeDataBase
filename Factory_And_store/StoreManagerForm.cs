@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EF_Model;
+using static EF_Model.DistributedDataBaseContainer;
 
 namespace Factory_And_store
 {
@@ -33,11 +34,16 @@ namespace Factory_And_store
             merchandisePanel.Hide();
             orderPanel.Hide();
             workVisitPanel.Show();
+            performedStoreOrderPanel.Hide();
+
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+
             visitEmployeeStoreComboBox.Items.Clear();
             // всі працівники
-            var tempEmployees = GlobalHelper.Store.Employees.Where(item => item.IsEnabled);
+
+            var tempEmployees = storeDB.Employees.Where(item => item.IsEnabled);
             // відвідування
-            var tempLogEmployees = GlobalHelper.Store.EmployeeWorkLogs.Where(item => item.Employee.IsEnabled);
+            var tempLogEmployees = storeDB.EmployeeWorkLogs.Where(item => item.Employee.IsEnabled);
 
             // ComboBox
             foreach (var i in tempEmployees)
@@ -95,9 +101,9 @@ namespace Factory_And_store
 
         private void storeVisitEmployeeButton_Click(object sender, EventArgs e)
         {
-
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
             Guid workerID = (visitEmployeeStoreComboBox.SelectedItem as dynamic).Value.ID_Employee;
-            var tempLogEmployees = GlobalHelper.Store.EmployeeWorkLogs.Where(item => item.ID_Employee == workerID);
+            var tempLogEmployees = storeDB.EmployeeWorkLogs.Where(item => item.ID_Employee == workerID);
 
             var newWorkLog = new EmployeeWorkLog()
             {
@@ -107,50 +113,50 @@ namespace Factory_And_store
                 DateTimeEnd = shiftDateTime(storeVisitEmployeeDateTimePicker.Value, visitEmployeeStoreShiftComboBox.Text, true)
             };
 
-            GlobalHelper.Store.EmployeeWorkLogs.Add(newWorkLog);
+            storeDB.EmployeeWorkLogs.Add(newWorkLog);
 
-            GlobalHelper.Store.SaveChanges();
+            storeDB.SaveChanges();
 
             storeVisitEmployeeRefreshButton.PerformClick();
         }
 
         private void storeVisitEmployeeRefreshButton_Click(object sender, EventArgs e)
         {
-            var comList = GlobalHelper.Store.EmployeeWorkLogs.Select(item => item);
-            if (checkBox1.Checked)
-            {
-                Guid workerID = (visitEmployeeStoreComboBox.SelectedItem as dynamic).Value.ID_Employee;
-                comList = comList.Where(item => item.ID_Employee == workerID);
-            }
-            if (checkBox2.Checked)
-            {
-                int shiftValue = 0;
-                switch (visitEmployeeStoreShiftComboBox.Text)
-                {
-                    case "I":
-                        shiftValue = 6;
-                        break;
-                    case "II":
-                        shiftValue = 14;
-                        break;
-                    default:
-                        shiftValue = 22;
-                        break;
-                }
-                comList = comList.Where(item => item.DateTimeStart.Hour == shiftValue);
-            }
-            if (checkBox3.Checked)
-            {
-                DateTime dataFound = storeVisitEmployeeDateTimePicker.Value;
-                comList = comList.Where(item => item.DateTimeStart.Day == dataFound.Day && item.DateTimeStart.Month == dataFound.Month && item.DateTimeStart.Year == dataFound.Year);
-            }
-            var tempEmployees = GlobalHelper.Store.Employees.Where(item => item.IsEnabled);
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+             var comList = storeDB.EmployeeWorkLogs.Select(item => item);
+             if (checkBox1.Checked)
+             {
+                 Guid workerID = (visitEmployeeStoreComboBox.SelectedItem as dynamic).Value.ID_Employee;
+                 comList = comList.Where(item => item.ID_Employee == workerID);
+             }
+             if (checkBox2.Checked)
+             {
+                 int shiftValue = 0;
+                 switch (visitEmployeeStoreShiftComboBox.Text)
+                 {
+                     case "I":
+                         shiftValue = 6;
+                         break;
+                     case "II":
+                         shiftValue = 14;
+                         break;
+                     default:
+                         shiftValue = 22;
+                         break;
+                 }
+                 comList = comList.Where(item => item.DateTimeStart.Hour == shiftValue);
+             }
+             if (checkBox3.Checked)
+             {
+                 DateTime dataFound = storeVisitEmployeeDateTimePicker.Value;
+                 comList = comList.Where(item => item.DateTimeStart.Day == dataFound.Day && item.DateTimeStart.Month == dataFound.Month && item.DateTimeStart.Year == dataFound.Year);
+             }
+            var tempEmployees = storeDB.Employees.Where(item => item.IsEnabled);
             storeVisitEmployeeDataGridView.Rows.Clear();
             foreach (var i in comList)
             {
-                storeVisitEmployeeDataGridView.Rows.Add($"{tempEmployees.Where(item => item.ID_Employee == i.ID_Employee).Select(item => item.FirstName).Single().ToString()}",
-                    $"{tempEmployees.Where(item => item.ID_Employee == i.ID_Employee).Select(item => item.SecondName).Single().ToString()}",
-                    $"{tempEmployees.Where(item => item.ID_Employee == i.ID_Employee).Select(item => item.MiddleName).Single().ToString()}",
+                Console.WriteLine($"{i.Employee.FirstName} {i.Employee.SecondName} {i.Employee.MiddleName} {i.DateTimeStart} {i.DateTimeEnd}");
+                storeVisitEmployeeDataGridView.Rows.Add($"{i.Employee.FirstName} {i.Employee.SecondName} {i.Employee.MiddleName}",
                     $"{i.DateTimeStart}",
                     $"{i.DateTimeEnd}");
             }
@@ -158,15 +164,17 @@ namespace Factory_And_store
 
         private void makeAnOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
             acceptPanel.Hide();
             merchandisePanel.Hide();
             orderPanel.Show();
             workVisitPanel.Hide();
+            performedStoreOrderPanel.Hide();
 
             comboBox1.Items.Clear();
 
-            var tempCookies = GlobalHelper.Store.Products.Select(item => item);
-            var tempOrders = GlobalHelper.Store.StoreOrders.Select(item => item);
+            var tempCookies = storeDB.Products.Select(item => item);
+            var tempOrders = storeDB.StoreOrders.Select(item => item);
 
             foreach (var i in tempCookies)
             {
@@ -177,7 +185,7 @@ namespace Factory_And_store
             comboBox1.Sorted = true;
             comboBox1.SelectedIndex = 0;
             string pos = "StoreManager";
-            var comList = GlobalHelper.Store.Employees.Where(item => item.Position.NamePosition == pos);
+            var comList = storeDB.Employees.Where(item => item.Position.NamePosition == pos);
             foreach (var i in comList)
             {
                 comboBox2.Items.Add(new { Text = $"{i.FirstName} {i.SecondName} {i.MiddleName}", Value = i });
@@ -188,36 +196,38 @@ namespace Factory_And_store
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
             Guid cookie = (comboBox1.SelectedItem as dynamic).Value.ID_Product;
-            var tempCookies = GlobalHelper.Store.Products.Where(item => item.ID_Product == cookie);
+            var tempCookies = storeDB.Products.Where(item => item.ID_Product == cookie);
             pictureBox1.Image = Image.FromFile(tempCookies.Select(item => item.Photo).Single().ToString());
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Guid produtID = (comboBox1.SelectedItem as dynamic).Value.ID_Product;
-
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
             var newOrder = new StoreOrder()
             {
                 ID_StoreOrder = Guid.NewGuid(),
                 ID_Product = produtID,
                 ID_RealEstateStore = GlobalHelper.User.Employee.RealEstate.ID_RealEstate,
                 ID_StoreManager = GlobalHelper.User.ID_Employee,
-                ID_StatusOrder = GlobalHelper.Store.StatusOrders.Where(item => item.NameStatusOrder == "Created").Select(item => item.ID_StatusOrder).Single(),
+                ID_StatusOrder = storeDB.StatusOrders.Where(item => item.NameStatusOrder == "Created").Select(item => item.ID_StatusOrder).Single(),
                 InitialDate = DateTime.Now,
                 Weight = (int)numericUpDown1.Value
             };
 
-            GlobalHelper.Store.StoreOrders.Add(newOrder);
+            storeDB.StoreOrders.Add(newOrder);
 
-            GlobalHelper.Store.SaveChanges();
+            storeDB.SaveChanges();
 
             refreshOrderButton.PerformClick();
         }
 
         private void RefreshOrderButton_Click(object sender, EventArgs e)
         {
-            var comList = GlobalHelper.Store.StoreOrders.Select(item => item);
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+            var comList = storeDB.StoreOrders.Select(item => item);
             if (checkBox6.Checked)
             {
                 comList = comList.Where(item => item.InitialDate == new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day));
@@ -238,72 +248,106 @@ namespace Factory_And_store
                 comList = comList.Where(item => item.Weight == weight);
             }
             dataGridView1.Rows.Clear();
-            int c = 0;
             foreach (var i in comList)
             {
-                c++;
                 dataGridView1.Rows.Add(i.ID_StoreOrder,
                     $"{i.Product.ProductName}",
                     $"{i.RealEstate.NameRealEstate}",
                     $"{i.Weight}",
                     $"{i.InitialDate}",
-                    $"{i.Employee.FirstName} {i.Employee.SecondName} {i.Employee.MiddleName}");
-
+                    $"{i.Employee.FirstName} {i.Employee.SecondName} {i.Employee.MiddleName}",
+                    $"{i.StatusOrder.NameStatusOrder}");
             }
         }
 
         private void acceptToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
             acceptPanel.Show();
             merchandisePanel.Hide();
             orderPanel.Hide();
             workVisitPanel.Hide();
-
-            var tempOrders = GlobalHelper.Store.StoreOrders.Select(item => item);
+            performedStoreOrderPanel.Hide();
+            dataGridView2.Rows.Clear();
+            var tempOrders = storeDB.StoreOrders.Where(item => item.StatusOrder.NameStatusOrder != "Accepted by the store");
             int c = 0;
             foreach (var i in tempOrders)
             {
                 dataGridView2.Rows.Add();
-                dataGridView2.Rows[c].Cells[1].Value = i.ID_StoreOrder;
-                dataGridView2.Rows[c].Cells[2].Value = Image.FromFile(i.Product.Photo);
-                dataGridView2.Rows[c].Cells[3].Value = i.InitialDate.ToString();
-                dataGridView2.Rows[c].Cells[5].Value = i.Weight;
+                dataGridView2["idColumn", c].Value = i.ID_StoreOrder;
+                dataGridView2["imageColumn", c].Value = Image.FromFile(i.Product.Photo);
+                dataGridView2["initialDateColumn", c].Value = i.InitialDate.ToString();
+                dataGridView2["weightColumn", c].Value = i.Weight;
                 c++;
             }
-            foreach (var j in GlobalHelper.Store.Employees.Where(item => item.Position.NamePosition == "Carrier"))
-            {
-                Column4.Items.Add(new { Text = $"{j.FirstName} {j.SecondName} {j.MiddleName}", Value = j });
-            }
-            Column4.Sorted = true;
-            Column4.ValueMember = "Value";
-            Column4.DisplayMember = "Text";
 
+            label4.Text = $"Count active orders: {tempOrders.Count().ToString()}";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+            for (int i = 0; i < dataGridView2.RowCount; i++)
+            {
+                if (Convert.ToBoolean(dataGridView2[0, i].Value))
+                {
+                    var newr = new MerchandiseAcceptanceLog()
+                    {
+                        ID_StoreOrder = Guid.Parse(dataGridView2["idColumn", i].Value.ToString()),
+                        ID_AcceptManager = GlobalHelper.User.ID_Employee,
+                        AcceptDate = DateTime.Now,
+                        Weight = Convert.ToInt32(dataGridView2["weightColumn", i].Value)
+                    };
+                    storeDB.MerchandiseAcceptanceLogs.Add(newr);
+                    storeDB.SaveChanges();
 
+                    var id_o = Guid.Parse(dataGridView2["idColumn", i].Value.ToString());
+                    var order = storeDB.StoreOrders.SingleOrDefault(item =>
+                        item.ID_StoreOrder == id_o);
+                    if (order == null) { return; }
+
+                    order.ID_StatusOrder =
+                        storeDB.StatusOrders.SingleOrDefault(item => item.NameStatusOrder == "Accepted by the store").ID_StatusOrder;
+
+                    storeDB.SaveChanges();
+
+                    var newm = new Merchandise()
+                    {
+                        ID_Merchandise = Guid.NewGuid(),
+                        ID_Product = order.ID_Product,
+                        ID_RealEstate = order.ID_RealEstateStore,
+                        Weight = newr.Weight,
+                        ManufactureDate = newr.AcceptDate,
+                        PricePerGramm = 15
+                    };
+                    storeDB.Merchandises.Add(newm);
+                    storeDB.SaveChanges();
+                }
+            }
+            acceptToolStripMenuItem.PerformClick();
         }
 
-        private int lastRow = -1;
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                int countCheckedRows = 0;
-                for (int i = 0; i < dataGridView2.RowCount; i++)
-                {;
-                    if (Convert.ToBoolean(dataGridView2[0, i].Value))
-                        countCheckedRows++;
-                }
+                var countCheckedRows = 0;
+                for (var i = 0; i < dataGridView2.RowCount; i++)
+                {
+                    if (e.RowIndex == i)
+                    {
+                        if (Convert.ToBoolean(dataGridView2.Rows[e.RowIndex].Cells[0].EditedFormattedValue))
+                        {
+                            countCheckedRows++;
+                        }
+                        continue;
+                    }
 
-                
-                countCheckedRows += (Convert.ToBoolean(dataGridView2.Rows[e.RowIndex].Cells[0].EditedFormattedValue))
-                    ? 1
-                    : lastRow == e.RowIndex
-                        ? 0
-                        :-1;
-                lastRow = e.RowIndex;
+                    if (Convert.ToBoolean(dataGridView2[0, i].Value))
+                    {
+                        countCheckedRows++;
+                    }
+                }
                 label3.Text = $"Count selected orders: {countCheckedRows}";
             }
         }
@@ -320,6 +364,64 @@ namespace Factory_And_store
                 }
                 label3.Text = $"Count selected orders: {countCheckedRows}";
             }
+        }
+
+        private void acceptedOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            acceptPanel.Hide();
+            merchandisePanel.Hide();
+            orderPanel.Hide();
+            workVisitPanel.Hide();
+            performedStoreOrderPanel.Show();
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+            dataGridView3.Rows.Clear();
+            var tempOrders = storeDB.MerchandiseAcceptanceLogs.Where(item => item.StoreOrder.StatusOrder.NameStatusOrder == "Accepted by the store");
+            var emp = storeDB.Employees.Select(item => item);
+            int c = 0;
+            foreach (var i in tempOrders)
+            {
+                dataGridView3.Rows.Add();
+                dataGridView3["idAcColumn", c].Value = i.ID_StoreOrder;
+                dataGridView3["productimColumn", c].Value = Image.FromFile(i.StoreOrder.Product.Photo);
+                dataGridView3["productColumn", c].Value = i.StoreOrder.Product.ProductName;
+                dataGridView3["cmanagerColumn", c].Value = $"{i.StoreOrder.Employee.FirstName} {i.StoreOrder.Employee.SecondName} {i.StoreOrder.Employee.MiddleName}";
+                dataGridView3["amanagerColumn", c].Value = $"{i.Employee.FirstName} {i.Employee.SecondName} {i.Employee.MiddleName}";
+                dataGridView3["inDateColumn", c].Value = i.StoreOrder.InitialDate;
+                dataGridView3["acDateColumn", c].Value = i.AcceptDate;
+                dataGridView3["sweightColumn", c].Value = i.StoreOrder.Weight;
+                dataGridView3["eweightColumn", c].Value = i.Weight;
+                dataGridView3["differenceColumn", c].Value = Math.Abs(i.StoreOrder.Weight - i.Weight);
+                c++;
+            }
+
+            label4.Text = $"Count active orders: {tempOrders.Count().ToString()}";
+        }
+
+        private void viewMerchandiseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            acceptPanel.Hide();
+            merchandisePanel.Show();
+            orderPanel.Hide();
+            workVisitPanel.Hide();
+            performedStoreOrderPanel.Hide();
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+            dataGridView4.Rows.Clear();
+            var tempMerch = storeDB.Merchandises.Select(item => item);
+            int c = 0;
+            foreach (var i in tempMerch)
+            {
+                dataGridView4.Rows.Add();
+                dataGridView4["idmerColumn", c].Value = i.ID_Merchandise;
+                dataGridView4["productimColumn2", c].Value = Image.FromFile(i.Product.Photo);
+                dataGridView4["productColumn2", c].Value = i.Product.ProductName;
+                dataGridView4["weightColumn2", c].Value =  i.Weight;
+                c++;
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

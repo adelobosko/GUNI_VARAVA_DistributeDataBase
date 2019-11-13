@@ -9,10 +9,6 @@ namespace Factory_And_store
 {
     public static class GlobalHelper
     {
-        public static DistributedDataBaseContainer MainOffice { get; set; }
-        public static DistributedDataBaseContainer Store { get; set; }
-        public static DistributedDataBaseContainer Factory { get; set; }
-
         public static User User { get; set; }
 
         public static AuthorizationForm AuthorizationForm { get; set; }

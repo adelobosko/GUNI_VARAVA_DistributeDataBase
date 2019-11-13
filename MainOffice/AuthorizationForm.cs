@@ -35,17 +35,33 @@ namespace MainOffice
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DomesticDataBase.DataSource = "127.0.0.1,31340";
-            DomesticDataBase.InitialCatalog = "VaravaMainOffice";
-            DomesticDataBase.UserId = "sa";
-            DomesticDataBase.UserPassword = "2584744";
+            try
+            {
+                GlobalHelper.MainOffice = GenerateConnection(dataBaseType: DataBaseType.MainOffice, connectionType: ConnectionType.Global);
+                connectedLabel.Text = GlobalHelper.MainOffice.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
+            }
+            catch
+            {
+                connectedLabel.Text = "Connection failed. Please, call to admin for correct this mistake!";
+                loginButton.Enabled = false;
+            }
 
-            GlobalHelper.MainOffice = GenerateConnection(dataBaseType: DataBaseType.MainOffice, connectionType: ConnectionType.Host);
-            connectedLabel.Text = GlobalHelper.MainOffice.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
-
-            var connectionType = ConnectionType.Host;
-            GlobalHelper.Factory = GenerateConnection(DataBaseType.Factory, connectionType);
-            GlobalHelper.Store = GenerateConnection(DataBaseType.Store, connectionType);
+            try
+            {
+                GlobalHelper.Factory = GenerateConnection(DataBaseType.Factory, ConnectionType.Global);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            try
+            {
+                GlobalHelper.Store = GenerateConnection(DataBaseType.Store, ConnectionType.Local);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)

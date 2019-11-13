@@ -35,20 +35,9 @@ namespace Factory_And_store
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DomesticDataBase.DataSource = "(localdb)\\MSSQLLocalDB";
-            DomesticDataBase.InitialCatalog = "VaravaStore";
-            DomesticDataBase.UserId = "sa";
-            DomesticDataBase.UserPassword = "2584744";
-
-            GlobalHelper.Store = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
-
-            //var tablesName = GlobalHelper.Store.DataBaseTables.Select(t => t.TableName).ToList();
-            //var res = GlobalHelper.Store.Positions.Select(i => i).ToList();
-            //MessageBox.Show(res.Count.ToString());
-            //MessageBox.Show(res[0].NamePosition);
-
-            connectedStoreLabel.Text = GlobalHelper.Store.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
-        }
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+            connectedStoreLabel.Text = storeDB.Users.Any() ? "Connected" : "Connection failed. Please, call to admin for correct this mistake!";
+            }
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -61,7 +50,8 @@ namespace Factory_And_store
 
         private static bool Authorization(string login, string password)
         {
-            var user = GlobalHelper.Store.Users
+            var storeDB = GenerateConnection(DataBaseType.Store, ConnectionType.Host);
+            var user = storeDB.Users
                 .FirstOrDefault(u => u.UserLogin == login && u.UserPassword == password);
 
             if (user == null)

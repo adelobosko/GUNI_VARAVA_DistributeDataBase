@@ -35,10 +35,9 @@
             this.makeAnOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acceptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acceptedOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewMerchandiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.merchandiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workVisitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setStartTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -58,16 +57,21 @@
             this.storeVisitEmployeeDataGridView = new System.Windows.Forms.DataGridView();
             this.workVisitPanel = new System.Windows.Forms.Panel();
             this.acceptPanel = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.selectColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.initialDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.merchandisePanel = new System.Windows.Forms.Panel();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.idmerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productimColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.productColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weightColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderPanel = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ColumnIDOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +80,7 @@
             this.OrderCookieAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -92,17 +97,33 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.performedStoreOrderPanel = new System.Windows.Forms.Panel();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.idAcColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productimColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.productColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmanagerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amanagerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sweightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eweightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.differenceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.storeVisitEmployeeDataGridView)).BeginInit();
             this.workVisitPanel.SuspendLayout();
             this.acceptPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.merchandisePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.orderPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.performedStoreOrderPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -110,7 +131,6 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.orderToolStripMenuItem,
-            this.merchandiseToolStripMenuItem,
             this.workVisitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -125,6 +145,7 @@
             this.makeAnOrderToolStripMenuItem,
             this.acceptToolStripMenuItem,
             this.acceptedOrderToolStripMenuItem,
+            this.viewMerchandiseToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.orderToolStripMenuItem.Name = "orderToolStripMenuItem";
@@ -150,6 +171,14 @@
             this.acceptedOrderToolStripMenuItem.Name = "acceptedOrderToolStripMenuItem";
             this.acceptedOrderToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.acceptedOrderToolStripMenuItem.Text = "View accepted order";
+            this.acceptedOrderToolStripMenuItem.Click += new System.EventHandler(this.acceptedOrderToolStripMenuItem_Click);
+            // 
+            // viewMerchandiseToolStripMenuItem
+            // 
+            this.viewMerchandiseToolStripMenuItem.Name = "viewMerchandiseToolStripMenuItem";
+            this.viewMerchandiseToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.viewMerchandiseToolStripMenuItem.Text = "View merchandise";
+            this.viewMerchandiseToolStripMenuItem.Click += new System.EventHandler(this.viewMerchandiseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -161,20 +190,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // merchandiseToolStripMenuItem
-            // 
-            this.merchandiseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.updateToolStripMenuItem});
-            this.merchandiseToolStripMenuItem.Name = "merchandiseToolStripMenuItem";
-            this.merchandiseToolStripMenuItem.Size = new System.Drawing.Size(105, 24);
-            this.merchandiseToolStripMenuItem.Text = "Merchandise";
-            // 
-            // updateToolStripMenuItem
-            // 
-            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-            this.updateToolStripMenuItem.Text = "Update";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // workVisitToolStripMenuItem
             // 
@@ -352,12 +368,15 @@
             // 
             // storeVisitEmployeeDataGridView
             // 
+            this.storeVisitEmployeeDataGridView.AllowUserToAddRows = false;
+            this.storeVisitEmployeeDataGridView.AllowUserToDeleteRows = false;
             this.storeVisitEmployeeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.storeVisitEmployeeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.storeVisitEmployeeDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.storeVisitEmployeeDataGridView.Location = new System.Drawing.Point(0, 106);
             this.storeVisitEmployeeDataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.storeVisitEmployeeDataGridView.Name = "storeVisitEmployeeDataGridView";
+            this.storeVisitEmployeeDataGridView.ReadOnly = true;
             this.storeVisitEmployeeDataGridView.RowTemplate.Height = 24;
             this.storeVisitEmployeeDataGridView.Size = new System.Drawing.Size(1000, 455);
             this.storeVisitEmployeeDataGridView.TabIndex = 2;
@@ -375,6 +394,7 @@
             // 
             // acceptPanel
             // 
+            this.acceptPanel.Controls.Add(this.label4);
             this.acceptPanel.Controls.Add(this.label3);
             this.acceptPanel.Controls.Add(this.button2);
             this.acceptPanel.Controls.Add(this.dataGridView2);
@@ -385,13 +405,23 @@
             this.acceptPanel.TabIndex = 3;
             this.acceptPanel.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 501);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(197, 21);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Count active orders: 0";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 495);
+            this.label3.Location = new System.Drawing.Point(18, 528);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 21);
+            this.label3.Size = new System.Drawing.Size(215, 21);
             this.label3.TabIndex = 2;
+            this.label3.Text = "Count selected orders: 0";
             // 
             // button2
             // 
@@ -412,76 +442,110 @@
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.ID,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
+            this.selectColumn,
+            this.idColumn,
+            this.imageColumn,
+            this.initialDateColumn,
+            this.weightColumn});
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView2.Location = new System.Drawing.Point(0, 0);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 100;
+            this.dataGridView2.RowTemplate.Height = 29;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1000, 475);
+            this.dataGridView2.Size = new System.Drawing.Size(1000, 489);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             this.dataGridView2.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
             // 
-            // Column1
+            // selectColumn
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column1.FillWeight = 20F;
-            this.Column1.HeaderText = "Select";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 67;
+            this.selectColumn.FillWeight = 5F;
+            this.selectColumn.HeaderText = "Select";
+            this.selectColumn.Name = "selectColumn";
             // 
-            // ID
+            // idColumn
             // 
-            this.ID.FillWeight = 5F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
+            this.idColumn.FillWeight = 30F;
+            this.idColumn.HeaderText = "ID";
+            this.idColumn.Name = "idColumn";
+            this.idColumn.ReadOnly = true;
             // 
-            // Column2
+            // imageColumn
             // 
-            this.Column2.FillWeight = 5F;
-            this.Column2.HeaderText = "Image";
-            this.Column2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Column2.Name = "Column2";
+            this.imageColumn.FillWeight = 10F;
+            this.imageColumn.HeaderText = "Image";
+            this.imageColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.imageColumn.Name = "imageColumn";
             // 
-            // Column3
+            // initialDateColumn
             // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.FillWeight = 27.7537F;
-            this.Column3.HeaderText = "Initial date";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 129;
+            this.initialDateColumn.FillWeight = 20F;
+            this.initialDateColumn.HeaderText = "Initial date";
+            this.initialDateColumn.Name = "initialDateColumn";
+            this.initialDateColumn.ReadOnly = true;
             // 
-            // Column4
+            // weightColumn
             // 
-            this.Column4.FillWeight = 27.7537F;
-            this.Column4.HeaderText = "Carrier";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column5.FillWeight = 21.36252F;
-            this.Column5.HeaderText = "Weight";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 98;
+            this.weightColumn.FillWeight = 20F;
+            this.weightColumn.HeaderText = "Weight";
+            this.weightColumn.Name = "weightColumn";
             // 
             // merchandisePanel
             // 
+            this.merchandisePanel.Controls.Add(this.dataGridView4);
             this.merchandisePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.merchandisePanel.Location = new System.Drawing.Point(0, 30);
             this.merchandisePanel.Name = "merchandisePanel";
             this.merchandisePanel.Size = new System.Drawing.Size(1000, 561);
             this.merchandisePanel.TabIndex = 4;
             this.merchandisePanel.Visible = false;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.AllowUserToAddRows = false;
+            this.dataGridView4.AllowUserToDeleteRows = false;
+            this.dataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idmerColumn,
+            this.productimColumn2,
+            this.productColumn2,
+            this.weightColumn2});
+            this.dataGridView4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView4.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.ReadOnly = true;
+            this.dataGridView4.RowTemplate.Height = 24;
+            this.dataGridView4.Size = new System.Drawing.Size(1000, 561);
+            this.dataGridView4.TabIndex = 0;
+            // 
+            // idmerColumn
+            // 
+            this.idmerColumn.HeaderText = "№";
+            this.idmerColumn.Name = "idmerColumn";
+            this.idmerColumn.ReadOnly = true;
+            // 
+            // productimColumn2
+            // 
+            this.productimColumn2.HeaderText = "Image";
+            this.productimColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.productimColumn2.Name = "productimColumn2";
+            this.productimColumn2.ReadOnly = true;
+            this.productimColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.productimColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // productColumn2
+            // 
+            this.productColumn2.HeaderText = "Product";
+            this.productColumn2.Name = "productColumn2";
+            this.productColumn2.ReadOnly = true;
+            // 
+            // weightColumn2
+            // 
+            this.weightColumn2.HeaderText = "weight";
+            this.weightColumn2.Name = "weightColumn2";
+            this.weightColumn2.ReadOnly = true;
             // 
             // orderPanel
             // 
@@ -496,6 +560,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -504,10 +570,12 @@
             this.Store,
             this.OrderCookieAmount,
             this.OrderDate,
-            this.Manager});
+            this.Manager,
+            this.stateColumn});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 171);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(1000, 390);
             this.dataGridView1.TabIndex = 1;
@@ -550,6 +618,12 @@
             this.Manager.HeaderText = "Manager";
             this.Manager.Name = "Manager";
             this.Manager.ReadOnly = true;
+            // 
+            // stateColumn
+            // 
+            this.stateColumn.HeaderText = "State";
+            this.stateColumn.Name = "stateColumn";
+            this.stateColumn.ReadOnly = true;
             // 
             // panel2
             // 
@@ -729,15 +803,114 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // performedStoreOrderPanel
+            // 
+            this.performedStoreOrderPanel.Controls.Add(this.dataGridView3);
+            this.performedStoreOrderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.performedStoreOrderPanel.Location = new System.Drawing.Point(0, 30);
+            this.performedStoreOrderPanel.Name = "performedStoreOrderPanel";
+            this.performedStoreOrderPanel.Size = new System.Drawing.Size(1000, 561);
+            this.performedStoreOrderPanel.TabIndex = 4;
+            this.performedStoreOrderPanel.Visible = false;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idAcColumn,
+            this.productimColumn,
+            this.productColumn,
+            this.cmanagerColumn,
+            this.amanagerColumn,
+            this.acDateColumn,
+            this.inDateColumn,
+            this.sweightColumn,
+            this.eweightColumn,
+            this.differenceColumn});
+            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView3.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.RowTemplate.Height = 24;
+            this.dataGridView3.Size = new System.Drawing.Size(1000, 561);
+            this.dataGridView3.TabIndex = 0;
+            // 
+            // idAcColumn
+            // 
+            this.idAcColumn.HeaderText = "№";
+            this.idAcColumn.Name = "idAcColumn";
+            this.idAcColumn.ReadOnly = true;
+            // 
+            // productimColumn
+            // 
+            this.productimColumn.HeaderText = "Image";
+            this.productimColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.productimColumn.Name = "productimColumn";
+            this.productimColumn.ReadOnly = true;
+            this.productimColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.productimColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // productColumn
+            // 
+            this.productColumn.HeaderText = "Product";
+            this.productColumn.Name = "productColumn";
+            this.productColumn.ReadOnly = true;
+            // 
+            // cmanagerColumn
+            // 
+            this.cmanagerColumn.HeaderText = "Creator manager";
+            this.cmanagerColumn.Name = "cmanagerColumn";
+            this.cmanagerColumn.ReadOnly = true;
+            // 
+            // amanagerColumn
+            // 
+            this.amanagerColumn.HeaderText = "Accepted manager";
+            this.amanagerColumn.Name = "amanagerColumn";
+            this.amanagerColumn.ReadOnly = true;
+            // 
+            // acDateColumn
+            // 
+            this.acDateColumn.HeaderText = "AcceptDate";
+            this.acDateColumn.Name = "acDateColumn";
+            this.acDateColumn.ReadOnly = true;
+            // 
+            // inDateColumn
+            // 
+            this.inDateColumn.HeaderText = "Initial Date";
+            this.inDateColumn.Name = "inDateColumn";
+            this.inDateColumn.ReadOnly = true;
+            // 
+            // sweightColumn
+            // 
+            this.sweightColumn.HeaderText = "Start weight";
+            this.sweightColumn.Name = "sweightColumn";
+            this.sweightColumn.ReadOnly = true;
+            // 
+            // eweightColumn
+            // 
+            this.eweightColumn.HeaderText = "End weight";
+            this.eweightColumn.Name = "eweightColumn";
+            this.eweightColumn.ReadOnly = true;
+            // 
+            // differenceColumn
+            // 
+            this.differenceColumn.HeaderText = "Difference";
+            this.differenceColumn.Name = "differenceColumn";
+            this.differenceColumn.ReadOnly = true;
+            // 
             // StoreManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 591);
-            this.Controls.Add(this.acceptPanel);
-            this.Controls.Add(this.orderPanel);
             this.Controls.Add(this.workVisitPanel);
+            this.Controls.Add(this.orderPanel);
             this.Controls.Add(this.merchandisePanel);
+            this.Controls.Add(this.performedStoreOrderPanel);
+            this.Controls.Add(this.acceptPanel);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -756,12 +929,16 @@
             this.acceptPanel.ResumeLayout(false);
             this.acceptPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.merchandisePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.orderPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.performedStoreOrderPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -773,8 +950,6 @@
         private System.Windows.Forms.ToolStripMenuItem orderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem makeAnOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acceptToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem merchandiseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem workVisitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setStartTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
@@ -817,19 +992,38 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewImageColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.ToolStripMenuItem acceptedOrderToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel performedStoreOrderPanel;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selectColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
+        private System.Windows.Forms.DataGridViewImageColumn imageColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn initialDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn weightColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idAcColumn;
+        private System.Windows.Forms.DataGridViewImageColumn productimColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cmanagerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amanagerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sweightColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eweightColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn differenceColumn;
+        private System.Windows.Forms.ToolStripMenuItem viewMerchandiseToolStripMenuItem;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idmerColumn;
+        private System.Windows.Forms.DataGridViewImageColumn productimColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn weightColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIDOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderCookieName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Store;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderCookieAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Manager;
-        private System.Windows.Forms.ToolStripMenuItem acceptedOrderToolStripMenuItem;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stateColumn;
     }
 }
